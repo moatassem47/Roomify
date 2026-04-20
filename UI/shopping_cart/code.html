@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shopping Cart | Modern Hearth</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#e6e2db",
+                    "on-secondary-container": "#516854",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#cda72c",
+                    "surface-variant": "#e6e2db",
+                    "inverse-primary": "#fbb893",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#52443d",
+                    "secondary-fixed": "#d0e9d0",
+                    "surface-tint": "#855234",
+                    "background": "#fef9f2",
+                    "on-secondary-fixed": "#0b2010",
+                    "on-background": "#1d1c18",
+                    "on-primary-fixed-variant": "#693b1f",
+                    "secondary": "#4d6450",
+                    "secondary-fixed-dim": "#b4cdb5",
+                    "surface-container": "#f2ede6",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#241a00",
+                    "primary": "#825032",
+                    "on-primary-container": "#fffbff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#ece7e1",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#584400",
+                    "outline": "#84746c",
+                    "tertiary-fixed": "#ffe08b",
+                    "inverse-surface": "#32302c",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#331200",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#9e6848",
+                    "on-surface": "#1d1c18",
+                    "surface-container-low": "#f8f3ec",
+                    "inverse-on-surface": "#f5f0e9",
+                    "primary-fixed": "#ffdbc9",
+                    "surface-bright": "#fef9f2",
+                    "outline-variant": "#d6c3b9",
+                    "tertiary-fixed-dim": "#ebc246",
+                    "secondary-container": "#cde6cd",
+                    "surface-dim": "#ded9d3",
+                    "on-secondary-fixed-variant": "#364c39",
+                    "on-tertiary-container": "#4f3d00",
+                    "primary-fixed-dim": "#fbb893",
+                    "tertiary": "#745b00",
+                    "surface": "#fef9f2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "24px",
+                    "unit": "8px",
+                    "container-max": "1280px",
+                    "xs": "4px",
+                    "lg": "40px",
+                    "sm": "12px",
+                    "xl": "64px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Noto Serif"],
+                    "headline-sm": ["Noto Serif"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "display-lg": ["Noto Serif"],
+                    "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .inset-shadow-tactile {
+            box-shadow: inset 0 2px 4px 0 rgba(62, 54, 46, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-[#FDFCFB] dark:bg-stone-950 border-b border-stone-200/60 dark:border-stone-800 sticky top-0 z-50 shadow-[0_4px_20px_-4px_rgba(62,54,46,0.08)]">
+<nav class="flex justify-between items-center w-full px-8 py-4 max-w-[1280px] mx-auto">
+<div class="text-2xl font-bold text-[#A66E4E] dark:text-[#D4A373] tracking-tight font-headline-md">
+                Modern Hearth
+            </div>
+<div class="hidden md:flex items-center space-x-8 font-serif">
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-stone-800 dark:hover:text-stone-200 transition-all duration-300" href="#">Shop All</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-stone-800 dark:hover:text-stone-200 transition-all duration-300" href="#">Living</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-stone-800 dark:hover:text-stone-200 transition-all duration-300" href="#">Bedroom</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-stone-800 dark:hover:text-stone-200 transition-all duration-300" href="#">Dining</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-stone-800 dark:hover:text-stone-200 transition-all duration-300" href="#">About</a>
+</div>
+<div class="flex items-center space-x-6 text-[#A66E4E] dark:text-[#D4A373]">
+<button class="hover:bg-stone-50 dark:hover:bg-stone-900 transition-all duration-300 p-2 rounded-full scale-95 active:opacity-80">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="hover:bg-stone-50 dark:hover:bg-stone-900 transition-all duration-300 p-2 rounded-full scale-95 active:opacity-80 relative">
+<span class="material-symbols-outlined" data-icon="shopping_cart" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+<span class="absolute top-0 right-0 bg-primary text-on-primary text-[10px] w-4 h-4 flex items-center justify-center rounded-full">3</span>
+</button>
+<button class="hover:bg-stone-50 dark:hover:bg-stone-900 transition-all duration-300 p-2 rounded-full scale-95 active:opacity-80">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</nav>
+</header>
+<main class="max-w-[1280px] mx-auto px-8 py-xl">
+<h1 class="font-display-lg text-display-lg mb-lg text-on-surface">Your Sanctuary Selection</h1>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Cart Items -->
+<div class="lg:col-span-8 space-y-md">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest p-md rounded-xl flex gap-md shadow-[0_4px_20px_-4px_rgba(62,54,46,0.08)] border border-surface-container-low transition-all hover:translate-y-[-2px]">
+<div class="w-32 h-32 md:w-40 md:h-40 flex-shrink-0 rounded-xl overflow-hidden bg-stone-100">
+<img alt="Luxury Sofa" class="w-full h-full object-cover" data-alt="close-up of a deep emerald velvet sofa with oak wood legs in a sun-drenched minimalist living room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGKFmycApE-ZWIeSYx691F37n9Sg5mKMGaehGWILmsMzXDvDVbnUiuCya4cFSgTsoGWuOntIq9_Q3xpY2qCIo2fX4h3bs-K-tSdzxrOF4tOB7yLOpPdQe_DfrGlcITulIU0O_fIJnGKnrP55FkeC5aAtvQ-Mg2cBvGk3n5NugFH3exS2_EfNv1wzA72_r10NKOTxrxMH7_CSgZKY1MKLwqRAQOjyjKJFFevxL5AAjntfV7G_1ysGV6NCWd25zTD66gouStZND8-Tw"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Serenity Velvet Sofa</h3>
+<p class="font-headline-sm text-headline-sm text-primary">$1,240.00</p>
+</div>
+<div class="flex gap-2 mt-xs">
+<span class="bg-secondary/10 text-on-secondary-fixed-variant px-3 py-1 rounded-full text-label-md font-semibold">Velvet</span>
+<span class="bg-secondary/10 text-on-secondary-fixed-variant px-3 py-1 rounded-full text-label-md font-semibold">Forest Green</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-md">
+<div class="flex items-center bg-surface-container rounded-lg p-1 border border-outline-variant/30">
+<button class="p-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="remove">remove</span>
+</button>
+<span class="px-4 font-label-md">1</span>
+<button class="p-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+<button class="text-stone-400 hover:text-error transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-md" data-icon="delete">delete</span>
+<span class="text-label-md">Remove</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest p-md rounded-xl flex gap-md shadow-[0_4px_20px_-4px_rgba(62,54,46,0.08)] border border-surface-container-low transition-all hover:translate-y-[-2px]">
+<div class="w-32 h-32 md:w-40 md:h-40 flex-shrink-0 rounded-xl overflow-hidden bg-stone-100">
+<img alt="Oak Dining Chair" class="w-full h-full object-cover" data-alt="a minimalist solid white oak dining chair with curved backrest on a clean concrete floor in soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHalSvOqSR6uOyHWr3FXlCHibvG5TQEC2Om_3z5DNHARRSNHAp8zfjzUPVqNDkharGU4U23octB21_v5SJAioOQq5afmp531AC82EygNqzofhYSqDyXGSdJJo4yKjvp3zsmfXZGdU_OV9WwrFnoPW-HZiu5Dv0gkj3gswrsyy19vp6y05CuI-FnZmJ5zctjBozpFdmnJvtfJ0udL4zv_8MAwVchfd59_mn0sGTB1YgpHs4UCD3Q_yfizUki6az91q5Ql-tZQPNHQY"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Echo Oak Chair</h3>
+<p class="font-headline-sm text-headline-sm text-primary">$350.00</p>
+</div>
+<div class="flex gap-2 mt-xs">
+<span class="bg-secondary/10 text-on-secondary-fixed-variant px-3 py-1 rounded-full text-label-md font-semibold">Solid Oak</span>
+<span class="bg-secondary/10 text-on-secondary-fixed-variant px-3 py-1 rounded-full text-label-md font-semibold">Natural Finish</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-md">
+<div class="flex items-center bg-surface-container rounded-lg p-1 border border-outline-variant/30">
+<button class="p-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="remove">remove</span>
+</button>
+<span class="px-4 font-label-md">2</span>
+<button class="p-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+<button class="text-stone-400 hover:text-error transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-md" data-icon="delete">delete</span>
+<span class="text-label-md">Remove</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container-lowest p-md rounded-xl flex gap-md shadow-[0_4px_20px_-4px_rgba(62,54,46,0.08)] border border-surface-container-low transition-all hover:translate-y-[-2px]">
+<div class="w-32 h-32 md:w-40 md:h-40 flex-shrink-0 rounded-xl overflow-hidden bg-stone-100">
+<img alt="Ceramic Table Lamp" class="w-full h-full object-cover" data-alt="handcrafted beige ceramic table lamp with a pleated linen shade on a rustic wooden sideboard" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDojJfgnNnmy7NxHCUhVDrI3exQmL8ETSkDlBKlV5ggmnKebh_A8WVK2oBjZXR5p5j1RhuJ8WYOSp70hSCSd5wzn3zgBUhhtRGlWtM7Q24ha4RHS8GS9cLhDvff2RAE5xd_5fteNhpLj-HjEzoUunedk1H00Ou9TCLEL_SVH2HXo_RhBrLRRQPwdbcC13akAXEgoLak2qWWj3Y907IEr3DQCWsfQvGPcj1UV8gILCsDlHqbL3OdfSAwNWVFQQL0qpkHbuvhB2LApkM"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Luna Ceramic Lamp</h3>
+<p class="font-headline-sm text-headline-sm text-primary">$185.00</p>
+</div>
+<div class="flex gap-2 mt-xs">
+<span class="bg-secondary/10 text-on-secondary-fixed-variant px-3 py-1 rounded-full text-label-md font-semibold">Hand-thrown Ceramic</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-md">
+<div class="flex items-center bg-surface-container rounded-lg p-1 border border-outline-variant/30">
+<button class="p-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="remove">remove</span>
+</button>
+<span class="px-4 font-label-md">1</span>
+<button class="p-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+<button class="text-stone-400 hover:text-error transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-md" data-icon="delete">delete</span>
+<span class="text-label-md">Remove</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Summary Sidebar -->
+<div class="lg:col-span-4 sticky top-32">
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_4px_20px_-4px_rgba(62,54,46,0.08)] border border-surface-container-low">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-6">Order Summary</h2>
+<div class="space-y-4 border-b border-surface-container pb-6">
+<div class="flex justify-between text-body-md text-on-surface-variant">
+<span>Subtotal</span>
+<span>$2,125.00</span>
+</div>
+<div class="flex justify-between text-body-md text-on-surface-variant">
+<span>Shipping</span>
+<span class="text-secondary font-medium">Free</span>
+</div>
+<div class="flex justify-between text-body-md text-on-surface-variant">
+<span>Tax estimate</span>
+<span>$170.00</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-6">
+<span class="font-headline-sm text-headline-sm text-on-surface">Total</span>
+<span class="font-display-lg text-headline-md text-primary">$2,295.00</span>
+</div>
+<div class="space-y-4">
+<div class="relative">
+<input class="w-full bg-surface-container border-none rounded-lg px-4 py-3 text-body-md focus:ring-2 focus:ring-primary/20 transition-shadow inset-shadow-tactile placeholder:text-stone-400" placeholder="Promo Code" type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-primary font-label-md px-2 py-1 hover:underline">Apply</button>
+</div>
+<button class="w-full bg-[#825032] text-white py-4 rounded-xl font-label-md text-lg shadow-[0_4px_12px_rgba(130,80,50,0.3)] hover:bg-[#693b1f] transition-all transform active:scale-[0.98]">
+                            Proceed to Checkout
+                        </button>
+<div class="flex items-center justify-center gap-2 text-stone-400 py-2">
+<span class="material-symbols-outlined text-sm" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="text-[12px] uppercase tracking-wider font-semibold">Secure SSL Checkout</span>
+</div>
+</div>
+</div>
+<div class="mt-md p-md bg-secondary/5 rounded-xl border border-secondary/10 flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="eco">eco</span>
+<div>
+<p class="text-label-md text-on-secondary-fixed-variant">Sustainability Pledge</p>
+<p class="text-[12px] text-stone-500 mt-1 leading-relaxed">Every purchase contributes to our reforestation partnership, planting one native tree per item in your cart.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-16 border-t border-stone-200 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-8 py-12 max-w-[1280px] mx-auto gap-6">
+<div class="text-lg font-semibold text-stone-800 dark:text-stone-200 font-headline-sm">
+                Modern Hearth
+            </div>
+<div class="flex flex-wrap justify-center gap-x-8 gap-y-2">
+<a class="font-serif text-stone-500 hover:text-[#A66E4E] text-sm transition-all" href="#">Sustainability</a>
+<a class="font-serif text-stone-500 hover:text-[#A66E4E] text-sm transition-all" href="#">Care Guide</a>
+<a class="font-serif text-stone-500 hover:text-[#A66E4E] text-sm transition-all" href="#">Shipping</a>
+<a class="font-serif text-stone-500 hover:text-[#A66E4E] text-sm transition-all" href="#">Returns</a>
+<a class="font-serif text-stone-500 hover:text-[#A66E4E] text-sm transition-all" href="#">Privacy</a>
+</div>
+<p class="font-serif text-stone-600 dark:text-stone-400 text-sm">
+                © 2024 The Modern Hearth. Designed for sanctuary.
+            </p>
+</div>
+</footer>
+<!-- Toast Notification (CS-07) -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 md:left-auto md:right-8 md:translate-x-0 z-[100]">
+<div class="bg-inverse-surface text-inverse-on-surface px-6 py-4 rounded-xl flex items-center gap-4 shadow-xl animate-in fade-in slide-in-from-bottom-4 duration-500">
+<div class="bg-secondary p-1 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="check">check</span>
+</div>
+<div>
+<p class="font-label-md">Item added to cart</p>
+<p class="text-[12px] opacity-70">Luna Ceramic Lamp is now in your selection.</p>
+</div>
+<button class="ml-4 hover:opacity-60">
+<span class="material-symbols-outlined text-lg" data-icon="close">close</span>
+</button>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .inset-shadow-tactile {
+            box-shadow: inset 0 2px 4px 0 rgba(62, 54, 46, 0.06);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e6e2db",
+                        "on-secondary": "#ffffff",
+                        "primary": "#825032",
+                        "tertiary": "#745b00",
+                        "on-tertiary-fixed-variant": "#584400",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#fbb893",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#516854",
+                        "on-primary-fixed": "#331200",
+                        "tertiary-fixed": "#ffe08b",
+                        "surface-container-highest": "#e6e2db",
+                        "secondary-fixed": "#d0e9d0",
+                        "surface-tint": "#855234",
+                        "surface-bright": "#fef9f2",
+                        "outline-variant": "#d6c3b9",
+                        "surface-dim": "#ded9d3",
+                        "secondary-fixed-dim": "#b4cdb5",
+                        "on-background": "#1d1c18",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#cda72c",
+                        "secondary-container": "#cde6cd",
+                        "on-secondary-fixed": "#0b2010",
+                        "surface": "#fef9f2",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#f2ede6",
+                        "on-primary-fixed-variant": "#693b1f",
+                        "surface-container-low": "#f8f3ec",
+                        "surface-container-high": "#ece7e1",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fef9f2",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#32302c",
+                        "inverse-on-surface": "#f5f0e9",
+                        "on-surface": "#1d1c18",
+                        "on-secondary-fixed-variant": "#364c39",
+                        "on-tertiary-container": "#4f3d00",
+                        "primary-container": "#9e6848",
+                        "tertiary-fixed-dim": "#ebc246",
+                        "outline": "#84746c",
+                        "secondary": "#4d6450",
+                        "on-surface-variant": "#52443d",
+                        "primary-fixed-dim": "#fbb893",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#ffdbc9",
+                        "on-primary-container": "#fffbff",
+                        "on-tertiary-fixed": "#241a00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "lg": "40px",
+                        "xs": "4px",
+                        "unit": "8px",
+                        "gutter": "24px",
+                        "xl": "64px",
+                        "sm": "12px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-sm": ["Noto Serif"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Noto Serif"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Noto Serif"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md">
+<!-- TopNavBar -->
+<nav class="bg-[#FDFBF9] dark:bg-stone-950 border-b border-stone-200/60 dark:border-stone-800/60 shadow-[0_4px_20px_-4px_rgba(62,54,46,0.08)] docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-[1280px] mx-auto">
+<div class="text-2xl font-bold text-[#A66E4E] dark:text-[#C48B6C] tracking-tighter font-['Noto_Serif']">The Modern Hearth</div>
+<div class="hidden md:flex items-center space-x-8 font-['Noto_Serif'] text-base tracking-tight">
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#A66E4E] transition-colors" href="#">Living</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#A66E4E] transition-colors" href="#">Dining</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#A66E4E] transition-colors" href="#">Bedroom</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#A66E4E] transition-colors" href="#">Decor</a>
+</div>
+<div class="flex items-center space-x-6">
+<div class="cursor-pointer active:scale-95 transition-transform text-[#A66E4E]">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</div>
+<div class="cursor-pointer active:scale-95 transition-transform text-[#A66E4E]">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-[1280px] mx-auto px-8 pt-10 pb-20">
+<!-- Search Header Area -->
+<div class="mb-12">
+<div class="relative max-w-2xl mx-auto">
+<span class="absolute inset-y-0 left-4 flex items-center text-primary/60">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</span>
+<input class="w-full bg-surface-container-low border-none rounded-xl py-4 pl-12 pr-4 text-headline-sm font-headline-sm text-on-surface focus:ring-2 focus:ring-primary/20 inset-shadow-tactile" placeholder="Search our sanctuary..." type="text" value="velvet"/>
+</div>
+<div class="text-center mt-6">
+<h1 class="font-display-lg text-display-lg text-primary mb-2">Refined Softness</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">24 results found for "velvet" treasures</p>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row gap-10">
+<!-- Sidebar Filters -->
+<aside class="w-full lg:w-64 flex-shrink-0">
+<div class="sticky top-28 space-y-8">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-4">Collections</h3>
+<div class="space-y-2">
+<div class="bg-[#A66E4E]/10 text-[#A66E4E] rounded-r-full font-bold px-4 py-2 flex items-center gap-3">
+<span class="material-symbols-outlined text-sm" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-label-md text-label-md">New Arrivals</span>
+</div>
+<div class="text-stone-600 dark:text-stone-400 px-4 py-2 hover:translate-x-1 transition-transform flex items-center gap-3 cursor-pointer">
+<span class="material-symbols-outlined text-sm" data-icon="chair">chair</span>
+<span class="font-label-md text-label-md">Furniture</span>
+</div>
+<div class="text-stone-600 dark:text-stone-400 px-4 py-2 hover:translate-x-1 transition-transform flex items-center gap-3 cursor-pointer">
+<span class="material-symbols-outlined text-sm" data-icon="texture">texture</span>
+<span class="font-label-md text-label-md">Textiles</span>
+</div>
+</div>
+</div>
+<div class="pt-6 border-t border-surface-variant">
+<h3 class="font-label-md text-label-md text-on-surface mb-4">Color Palette</h3>
+<div class="grid grid-cols-4 gap-3">
+<button class="w-10 h-10 rounded-full bg-[#4A3728] border-2 border-white ring-1 ring-stone-200 shadow-sm transition-transform hover:scale-110"></button>
+<button class="w-10 h-10 rounded-full bg-[#4D6450] border-2 border-white ring-1 ring-stone-200 shadow-sm transition-transform hover:scale-110"></button>
+<button class="w-10 h-10 rounded-full bg-[#825032] border-2 border-white ring-2 ring-primary shadow-sm transition-transform hover:scale-110"></button>
+<button class="w-10 h-10 rounded-full bg-[#D4AF37] border-2 border-white ring-1 ring-stone-200 shadow-sm transition-transform hover:scale-110"></button>
+</div>
+</div>
+<div class="pt-6 border-t border-surface-variant">
+<h3 class="font-label-md text-label-md text-on-surface mb-4">Price Range</h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 group cursor-pointer">
+<div class="w-5 h-5 rounded border border-outline group-hover:border-primary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-primary hidden">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant">Under $500</span>
+</label>
+<label class="flex items-center gap-3 group cursor-pointer">
+<div class="w-5 h-5 rounded border-2 border-primary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant font-semibold">$500 - $1,500</span>
+</label>
+</div>
+</div>
+</div>
+</aside>
+<!-- Results Grid -->
+<div class="flex-1">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-gutter gap-y-12">
+<!-- Product Card 1 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] bg-white rounded-xl overflow-hidden shadow-[0_4px_20px_-4px_rgba(62,54,46,0.08)] mb-6 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-[0_12px_32px_-8px_rgba(62,54,46,0.12)]">
+<img alt="Velvet Sofa" class="w-full h-full object-cover" data-alt="luxurious deep emerald green velvet sofa in a sunlit minimalist living room with warm wooden accents and soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBIVyFRw4eKYtspxS6T0cJ1MhzMWoc3QniHGQOo0PMF_87O684KPsRI02zJ1fXN0CHA4lUqOBqva2MNtVokGO9HOSLCqsqQCdi2zlBmM47OsfUvidE4Y1bhF1EToIJkY8pb4IBWMI0IBpsfS6o6X_v8WcIXIo3dJDahm5gGZMMTGTcxNE1NtW0IsanOG0Dt0f2tnMR5Ggt02kOaaowRSQITpf8e2wxvH5gKyFtNa0FETTf4UAglu_3MDlHoWFFeGxcle0Pw5lVj0M"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-primary shadow-sm">Bestseller</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-1">Elysian Velvet Sofa</h4>
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-secondary/10 text-secondary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Emerald</span>
+<span class="bg-tertiary/10 text-tertiary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Oak Base</span>
+</div>
+<p class="font-headline-sm text-primary">$1,250</p>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary transition-colors hover:bg-primary hover:text-white">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] bg-white rounded-xl overflow-hidden shadow-[0_4px_20px_-4px_rgba(62,54,46,0.08)] mb-6 transition-all duration-300 group-hover:-translate-y-2">
+<img alt="Velvet Chair" class="w-full h-full object-cover" data-alt="a plush burnt orange velvet armchair standing on a textured cream rug with soft afternoon sunlight filtering through" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_1h4piCTgiESEbAv1cEirHj2SOEdKzIQyT2B8qV69vRq7GNO91kuViN753yt_1nPJz_g_LfR5ZZd7-MZGt-Ni2hBV2Je7oL9xbt7pV8TlJbOuRTRz9vQzSFdPvXsarR-_Nk79IwD4bVsJE1h3OkAfma_sL3hTNSL--J1NxX8Clo7waAG5x05LwW0rPIj3yQ--TC4dJpd2xTbvSbBfqCobwmkvvmxRUBxTYYY_Gq_gke3MZlUzEljLANaRpOXZOh8qPc5rTYnPr6k"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-1">Amber Hearth Chair</h4>
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-secondary/10 text-secondary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Burnt Orange</span>
+</div>
+<p class="font-headline-sm text-primary">$680</p>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary transition-colors hover:bg-primary hover:text-white">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<!-- Product Card 3 (Bento-style wide) -->
+<div class="group cursor-pointer md:col-span-2 lg:col-span-1 xl:col-span-1">
+<div class="relative aspect-[4/5] bg-white rounded-xl overflow-hidden shadow-[0_4px_20px_-4px_rgba(62,54,46,0.08)] mb-6 transition-all duration-300 group-hover:-translate-y-2">
+<img alt="Velvet Cushions" class="w-full h-full object-cover" data-alt="collection of assorted velvet throw pillows in earthy tones of ochre, sage, and terracotta arranged on a neutral linen bed" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAs-uWtQnbxcvLlYfie-AW5Tss8aCvATLo6iVDAxWm1_BIuJ83E8LRdxMryoEiuqfb3wkVjsyLmLdK6sCcWZaULiIijMDW7bdHwYg9d2gXlXHHkvOwGlts8pLxR4U7TuIoy39jFJzWYlBKDlJG4MExgR_cdkZ14dP9siAsqT_cIeRzR_1WGUJqF4irS04SqENI3DXugazSB1Olas4yg7MhlTYF_nBxSZ8s7Y0sOSEUTKLcHAH0Zl6UazI2vQErpw6m2gcpKDC-EBwc"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-1">Cloud Velvet Set</h4>
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-secondary/10 text-secondary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Multi-tone</span>
+</div>
+<p class="font-headline-sm text-primary">$145</p>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary transition-colors hover:bg-primary hover:text-white">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] bg-white rounded-xl overflow-hidden shadow-[0_4px_20px_-4px_rgba(62,54,46,0.08)] mb-6 transition-all duration-300 group-hover:-translate-y-2">
+<img alt="Velvet Bed" class="w-full h-full object-cover" data-alt="magnificent navy blue velvet headboard with diamond quilting in a sophisticated bedroom setting with ambient warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjd4YR4TTm4WHBI62ReXX0xPTMFST-rYNWtqAp50helsKMvv7dvYJHRKkdB22ubrNSq6gIKCf7kcaWGU4SgKzsC--NSOegX4D1IsM9Kkfa6LeO7n5iS3E5QQzwH4N6StFfZ6DG3pEVCV-COfHxkVnX0fM7LtUPWx_UEvuJg33vUoR5_olTTqUY6GKT5mwMtO7kzbDZJPUmcBW6ZpNXBAiEnukA-uybYcNF-hovoxEFLeQtAY8NTIE-hZHb1RSo8tQGSsFcwSXBkwI"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-1">Nocturne Bedframe</h4>
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-secondary/10 text-secondary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Navy</span>
+</div>
+<p class="font-headline-sm text-primary">$1,850</p>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary transition-colors hover:bg-primary hover:text-white">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] bg-white rounded-xl overflow-hidden shadow-[0_4px_20px_-4px_rgba(62,54,46,0.08)] mb-6 transition-all duration-300 group-hover:-translate-y-2">
+<img alt="Velvet Bench" class="w-full h-full object-cover" data-alt="a minimalist sage green velvet bench with brass legs placed against a clean cream wall in a bright entryway" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9Wa0AN39Wr53AZD6zgMEbVITDqnTqbl3lx2NPpO3n37rqS9q625J_klStkMISvFIroQiNdltxF-jWbJed-d8DixPryGRvpburOZbViMOLcsUE2pRNQmZp3S75rTqL2o-sUT47en5EW8ISWNoj643y0rCJfSpL-mE1g-Bb1cMH0jud6Hl-J34L7EhwEZ6UMif94IErs4UIQUqJVNZpVtNilkiL1YnykYF8xNIXIffl2o2uwgClwA3epzvAZMqID_fmjjD-nnBFZq4"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-1">Willow Entry Bench</h4>
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-secondary/10 text-secondary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Sage</span>
+<span class="bg-tertiary/10 text-tertiary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Brass</span>
+</div>
+<p class="font-headline-sm text-primary">$420</p>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary transition-colors hover:bg-primary hover:text-white">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<!-- Empty/Joyful Placeholder -->
+<div class="flex flex-col items-center justify-center bg-surface-container p-8 rounded-xl border-2 border-dashed border-outline-variant text-center opacity-80 group">
+<span class="material-symbols-outlined text-4xl text-primary/40 mb-4 group-hover:scale-125 transition-transform" data-icon="spa">spa</span>
+<h4 class="font-headline-sm text-on-surface-variant mb-2">Something Missing?</h4>
+<p class="font-body-md text-on-surface-variant mb-4">We can custom craft your velvet dreams in over 40 bespoke shades.</p>
+<button class="px-6 py-2 bg-primary text-white rounded-full font-label-md hover:bg-primary-container transition-colors">Speak with a Designer</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#F9F7F5] dark:bg-stone-900 border-t border-stone-200 dark:border-stone-800 w-full mt-16">
+<div class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center max-w-[1280px] mx-auto">
+<div class="mb-8 md:mb-0 text-center md:text-left">
+<div class="text-lg font-bold text-[#A66E4E] mb-4 font-['Noto_Serif']">The Modern Hearth</div>
+<p class="font-['Noto_Serif'] text-sm text-stone-500">© 2024 The Modern Hearth. Crafted for your sanctuary.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-x-8 gap-y-4">
+<a class="font-['Noto_Serif'] text-sm text-stone-400 hover:text-[#A66E4E] hover:underline underline-offset-4 transition-opacity duration-200" href="#">Sustainability</a>
+<a class="font-['Noto_Serif'] text-sm text-stone-400 hover:text-[#A66E4E] hover:underline underline-offset-4 transition-opacity duration-200" href="#">Shipping</a>
+<a class="font-['Noto_Serif'] text-sm text-stone-400 hover:text-[#A66E4E] hover:underline underline-offset-4 transition-opacity duration-200" href="#">Returns</a>
+<a class="font-['Noto_Serif'] text-sm text-stone-400 hover:text-[#A66E4E] hover:underline underline-offset-4 transition-opacity duration-200" href="#">Contact</a>
+<a class="font-['Noto_Serif'] text-sm text-stone-400 hover:text-[#A66E4E] hover:underline underline-offset-4 transition-opacity duration-200" href="#">Journal</a>
+</div>
+</div>
+</footer>
+</body></html>
