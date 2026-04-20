@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e6e2db",
+                        "on-secondary-container": "#516854",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#cda72c",
+                        "surface-variant": "#e6e2db",
+                        "inverse-primary": "#fbb893",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#52443d",
+                        "secondary-fixed": "#d0e9d0",
+                        "surface-tint": "#855234",
+                        "background": "#fef9f2",
+                        "on-secondary-fixed": "#0b2010",
+                        "on-background": "#1d1c18",
+                        "on-primary-fixed-variant": "#693b1f",
+                        "secondary": "#4d6450",
+                        "secondary-fixed-dim": "#b4cdb5",
+                        "surface-container": "#f2ede6",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#241a00",
+                        "primary": "#825032",
+                        "on-primary-container": "#fffbff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#ece7e1",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#584400",
+                        "outline": "#84746c",
+                        "tertiary-fixed": "#ffe08b",
+                        "inverse-surface": "#32302c",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#331200",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#9e6848",
+                        "on-surface": "#1d1c18",
+                        "surface-container-low": "#f8f3ec",
+                        "inverse-on-surface": "#f5f0e9",
+                        "primary-fixed": "#ffdbc9",
+                        "surface-bright": "#fef9f2",
+                        "outline-variant": "#d6c3b9",
+                        "tertiary-fixed-dim": "#ebc246",
+                        "secondary-container": "#cde6cd",
+                        "surface-dim": "#ded9d3",
+                        "on-secondary-fixed-variant": "#364c39",
+                        "on-tertiary-container": "#4f3d00",
+                        "primary-fixed-dim": "#fbb893",
+                        "tertiary": "#745b00",
+                        "surface": "#fef9f2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "xs": "4px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "xl": "64px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Noto Serif"],
+                        "headline-sm": ["Noto Serif"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Noto Serif"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<header class="sticky top-0 z-50 bg-[#FDFCFB] dark:bg-stone-950 border-b border-stone-200/60 dark:border-stone-800 shadow-[0_4px_20px_-4px_rgba(62,54,46,0.08)] dark:shadow-none">
+<nav class="flex justify-between items-center w-full px-8 py-4 max-w-[1280px] mx-auto">
+<div class="text-2xl font-bold text-[#A66E4E] dark:text-[#D4A373] tracking-tight font-headline-md">Modern Hearth</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-[#A66E4E] dark:text-[#D4A373] font-semibold border-b-2 border-[#A66E4E] pb-1 font-label-md" href="#">Shop All</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-stone-800 dark:hover:text-stone-200 transition-all duration-300 font-label-md" href="#">Living</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-stone-800 dark:hover:text-stone-200 transition-all duration-300 font-label-md" href="#">Bedroom</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-stone-800 dark:hover:text-stone-200 transition-all duration-300 font-label-md" href="#">Dining</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-stone-800 dark:hover:text-stone-200 transition-all duration-300 font-label-md" href="#">About</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-[#A66E4E] hover:bg-stone-50 p-2 rounded-full transition-all" data-icon="search">search</button>
+<button class="material-symbols-outlined text-[#A66E4E] hover:bg-stone-50 p-2 rounded-full transition-all" data-icon="shopping_cart">shopping_cart</button>
+<button class="material-symbols-outlined text-[#A66E4E] hover:bg-stone-50 p-2 rounded-full transition-all" data-icon="person">person</button>
+</div>
+</nav>
+</header>
+<main class="max-w-[1280px] mx-auto px-8 pt-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+<section class="lg:col-span-7 space-y-md">
+<div class="relative group">
+<img alt="Sunbeam Sofa" class="w-full aspect-[4/3] object-cover rounded-xl shadow-[0_8px_30px_rgb(62,54,46,0.12)] transition-transform duration-500 hover:scale-[1.01]" data-alt="Luxurious cream-colored Sunbeam Sofa with soft velvet texture in a sunlit minimalist living room with warm wood accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlOriAMekWpKd3lGlkcT1r3bGSi8oS0NlYYIMB_aGZGu55iaQVEFFFKuLmhdXXelPAiuJ_tLAWeMuwxNwR1fkWnUqyPI2oMv1ysQBOM90FeSF7WvssPSmaDFMDpvtJ3q5FfX3XXZPBBQGN-8GWa836aMRIhdc8VlzKFO89RxhehsbgOAZ4eobYj9w9ZpDDx2bpMQ7YC1IJr7RNo8Na7_oFWndN4mV-B477xQ2aRIrTTiQRDb28c3tZUDfxOhpyONNKFkK4y3PGG7E"/>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
+<span class="w-2.5 h-2.5 rounded-full bg-white shadow-sm border border-stone-200"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-white/40 shadow-sm border border-white/20"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-white/40 shadow-sm border border-white/20"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-white/40 shadow-sm border border-white/20"></span>
+</div>
+<div class="absolute top-6 right-6 flex flex-col gap-3">
+<button class="glass-panel w-12 h-12 rounded-full flex items-center justify-center text-on-surface shadow-sm hover:scale-105 transition-transform" title="View in 3D">
+<span class="material-symbols-outlined" data-icon="3d_rotation">3d_rotation</span>
+</button>
+<button class="glass-panel w-12 h-12 rounded-full flex items-center justify-center text-on-surface shadow-sm hover:scale-105 transition-transform" title="Try in AR">
+<span class="material-symbols-outlined" data-icon="view_in_ar">view_in_ar</span>
+</button>
+</div>
+</div>
+<div class="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+<img alt="Sofa Detail 1" class="w-24 h-24 rounded-lg object-cover cursor-pointer border-2 border-primary ring-2 ring-primary-fixed/20" data-alt="Macro detail of cream velvet upholstery on a sofa showing fine fabric weave and soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABUv2n7C3ahIWc6R0UqRx5qLHOGn2U25lFZiE_m0_oTpWHCDtxlYeubKS8psTwPp39amefQYPAafLTr3TN1fA56p8l35ANwNpo9p7d0XoK-GycVWaXQo3avw4t6OkmvW-I9O9aQhCP-3xp_C3aoSmvq543LHHURtCDwpRqQLHs4sQSk5BvhsXXrrGcyYH8IMcivqEuZ95WDgOBhBvbK7he2SugEz80di_ZSZNOtXphhczRXbLNm73Ictt_RKPUFOVI9dEyGVOQA1E"/>
+<img alt="Sofa Detail 2" class="w-24 h-24 rounded-lg object-cover cursor-pointer hover:opacity-80 transition-opacity" data-alt="Side profile view of a minimalist sofa with elegant oak wood legs and rounded fabric corners" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkJkm25FtfrpTE1u7ToHh4ODqk0Ql_K3v7dSNCjGC1RyIWYkSp8hvkHfEL-B9CXwCSuenXQ1iN2OtbQYurYNXcTrkChrAIi2Ed1I-M6DDumM7ZFS8Ih_PEI6jC7JDNv3dLPyrUp_VWzbWyclslbJTyWymE76G_11H6YGrpQKgnI5yVPsVKAjuL5kNYv42StHayTc8TihUt9frSHoISrvlX5llJHh7Shdn7ohDATvujfItkbXU4TH014qIKQRxOk36GLM9aRVbZx4I"/>
+<img alt="Sofa Detail 3" class="w-24 h-24 rounded-lg object-cover cursor-pointer hover:opacity-80 transition-opacity" data-alt="Sunlight hitting the armrest of a modern sofa highlighting the golden hour warmth and texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0ATveXZAvmMWT_6YPXyKme1vrDcxnABm31UKR_clzrUZFKrrnPlkBCPdv6cKvhMMwGcvl8b3atUAZZh6GVU-VgUiy5-wpanP14_h3LCgyT0WRJdE9f7DNNima3fonibd6odWlX94CHAmxGtwdJeNv3KizYbmOA2PDTYcspeH6RaQ2zO1T64uylSnOoYOUJAqV-EmzI6yi8FjBRbay-_GMZuuKVHL7m6jbixhmcEzvflqeTRqUALQ-4Fr28EucXi75_3oNSrHSxjY"/>
+<img alt="Sofa Detail 4" class="w-24 h-24 rounded-lg object-cover cursor-pointer hover:opacity-80 transition-opacity" data-alt="A wide angle view of the sofa in a modern apartment setting with large windows and plants" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFJctcn-ctm4IYqHqv-48jez0XLyiZvMqFkM4LdqUeIKIpqfKzkamQhSJXU_VLg3F6LifzghAzfrk1iuYnVatBBxBWpfx43op3vLNZUx7tVBpiOGFA6-jePJN4HAY2aM1Kkgys-OS6C--4W-sJOqdqv7RFUZ-BOgW76kf3JP98IxSIxF1akEwG0iXM_PjmEGBGBXOJj_tkDP5LAZZoMjgULv4KRczT1GwiWLPklF-_gL1kxEk716FgYEU6Ua-ZwEVvJE3jSgr-uxo"/>
+</div>
+</section>
+<section class="lg:col-span-5 flex flex-col">
+<div class="mb-lg">
+<nav class="flex text-label-md text-stone-400 mb-4 gap-2">
+<span>Living Room</span>
+<span>/</span>
+<span class="text-stone-600">Seating</span>
+</nav>
+<h1 class="font-display-lg text-on-surface mb-2">Sunbeam Sofa</h1>
+<div class="flex items-center gap-4 mb-6">
+<div class="flex text-tertiary">
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star_half" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<span class="font-label-md text-stone-500">(128 Reviews)</span>
+</div>
+<p class="font-display-lg text-primary mb-lg">$2,499.00</p>
+<p class="font-body-lg text-stone-600 mb-lg">
+                        Designed to capture the essence of a warm afternoon, the Sunbeam Sofa combines deep, cloud-like cushioning with a structural elegance that anchors any room. Upholstered in our signature tactile velvet that glows under natural light.
+                    </p>
+</div>
+<div class="mb-lg space-y-md">
+<div>
+<span class="font-label-md text-on-surface block mb-3 uppercase tracking-wider">Material Swatches</span>
+<div class="flex gap-4">
+<div class="group relative">
+<button class="w-12 h-12 rounded-full ring-2 ring-primary ring-offset-2 bg-[#E6D5C3] shadow-inner"></button>
+<span class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity font-label-md whitespace-nowrap bg-stone-800 text-white px-2 py-1 rounded">Oat Velvet</span>
+</div>
+<div class="group relative">
+<button class="w-12 h-12 rounded-full bg-[#525B56] shadow-inner"></button>
+</div>
+<div class="group relative">
+<button class="w-12 h-12 rounded-full bg-[#7D6B5D] shadow-inner"></button>
+</div>
+</div>
+</div>
+<div class="flex gap-3">
+<span class="px-4 py-1.5 rounded-full bg-secondary/10 text-on-secondary-container font-label-md flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="eco">eco</span>
+                            Organic Velvet
+                        </span>
+<span class="px-4 py-1.5 rounded-full bg-secondary/10 text-on-secondary-container font-label-md flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="forest">forest</span>
+                            Solid Oak
+                        </span>
+</div>
+</div>
+<div class="mt-auto space-y-4">
+<div class="flex gap-4">
+<div class="flex items-center border border-outline-variant rounded-lg px-4 bg-white shadow-sm">
+<button class="material-symbols-outlined p-2 text-stone-500 hover:text-primary transition-colors" data-icon="remove">remove</button>
+<span class="px-6 font-label-md">1</span>
+<button class="material-symbols-outlined p-2 text-stone-500 hover:text-primary transition-colors" data-icon="add">add</button>
+</div>
+<button class="flex-1 bg-primary text-white font-label-md py-4 rounded-lg shadow-lg hover:bg-primary-container transition-all active:scale-[0.98] flex items-center justify-center gap-3">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+                            Add to Cart
+                        </button>
+</div>
+<button class="w-full border-2 border-primary text-primary font-label-md py-4 rounded-lg hover:bg-primary/5 transition-all flex items-center justify-center gap-3">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+                        Save to Wishlist
+                    </button>
+</div>
+<div class="mt-lg grid grid-cols-2 gap-4">
+<div class="p-4 rounded-xl bg-surface-container-low border border-stone-100 flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="local_shipping">local_shipping</span>
+<div>
+<p class="font-label-md text-on-surface">Free Delivery</p>
+<p class="text-[12px] text-stone-500">To your room of choice</p>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-low border border-stone-100 flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="verified">verified</span>
+<div>
+<p class="font-label-md text-on-surface">5 Year Warranty</p>
+<p class="text-[12px] text-stone-500">Quality guaranteed</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<section class="mt-xl pt-xl border-t border-stone-200">
+<h2 class="font-headline-md text-on-surface mb-lg text-center">Complete the Sanctuary</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<div class="group cursor-pointer">
+<div class="relative overflow-hidden rounded-xl bg-white shadow-[0_4px_20px_-4px_rgba(62,54,46,0.08)] mb-4">
+<img alt="Handcrafted Coffee Table" class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Minimalist solid oak coffee table with organic rounded edges in a bright living room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPH1rG-XyaW6rXNLzljQdjfDzPSv6WQkk0zeQz4df9WHrgg1Xp4q2qxTEuVp7dfnsQ2Qo9hSNaHNvyQyQgLsT1TtpMpEhq83BlH6qQ1kPZmwnSmxLTjR1ivtVAWgDvILog75WlBKw3lrs10B8f2_tw7PF9RCFhIPQAgADPrWr5Niy1zIkYyO9zZBVgnhjdmWxwls89dGBzeWvgtIe6qvRiGlKm2cTJelK2VbUtSqjJJQa3qfD1WWcVeqjK1OWUN44hBHwbvjsj8vE"/>
+<button class="absolute top-4 right-4 w-10 h-10 rounded-full glass-panel flex items-center justify-center text-stone-800 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+</div>
+<h3 class="font-label-md text-on-surface">Oak Float Coffee Table</h3>
+<p class="text-primary font-label-md">$850.00</p>
+</div>
+<div class="group cursor-pointer">
+<div class="relative overflow-hidden rounded-xl bg-white shadow-[0_4px_20px_-4px_rgba(62,54,46,0.08)] mb-4">
+<img alt="Textured Wool Rug" class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close-up of a high-pile cream wool rug with subtle geometric patterns and soft texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnsEN4KWoEVQ_I9tGK4ItkyumvuLv-TnLBkwv_v5zV-igQFW6eK7ZNOV_rSoj6_j9jyqq_KIFwPE7Lewa0trvh75lYkovoNv8u8dC0694m18KPjJkQ2aW-5WjWLZrP2jouzT89X9A6rLGQimUWO8jNJepkgMvbarueY9_6wvH2sFSFpo7Uy4IZkPJV9n6JE2JUNb-N4hH2CyQ381W8ofqjVS2RlOeKGswbpw45LYPKNXjLNs1oHa6xGY_xxm5T0WahtjBw87X_TOA"/>
+<button class="absolute top-4 right-4 w-10 h-10 rounded-full glass-panel flex items-center justify-center text-stone-800 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+</div>
+<h3 class="font-label-md text-on-surface">Driftwood Wool Rug</h3>
+<p class="text-primary font-label-md">$1,200.00</p>
+</div>
+<div class="group cursor-pointer">
+<div class="relative overflow-hidden rounded-xl bg-white shadow-[0_4px_20px_-4px_rgba(62,54,46,0.08)] mb-4">
+<img alt="Amber Glass Lamp" class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Hand-blown amber glass table lamp with a soft warm glow sitting on a wooden side table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAszDvFky4R5ra5YHYSSfDSPsn9z311cA16pIKnzG4S1m3Q8Go0kzR_KdsJ8GouQ3MgNmxmawGlGIPi8cLEshAN4gW-t8FexJw3v0yMwc-Gln9mh_QD7e9II-a2iQ-8bjptBW4xt8j59qAPSg21xL0-v8PWwoIeKCV6K29reiZ0uEMhn50V_ZjjAfd7KcXCKWxqDShoHxrnQbPiM9u6T2N_CDPsgBT6nFeGPt2nsyfz4QsWDhqWgYhEpeB1XNkxYKYwcCRZIAbfFhQ"/>
+<button class="absolute top-4 right-4 w-10 h-10 rounded-full glass-panel flex items-center justify-center text-stone-800 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+</div>
+<h3 class="font-label-md text-on-surface">Ember Glass Lamp</h3>
+<p class="text-primary font-label-md">$245.00</p>
+</div>
+<div class="group cursor-pointer">
+<div class="relative overflow-hidden rounded-xl bg-white shadow-[0_4px_20px_-4px_rgba(62,54,46,0.08)] mb-4">
+<img alt="Velvet Cushion" class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Assortment of luxury velvet cushions in earthy tones: forest green, burnt orange, and cream" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZR8A6Yv1RlX-CqvWo0kEayH1PRYiDCZxL8UBsdaBfd7f9mGWI6f-FuWtKj-dNohPYW_UKiZ_5UsEMTvIMAmeXZRP1G0Wuge0HrgrS3tTGZRDwEpjfPz2_RWg_1hjNJqWP-zLJMwqa7aaC7Z5QbDe28u4FtuSzAtg1qRMafqxXKQ2pB9fNhdWcq4hPYAVOyEq_9Jwl024bklxzDOPwwcGGvqGO3-JlagZ572k8PdyUnFwco70sfdVdMin7JCT0vMG9yqJyq_W94Ro"/>
+<button class="absolute top-4 right-4 w-10 h-10 rounded-full glass-panel flex items-center justify-center text-stone-800 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+</div>
+<h3 class="font-label-md text-on-surface">Lush Velvet Cushions</h3>
+<p class="text-primary font-label-md">$75.00</p>
+</div>
+</div>
+</section>
+</main>
+<footer class="w-full mt-16 border-t border-stone-200 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-8 py-12 max-w-[1280px] mx-auto gap-6">
+<div class="text-lg font-semibold text-stone-800 dark:text-stone-200 font-headline-sm">Modern Hearth</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-stone-500 hover:text-[#A66E4E] transition-all font-body-md" href="#">Sustainability</a>
+<a class="text-stone-500 hover:text-[#A66E4E] transition-all font-body-md" href="#">Care Guide</a>
+<a class="text-stone-500 hover:text-[#A66E4E] transition-all font-body-md" href="#">Shipping</a>
+<a class="text-stone-500 hover:text-[#A66E4E] transition-all font-body-md" href="#">Returns</a>
+<a class="text-stone-500 hover:text-[#A66E4E] transition-all font-body-md" href="#">Privacy</a>
+</div>
+<div class="text-stone-600 dark:text-stone-400 text-sm font-body-md">
+                © 2024 The Modern Hearth. Designed for sanctuary.
+            </div>
+</div>
+</footer>
+</body></html>
