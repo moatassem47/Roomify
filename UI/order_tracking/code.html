@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Tracking | The Modern Hearth</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fef9f2; /* surface color */
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#364c39",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#b4cdb5",
+                    "secondary": "#4d6450",
+                    "tertiary-fixed": "#ffe08b",
+                    "on-secondary-fixed": "#0b2010",
+                    "on-tertiary-fixed": "#241a00",
+                    "on-tertiary-container": "#4f3d00",
+                    "on-error": "#ffffff",
+                    "surface": "#fef9f2",
+                    "inverse-primary": "#fbb893",
+                    "surface-container-high": "#ece7e1",
+                    "surface-bright": "#fef9f2",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#ded9d3",
+                    "surface-container-low": "#f8f3ec",
+                    "surface-tint": "#855234",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#f5f0e9",
+                    "surface-container": "#f2ede6",
+                    "on-primary-fixed-variant": "#693b1f",
+                    "surface-variant": "#e6e2db",
+                    "on-surface": "#1d1c18",
+                    "outline-variant": "#d6c3b9",
+                    "on-primary-fixed": "#331200",
+                    "primary-fixed": "#ffdbc9",
+                    "inverse-surface": "#32302c",
+                    "primary-fixed-dim": "#fbb893",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#516854",
+                    "on-background": "#1d1c18",
+                    "primary": "#825032",
+                    "on-tertiary-fixed-variant": "#584400",
+                    "on-surface-variant": "#52443d",
+                    "error": "#ba1a1a",
+                    "tertiary": "#745b00",
+                    "primary-container": "#9e6848",
+                    "outline": "#84746c",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#cda72c",
+                    "surface-container-highest": "#e6e2db",
+                    "secondary-fixed": "#d0e9d0",
+                    "on-primary-container": "#fffbff",
+                    "secondary-container": "#cde6cd",
+                    "background": "#fef9f2",
+                    "tertiary-fixed-dim": "#ebc246"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "md": "24px",
+                    "xs": "4px",
+                    "unit": "8px",
+                    "sm": "12px",
+                    "gutter": "24px",
+                    "lg": "40px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Noto Serif"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "display-lg": ["Noto Serif"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "headline-sm": ["Noto Serif"],
+                    "body-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-white/90 dark:bg-stone-900/90 backdrop-blur-md text-[#A66E4E] dark:text-[#C48B6C] docked full-width top-0 z-40 border-b border-stone-100 dark:border-stone-800 shadow-[0_2px_15px_-3px_rgba(62,54,46,0.05)] flex justify-between items-center w-full px-8 h-20">
+<div class="text-2xl font-bold tracking-tighter text-[#A66E4E] dark:text-[#C48B6C] font-noto-serif">The Modern Hearth</div>
+<nav class="hidden md:flex items-center gap-8 h-full">
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors font-noto-serif text-stone-800 dark:text-stone-100" href="#">Catalog</a>
+<a class="text-[#A66E4E] font-semibold border-b-2 border-[#A66E4E] pb-1 font-noto-serif" href="#">My Orders</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors font-noto-serif text-stone-800 dark:text-stone-100" href="#">Showrooms</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-stone-50 dark:hover:bg-stone-800/50 rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="p-2 hover:bg-stone-50 dark:hover:bg-stone-800/50 rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-stone-50 dark:hover:bg-stone-800/50 rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed ml-2">
+<img alt="User profile photo" data-alt="Close-up portrait of a serene woman with natural lighting in a warm interior setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNyctYqb1z-5RJvs68r_-owWZkLM5BgW6lUuy2jC3h_GZi8JzCoPJCGzmzCVdmebt1OfDNJ7oDI3bc-1u3K8v3wgpHxkgiK509J0S3waIXvQU88pzA3zI0y0d9tLnp2C2_OwZpHjZIzKhn__COq-X6ith4U8dEdcXCtBbfIpvEZX7AVVCetWNTlEmthM2TtyBLz3j0lBYxkpDH6kRGFwqvBSozCWkhvdGj2pRhCypTxC0faR-KESPjGKF72P0WYTVbT7PmYsA2kmo"/>
+</div>
+</div>
+</header>
+<main class="max-w-[1280px] mx-auto px-gutter py-xl">
+<div class="flex flex-col gap-lg">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2 block">Track Your Delivery</span>
+<h1 class="font-display-lg text-display-lg text-on-surface">Almost home.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Order #MH-82910 — Handcrafted Oak Dining Table</p>
+</div>
+<div class="flex items-center gap-3 bg-white px-6 py-3 rounded-xl shadow-[0_2px_15px_-3px_rgba(62,54,46,0.05)] border border-surface-variant/30">
+<div class="w-3 h-3 rounded-full bg-secondary animate-pulse"></div>
+<span class="font-label-md text-label-md text-secondary">Out for Delivery</span>
+</div>
+</div>
+<!-- Main Tracking Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Map and Driver Info (Bento Style) -->
+<div class="lg:col-span-8 flex flex-col gap-gutter">
+<!-- Map Component -->
+<div class="h-[450px] bg-surface-container rounded-xl overflow-hidden relative shadow-[0_4px_24px_-4px_rgba(62,54,46,0.08)]">
+<img class="w-full h-full object-cover opacity-80" data-alt="Soft watercolor-style minimalist map of a quiet residential neighborhood with warm neutral tones and subtle street highlights" data-location="Portland, Oregon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7-uYyO-DTKHqLhF-utYiFTuNqAuD22TqakO-5nLHsL0EiadLhpEisWLiBcWOCAu0kziI69c6cr1bPXZdQP9XbVh_p6X3yO5I9C0A_myatpokTJcU_lOktkX9oPWk78V_G_I8phjoqLdyPsgqMGBbmeGu1xt2vRYWfkdePrw3AR-sRMP6zKKo1GOFtrY_OJ-C7n4otqg1nErUHYYEcz5cCRuMZmRhaK_W_IO3MDVCavDQI4slO3proAtcnxP_9lpDdM20fncgdH0w"/>
+<!-- Overlaying Live Status -->
+<div class="absolute bottom-6 left-6 right-6">
+<div class="bg-white/90 backdrop-blur-md p-6 rounded-xl shadow-xl flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-full overflow-hidden ring-4 ring-primary-fixed">
+<img alt="Driver profile" data-alt="Friendly delivery professional smiling with a warm, trustworthy expression in a clean uniform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk7kMHSTeFPrQrJoWxeBZZXJ-T05CxritJd7jmiHV1tKyUBszadVp0D_shg_c43tYhRzwxAqvvxlBtdRMsSee779myu5_W5zrkjGxCi-quKusLbO1nIF39P3lmQl3xrrKweX-NuAOrU7mez_aHWOKB6hNskaN0SikjgLO40oHo0QWNXPkjz1_TMG581aihV0BAx1QoEo7tkX2NAgHwnUIks7eKXFHN7qW3GCFSu_hT9kzKUwyhE_kiZpxxeIS3WueleabYqcl6nck"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant">Your Delivery Artisan</p>
+<p class="font-headline-sm text-headline-sm text-on-surface">Elias Thorne</p>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-5 py-3 rounded-xl bg-primary text-white font-label-md shadow-md hover:scale-[1.02] transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="chat">chat</span>
+                                        Message Elias
+                                    </button>
+<button class="p-3 rounded-xl bg-surface-container-low text-primary hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Progress Journey -->
+<div class="bg-white p-8 rounded-xl shadow-[0_4px_24px_-4px_rgba(62,54,46,0.08)]">
+<h3 class="font-headline-sm text-headline-sm mb-8">Delivery Progress</h3>
+<div class="relative flex justify-between">
+<!-- Progress Line -->
+<div class="absolute top-5 left-0 w-full h-[2px] bg-surface-variant"></div>
+<div class="absolute top-5 left-0 w-3/4 h-[2px] bg-secondary"></div>
+<!-- Steps -->
+<div class="relative z-10 flex flex-col items-center text-center w-1/4">
+<div class="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-sm" data-icon="check" data-weight="fill">check</span>
+</div>
+<span class="font-label-md text-on-surface">Confirmed</span>
+<span class="text-xs text-on-surface-variant mt-1">Oct 12, 9:30 AM</span>
+</div>
+<div class="relative z-10 flex flex-col items-center text-center w-1/4">
+<div class="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-sm" data-icon="check" data-weight="fill">check</span>
+</div>
+<span class="font-label-md text-on-surface">Polished</span>
+<span class="text-xs text-on-surface-variant mt-1">Oct 14, 2:15 PM</span>
+</div>
+<div class="relative z-10 flex flex-col items-center text-center w-1/4">
+<div class="w-12 h-12 rounded-full bg-white border-4 border-secondary flex items-center justify-center mb-3 shadow-lg -mt-1">
+<span class="material-symbols-outlined text-secondary" data-icon="local_shipping" data-weight="fill">local_shipping</span>
+</div>
+<span class="font-label-md text-secondary font-bold">Out for Delivery</span>
+<span class="text-xs text-on-surface-variant mt-1">Estimated: 4:30 PM</span>
+</div>
+<div class="relative z-10 flex flex-col items-center text-center w-1/4 opacity-40">
+<div class="w-10 h-10 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-sm" data-icon="home">home</span>
+</div>
+<span class="font-label-md text-on-surface">At Home</span>
+<span class="text-xs text-on-surface-variant mt-1">Waiting</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Sidebar -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<!-- Order Details Card -->
+<div class="bg-white p-8 rounded-xl shadow-[0_4px_24px_-4px_rgba(62,54,46,0.08)] flex flex-col gap-6">
+<h3 class="font-headline-sm text-headline-sm">Order Summary</h3>
+<div class="flex gap-4">
+<div class="w-24 h-24 rounded-lg overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Top-down view of a handcrafted solid oak dining table with rich grain texture and minimalist legs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3NNfmO1Zp4azYxwUUwprrbvW403rFIrRUNGENTDVoJM6hSy2ycGn29-AODS04bAmAsQxvJLeahyWXuVlcTyenlq_w-9BLjfJMcJYcWzvvtBzT0CmO5V1EqpqAB-09KizKaHrzelq91BpEwe802mGFbNNIBdzGfZcXn4COSLBjQ-hdTgC4DI-OBI3v8eac65n8IMe7t9HZe5p0bIUOySP56bxNgBW2me6NbbGpUmNIb7bLSfKFdoa0yNrH2UAxw0HOtbh2htYN2H0"/>
+</div>
+<div class="flex flex-col justify-center">
+<p class="font-label-md text-on-surface">Wild Oak Trestle Table</p>
+<p class="text-sm text-on-surface-variant">Natural Finish / 6-Seater</p>
+<p class="font-label-md text-secondary mt-1">$2,450.00</p>
+</div>
+</div>
+<hr class="border-surface-variant/30"/>
+<div class="flex flex-col gap-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+<div>
+<p class="font-label-md text-on-surface">Delivery Address</p>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                                        Jane Doe<br/>
+                                        4228 Serenity Lane<br/>
+                                        Portland, OR 97201
+                                    </p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="event">event</span>
+<div>
+<p class="font-label-md text-on-surface">Scheduled Window</p>
+<p class="text-sm text-on-surface-variant">Today, Oct 15<br/>2:00 PM – 5:00 PM</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Delivery Instructions Card -->
+<div class="bg-surface-container-low p-8 rounded-xl border border-primary/10">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="info">info</span>
+<h4 class="font-label-md text-on-surface">Artisan Notes</h4>
+</div>
+<p class="text-sm text-on-surface-variant italic leading-relaxed">
+                            "Please ensure there is a clear path to the dining area. Our team will perform the final hand-buffing on-site to ensure the finish is perfect for your space."
+                        </p>
+</div>
+<!-- Help & Support -->
+<div class="flex flex-col gap-3">
+<button class="w-full py-4 text-center rounded-xl font-label-md text-on-surface-variant border border-surface-variant hover:bg-white transition-all">
+                            Need help with this order?
+                        </button>
+<button class="w-full py-4 text-center rounded-xl font-label-md text-on-surface-variant border border-surface-variant hover:bg-white transition-all">
+                            Change delivery preferences
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer-like Bottom Nav for Mobile -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-stone-100 flex justify-around py-4 z-50">
+<button class="flex flex-col items-center gap-1 text-stone-400">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] font-medium">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#A66E4E]">
+<span class="material-symbols-outlined" data-icon="package_2" data-weight="fill">package_2</span>
+<span class="text-[10px] font-medium">Orders</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-stone-400">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="text-[10px] font-medium">Saved</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-stone-400">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</button>
+</div>
+</body></html>
