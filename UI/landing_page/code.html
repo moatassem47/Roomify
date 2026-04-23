@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Modern Hearth | Joyful Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e6e2db",
+                        "on-secondary-container": "#516854",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#cda72c",
+                        "surface-variant": "#e6e2db",
+                        "inverse-primary": "#fbb893",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#52443d",
+                        "secondary-fixed": "#d0e9d0",
+                        "surface-tint": "#855234",
+                        "background": "#fef9f2",
+                        "on-secondary-fixed": "#0b2010",
+                        "on-background": "#1d1c18",
+                        "on-primary-fixed-variant": "#693b1f",
+                        "secondary": "#4d6450",
+                        "secondary-fixed-dim": "#b4cdb5",
+                        "surface-container": "#f2ede6",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#241a00",
+                        "primary": "#825032",
+                        "on-primary-container": "#fffbff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#ece7e1",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#584400",
+                        "outline": "#84746c",
+                        "tertiary-fixed": "#ffe08b",
+                        "inverse-surface": "#32302c",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#331200",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#9e6848",
+                        "on-surface": "#1d1c18",
+                        "surface-container-low": "#f8f3ec",
+                        "inverse-on-surface": "#f5f0e9",
+                        "primary-fixed": "#ffdbc9",
+                        "surface-bright": "#fef9f2",
+                        "outline-variant": "#d6c3b9",
+                        "tertiary-fixed-dim": "#ebc246",
+                        "secondary-container": "#cde6cd",
+                        "surface-dim": "#ded9d3",
+                        "on-secondary-fixed-variant": "#364c39",
+                        "on-tertiary-container": "#4f3d00",
+                        "primary-fixed-dim": "#fbb893",
+                        "tertiary": "#745b00",
+                        "surface": "#fef9f2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "xs": "4px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "xl": "64px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Noto Serif"],
+                        "headline-sm": ["Noto Serif"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Noto Serif"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .text-shadow-subtle {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar -->
+<header class="bg-[#FDFCFB] sticky top-0 z-50 border-b border-stone-200/60 shadow-[0_4px_20px_-4px_rgba(62,54,46,0.08)]">
+<nav class="flex justify-between items-center w-full px-8 py-4 max-w-[1280px] mx-auto">
+<div class="flex items-center gap-12">
+<a class="text-2xl font-bold text-[#A66E4E] tracking-tight font-headline-md" href="#">Modern Hearth</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#A66E4E] font-semibold border-b-2 border-[#A66E4E] pb-1 font-label-md" href="#">Shop All</a>
+<a class="text-stone-500 font-medium hover:text-stone-800 transition-all duration-300 font-label-md" href="#">Living</a>
+<a class="text-stone-500 font-medium hover:text-stone-800 transition-all duration-300 font-label-md" href="#">Bedroom</a>
+<a class="text-stone-500 font-medium hover:text-stone-800 transition-all duration-300 font-label-md" href="#">Dining</a>
+<a class="text-stone-500 font-medium hover:text-stone-800 transition-all duration-300 font-label-md" href="#">About</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="p-2 hover:bg-stone-50 rounded-full transition-all duration-300 scale-95 active:opacity-80">
+<span class="material-symbols-outlined text-stone-600">search</span>
+</button>
+<button class="p-2 hover:bg-stone-50 rounded-full transition-all duration-300 scale-95 active:opacity-80">
+<span class="material-symbols-outlined text-stone-600">shopping_cart</span>
+</button>
+<button class="p-2 hover:bg-stone-50 rounded-full transition-all duration-300 scale-95 active:opacity-80">
+<span class="material-symbols-outlined text-stone-600">person</span>
+</button>
+</div>
+</nav>
+</header>
+<!-- Hero Section -->
+<main>
+<section class="relative w-full min-h-[870px] flex items-center px-8 py-16 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Cozy Living Room" class="w-full h-full object-cover" data-alt="A warm, sun-drenched living room with a plush cream sofa, light oak coffee table, soft linen curtains, and organic pottery accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgECevjYK1azwhYb1-oT-_gAK9b3cndNFyIWaLFG2l1QAmeCZQMluqrqHMBRJfPscOHO7UKqUhC62xBQSQ1u508aR5_drMXAkEfy3u8v0Wu5EoV0569Z_FVPq9S1F0E4Kh0nCBRnTrdeGfqUQqrcAGhnhEBBwG-1-durFNaqLW8kTVMKUwsL1L3dPKOSwUg6sc1Ug0_0R8WeWt0q6k8tPq-KXmk60y6Df9hwrDQAjJM1YKWwwkoNdlFWg82l4IcbVu9Vh7uQAlQqo"/>
+<div class="absolute inset-0 bg-gradient-to-r from-background/90 via-background/40 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-[1280px] mx-auto w-full">
+<div class="max-w-2xl space-y-8">
+<div class="inline-flex items-center gap-2 px-4 py-2 bg-secondary-container/30 text-on-secondary-container rounded-full border border-secondary-container/50">
+<span class="material-symbols-outlined text-[18px]">temp_preferences_custom</span>
+<span class="font-label-md">New Autumn Collection</span>
+</div>
+<h1 class="font-display-lg text-on-background leading-tight">Create a Sanctuary of <span class="text-primary italic">Comfort &amp; Joy</span></h1>
+<p class="font-body-lg text-on-surface-variant max-w-lg">
+                        Thoughtfully designed furniture that turns every corner of your home into a restorative escape. Sustainable materials, timeless design, and a touch of warmth for your modern hearth.
+                    </p>
+<div class="flex items-center gap-4 pt-4">
+<button class="bg-primary text-white px-8 py-4 rounded-xl font-label-md shadow-lg hover:bg-primary-container transition-all hover:translate-y-[-2px] active:scale-95">
+                            Shop the Collection
+                        </button>
+<button class="flex items-center gap-2 px-8 py-4 font-label-md text-primary hover:bg-surface-container rounded-xl transition-all">
+                            View Lookbook
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- New Arrivals - Asymmetric Grid -->
+<section class="max-w-[1280px] mx-auto px-8 py-xl">
+<div class="flex justify-between items-end mb-lg">
+<div class="space-y-2">
+<p class="font-label-md text-primary tracking-widest uppercase">Curated Selection</p>
+<h2 class="font-headline-md text-on-surface">The New Arrivals</h2>
+</div>
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="#">
+                    Explore All <span class="material-symbols-outlined">chevron_right</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Large Featured Card -->
+<div class="md:col-span-7 group cursor-pointer">
+<div class="relative aspect-[16/10] rounded-xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] mb-md">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Modern minimalist bedroom with a textured fabric headboard in charcoal grey and soft organic cotton bedding in sage green." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc5NsA6YXEnzHoBburH22KLePVuG4hgRNuaQSYqm3EF1ZoiYwW0VIsUBMi_JwKKM1jwVgMub8bY8P2h3aaTNhUyGZqtEJuzbZGKkSela_yyuL9yH8VoYdqb9b_rO6QHg5LNyKYhizsAzpa6JWpKVIOs7k7NeGV8tWgKJhsV-rQPusLfNXewcsL_T3nQFabAgXzUMZc0Wwg1XojzkxUAiUtzQj7ETpe-u3NVq5xfergzppqil97Efy0dLhFBkP6bwN_DewMXo0nKpo"/>
+<div class="absolute top-4 right-4 px-3 py-1 bg-white/90 backdrop-blur rounded-full text-xs font-bold text-primary">FEATURED</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-sm text-on-background group-hover:text-primary transition-colors">The Serenity Bed Frame</h3>
+<p class="font-body-md text-on-surface-variant">Solid Walnut &amp; Belgian Linen</p>
+</div>
+<p class="font-label-md text-on-background">$1,850</p>
+</div>
+</div>
+<!-- Column of smaller items -->
+<div class="md:col-span-5 flex flex-col gap-gutter">
+<div class="group cursor-pointer flex gap-md items-center bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-all">
+<div class="w-32 h-32 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Handcrafted ceramic side table with a unique textured glaze in a soft oatmeal color." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEV1Vt-4MrMivIiNGvlDagJSZy25IjpZ16kTIgcV86BdDmcq54Cj8seUYrTbVulGs2dLA7CgIDCqAYwvcUokbOJFkUyv1_xLTkmJ8BquECBofvrrw5ifsisiXlwTf0OtSH7qusyfBQ7AxO9CmMrFsqTcyZUR4Zv-iBJGvTcxWoc2Q6w-tBiz6rX-qAEKytyVusZBL9bvTQNP4uv6v7696zd1yKYu3RtLjdbKXrfgoT5p-VFeOS5sE6d2BgiERlwmltt_DGFkJZtqc"/>
+</div>
+<div class="flex-1">
+<h4 class="font-label-md text-on-background">Oatmeal Ceramic Stool</h4>
+<p class="text-xs text-on-surface-variant mb-2">Artisan Collection</p>
+<p class="font-label-md text-primary">$320</p>
+</div>
+</div>
+<div class="group cursor-pointer flex gap-md items-center bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-all">
+<div class="w-32 h-32 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Modern geometric pendant light with frosted glass and brass accents hanging in a clean white space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIzyb0zK6XysI28186X8gPZjT7hMEiGl-StI_rYmGMdO9Mv-HWFntxEzj6eN7XN1FDvp1haiSMIK0FEp2Mh6i9buMsiwfifAlvswuBSKetG6QFBN-BsfvZ3S4jeMAZUNvuTQhA1oLnztVOJlkzU50WoW11TcElk_LuHX-OPUoqbruqjvh3r0bpSuVqR3-Ogiy4nc7p6N_0zh_lp7bm72TmDjcgsHAc4OumwPoBcLWpYDvH7kT3J78z7hJvtT2WJyCD5tfFua0nU_E"/>
+</div>
+<div class="flex-1">
+<h4 class="font-label-md text-on-background">Lumiere Pendant Light</h4>
+<p class="text-xs text-on-surface-variant mb-2">Polished Brass &amp; Glass</p>
+<p class="font-label-md text-primary">$450</p>
+</div>
+</div>
+<div class="group cursor-pointer flex gap-md items-center bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-all">
+<div class="w-32 h-32 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Comfortable lounge chair with boucle fabric in a soft cream color and light wood legs." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIcOEUSpUbPRot2QvWUthPdnbLG9t0g76Ck60LwGAkX6tH2jDTD9rh9WdQyesYBgNYHL8tw8qhJpU805iivVT-EnoyOT5yxY7Gd8OF0TaiHCTmsKlcrtygmT6OOsAzZO3e07fsJsR7pB1CYG3g3m17aeX77YduS2H2TE42qKZ7hjRtoEXf1OFMGTgF3r2Pjd7lB3IyP_U542KuFBFR5VOeYjGI8mB2ElDwoTlGVTLNqkGtCz4smMTH5c80lMcOXiSysqIJb6SAx6Y"/>
+</div>
+<div class="flex-1">
+<h4 class="font-label-md text-on-background">Cloud Bouclé Lounge</h4>
+<p class="text-xs text-on-surface-variant mb-2">Living Room</p>
+<p class="font-label-md text-primary">$1,100</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Our Philosophy -->
+<section class="bg-surface-container py-xl">
+<div class="max-w-[1280px] mx-auto px-8">
+<div class="grid md:grid-cols-2 gap-xl items-center">
+<div class="relative">
+<div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-xl">
+<img class="w-full h-full object-cover" data-alt="Sunlight hitting a beautiful wooden chair and table set near a large window with lush plants." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR_ipcYNcswXeriLPW9lnUinTJoBqP6m0aTCh4xl3XIdAk59YyHVr--CMlrBmO9nSg6XJNAYIClLt75yVdBTay9g5vPXjpMHPxukHoNXO9CjOPQQuc5EfS1AbG7JPvZu5IbCyU5yujNvxmUZ0paPJeOmgp5JU-ItQASoRf3zMZ1W4X2bi9QFtduealTzH-WyBAKIDy20L-hiTltK_2MzdM8e_glfovre44GJXhzXeZk7IRSHVv0Wi6SZrJY6uJk2mnnBDHFXmHXUM"/>
+</div>
+<div class="absolute -bottom-8 -right-8 bg-white p-8 rounded-2xl shadow-lg max-w-xs hidden lg:block border border-stone-100">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">eco</span>
+</div>
+<h4 class="font-label-md">Eco-Conscious Craft</h4>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                                We source only sustainable hardwoods and recycled textiles to ensure your comfort doesn't cost the Earth.
+                            </p>
+</div>
+</div>
+<div class="space-y-md">
+<p class="font-label-md text-primary tracking-widest uppercase">Our Philosophy</p>
+<h2 class="font-display-lg text-on-background">Design That Feels Like a Deep Exhale.</h2>
+<p class="font-body-lg text-on-surface-variant">
+                            At Modern Hearth, we believe your home should be more than just a place where you keep your things. It should be a restorative sanctuary—a tactile experience of comfort and joy.
+                        </p>
+<div class="space-y-6 pt-4">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">spa</span>
+<div>
+<h4 class="font-label-md text-on-background">Restorative Spaces</h4>
+<p class="font-body-md text-on-surface-variant text-sm">Every piece is designed to lower your heart rate and soothe the senses.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<div>
+<h4 class="font-label-md text-on-background">Built for Joy</h4>
+<p class="font-body-md text-on-surface-variant text-sm">We focus on the small details that bring a smile to your face every morning.</p>
+</div>
+</div>
+</div>
+<button class="mt-8 border-b-2 border-primary text-primary font-label-md hover:pb-1 transition-all">Read Our Full Story</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter Signup -->
+<section class="max-w-[1280px] mx-auto px-8 py-xl">
+<div class="bg-primary rounded-[2rem] p-lg md:p-xl text-center relative overflow-hidden">
+<!-- Background Decoration -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
+<div class="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full -ml-48 -mb-48"></div>
+<div class="relative z-10 max-w-xl mx-auto space-y-md">
+<span class="material-symbols-outlined text-white/80 text-4xl">mail</span>
+<h2 class="font-headline-md text-white">Join Our Hearth Community</h2>
+<p class="text-white/80 font-body-md">
+                        Subscribe for seasonal inspiration, early access to new collections, and stories from homes around the world.
+                    </p>
+<form class="flex flex-col sm:flex-row gap-4 pt-4">
+<input class="flex-1 bg-white/10 border border-white/20 rounded-xl px-6 py-4 text-white placeholder:text-white/60 focus:ring-2 focus:ring-white/50 focus:border-transparent outline-none backdrop-blur-sm" placeholder="Your email address" type="email"/>
+<button class="bg-white text-primary px-8 py-4 rounded-xl font-label-md shadow-lg hover:bg-stone-50 transition-all active:scale-95" type="submit">
+                            Subscribe
+                        </button>
+</form>
+<p class="text-xs text-white/50">By subscribing, you agree to our Privacy Policy and Terms of Service.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-stone-100 mt-16 border-t border-stone-200">
+<div class="flex flex-col md:flex-row justify-between items-start w-full px-8 py-12 max-w-[1280px] mx-auto gap-12">
+<div class="max-w-xs space-y-4">
+<a class="text-lg font-semibold text-stone-800 font-headline-md" href="#">Modern Hearth</a>
+<p class="font-body-md text-stone-600 text-sm">
+                    Making the world a more comfortable place, one room at a time.
+                </p>
+<div class="flex gap-4">
+<a class="w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center text-stone-500 hover:bg-stone-200 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</a>
+<a class="w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center text-stone-500 hover:bg-stone-200 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">public</span>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-12">
+<div class="space-y-4">
+<h5 class="font-label-md text-on-surface">Experience</h5>
+<ul class="space-y-2 text-sm text-stone-500">
+<li><a class="hover:text-primary transition-colors" href="#">Sustainability</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Care Guide</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Showrooms</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="font-label-md text-on-surface">Support</h5>
+<ul class="space-y-2 text-sm text-stone-500">
+<li><a class="hover:text-primary transition-colors" href="#">Shipping</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Returns</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Warranty</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="font-label-md text-on-surface">Legal</h5>
+<ul class="space-y-2 text-sm text-stone-500">
+<li><a class="hover:text-primary transition-colors" href="#">Privacy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Terms</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="border-t border-stone-200/50 py-8 text-center px-8">
+<p class="font-serif text-stone-600 text-sm">© 2024 The Modern Hearth. Designed for sanctuary.</p>
+</div>
+</footer>
+</body></html>
