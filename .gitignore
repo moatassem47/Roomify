@@ -25,7 +25,7 @@ dist-ssr
 
 # Environment variables
 .env
-.env.*
+
 
 #unnecessary data
 furniture_data_clean.json
