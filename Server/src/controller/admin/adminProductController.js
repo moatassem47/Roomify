@@ -1,4 +1,4 @@
-const Product=require("../../model/productModel")
+const Product=require("../../model/productSchema")
 const mongoose=require("mongoose")
 const {uploudToCloudinary,DeleteProductFromCloudinary}=require("../../utils/cloudinaryHandler")
 const upload=require("../../middleware/uploadMiddleware")
@@ -32,13 +32,13 @@ exports.addProduct=async(req,res)=>{
         
         const newProduct= await Product.create(
             {
-                name:name,
-                description:description,
-                price:price,
-                stockQuantity:stockQuantity,
-                category:category,
-                rating:rating,
-                specs:specs,
+                name,
+                description,
+                price,
+                stockQuantity,
+                category,
+                rating,
+                specs,
                 imageUrls:imagesUrl,
                 model3dUrl:modelurl
             }
@@ -74,6 +74,47 @@ exports.deleteProduct=async(req,res)=>{
         res.status(200).json({
             message:"Product deleted succefully",
             data:DeletedProduct
+        })
+
+    }catch(e){
+        res.status(500).json(e.message)
+    }
+
+}
+
+
+exports.updateProduct=async(req,res)=>{
+    try{
+        const id=req.params.id
+        const{name,description,price,stockQuantity,specs}=req.body
+    
+        const product=await Product.findById(id)
+
+        if(!product){
+            return res.status(404).json({message:"this no product with this id"})
+        }
+
+        if(name){
+            product.name=name
+        }
+        if(description){
+            product.description=description
+        }
+        if(price){
+            product.price=price
+        }
+        if(stockQuantity){
+            product.stockQuantity=stockQuantity
+        }
+        if(specs){
+            product.specs = { ...product.specs.toObject(), ...specs };
+        }
+        
+        await product.save()
+    
+        res.status(200).json({
+            message:"Product updated succefully",
+            data:product
         })
 
     }catch(e){

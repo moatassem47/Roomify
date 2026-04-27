@@ -3,8 +3,10 @@ const dotenv=require("dotenv").config()
 const connectDB=require("./config/db")
 const productRouter=require("./routes/productRoute")
 const adminRouter=require("./routes/adminRoutes")
+const authRouter=require("./routes/authRoute")
 const app=express();
 const cors = require('cors');
+const cookiesParser=require("cookie-parser")
 
 
 connectDB()
@@ -13,6 +15,12 @@ connectDB()
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
+app.use(cookiesParser())
+app.use(cors({
+    origin:"http://localhost:5173",
+    credentials:true
+}
+))
 
 //Routes
 app.get("/",(req,res)=>{
@@ -24,7 +32,7 @@ app.get("/",(req,res)=>{
 
 app.use("/products",productRouter)
 app.use("/admin",adminRouter)
-
+app.use("/auth",authRouter)
 
 
 const PORT=process.env.PORT
