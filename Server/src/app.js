@@ -1,15 +1,23 @@
 const express=require("express");
 const dotenv=require("dotenv").config()
 const connectDB=require("./config/db")
-const productRouter=require("./routes/productRoute")
+const productRouter=require("./routes/productRoutes")
 const adminRouter=require("./routes/adminRoutes")
-const authRouter=require("./routes/authRoute")
+const authRouter=require("./routes/authRoutes")
+const cartRouter=require("./routes/cartRoutes")
+const orderRouter=require("./routes/orderRoutes")
+const deliveryRouter=require("./routes/deliveryRoutes")
+const userRouter=require("./routes/userRoutes")
 const app=express();
 const cors = require('cors');
 const cookiesParser=require("cookie-parser")
+const { stripeWebhook } = require("./controller/paymentController");
 
 
 connectDB()
+
+app.post('/order/webhook', express.raw({ type: 'application/json' }), stripeWebhook);
+
 
  
 //middleware
@@ -30,9 +38,20 @@ app.get("/",(req,res)=>{
         `)
 })
 
+app.get("/checkout", (req, res) => {
+    res.render("checkout");
+});
+
+
+
 app.use("/products",productRouter)
 app.use("/admin",adminRouter)
 app.use("/auth",authRouter)
+app.use("/cart",cartRouter)
+app.use("/order",orderRouter)
+app.use("/delivery",deliveryRouter)
+app.use("/user",userRouter)
+
 
 
 const PORT=process.env.PORT

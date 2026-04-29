@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongoosePaginate=require("mongoose-paginate-v2")
 
 const orderItemSchema = new mongoose.Schema({
     productId: {
@@ -15,7 +16,7 @@ const orderItemSchema = new mongoose.Schema({
         type: Number,
         required: true 
     }
-},{ _id: false });
+}, { _id: false });
 
 const orderSchema = new mongoose.Schema({
     userId: {
@@ -26,7 +27,6 @@ const orderSchema = new mongoose.Schema({
     deliveryPersonId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User", 
-        required: false
     },
     status: {
         type: String,
@@ -38,8 +38,10 @@ const orderSchema = new mongoose.Schema({
         required: true
     },
     shippingAddress: {
-        type: String,
-        required: true
+        city: { type: String, required: true },
+        street: { type: String, required: true },
+        buildingNumber: { type: String },
+        phone: { type: String, required: true }
     },
     items: [orderItemSchema],
     
@@ -48,13 +50,21 @@ const orderSchema = new mongoose.Schema({
         enum: ['Cash', 'Card'],
         default: 'Cash'
     },
+    paymentStatus: {
+        type: String,
+        enum: ['Pending', 'Completed', 'Failed', 'Refunded'],
+        default: 'Pending'
+    },
+    stripeSessionId: {
+        type: String
+    },
     deliveredAt: {
         type: Date 
     }
 }, { timestamps: true });
 
+orderSchema.index({ status: 1, userId: 1 });
+orderSchema.plugin(mongoosePaginate)
 
-
- const Order = mongoose.model("Order", orderSchema);
-
- module.exports=Order
+const Order = mongoose.model("Order", orderSchema);
+module.exports = Order;
