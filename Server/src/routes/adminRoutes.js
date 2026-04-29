@@ -4,7 +4,8 @@ const upload=require("../middleware/uploadMiddleware")
 const router=express.Router()
 const {verfiyToken,restrictedTo}=require("../middleware/authMiddleware")
 const {addDeliveryUser,deleteDeliveryUser,showAllDeliverieUsers,showDeliveryUserByID}=require("../controller/admin/adminDelvieryController")
-
+const {showAllOrders,updateOrderStatus}=require("../controller/admin/adminOrdersController")
+const {getDashboardStats}=require("../controller/admin/analysisController")
 const uploadFields=upload.fields([
     {name:"images",maxCount:6},
     {name:"model",maxCount:1}
@@ -21,6 +22,12 @@ router.delete("/delivery/delete/:id",verfiyToken,restrictedTo("admin"),deleteDel
 router.get("/delivery",verfiyToken,restrictedTo("admin"),showAllDeliverieUsers)
 router.get("/delivery/:id",verfiyToken,restrictedTo("admin"),showDeliveryUserByID)
 
+//orders
+router.get("/orders",verfiyToken,restrictedTo("admin"),showAllOrders)
+router.patch("/orders/:id",verfiyToken,restrictedTo("admin"),updateOrderStatus)
 
+
+//Dashboard
+router.get("/dashboard",verfiyToken,restrictedTo("admin"),getDashboardStats)
 
 module.exports = router;
