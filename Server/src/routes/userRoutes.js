@@ -4,7 +4,7 @@ const express=require("express");
 const router=express.Router();
 
 router.get("/",verfiyToken,getUserData);
-router.patch("/edit",verfiyToken,getUserData);
+router.patch("/edit",verfiyToken,changeUserData);
 
 
 module.exports = router;

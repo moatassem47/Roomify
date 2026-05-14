@@ -1,0 +1,55 @@
+@import "tailwindcss";
+ 
+@theme {
+  /* ── Colors ── */
+  
+  --color-brand-cedar: #825032;
+  --color-brand-text:#52443d;
+  --color-brand-cedar-hover: #693b1f;
+  --color-brand-sage: #4d6450;
+  --color-brand-honey: #745b00;
+  --color-brand-cream: #fef9f2;
+  --color-brand-charcoal: #1d1c18;
+  --color-brand-surface-dim: #ded9d3;
+  --color-brand-error: #ba1a1a; 
+  --color-brand-error-container: #ffdad6;
+  --color-brand-surface-container:#f2ede6;
+  /* ── Font families ── */
+  --font-serif: "Noto Serif", serif;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+ 
+  /* ── Shadows ── */
+  --shadow-ambient: 0 4px 20px rgba(62, 54, 46, 0.08);
+  --shadow-ambient-hover: 0 8px 30px rgba(62, 54, 46, 0.12);
+  --shadow-inset-soft: inset 0 2px 4px rgba(62, 54, 46, 0.04);
+ 
+  /* ── Border radius ── */
+  --radius-base: 0.5rem;
+  --radius-large: 1rem;
+  --radius-xlarge: 1.5rem;
+}
+ 
+
+
+
+@layer base {
+  body {
+    background-color: var(--color-brand-cream);
+    color: var(--color-brand-charcoal);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+ 
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    color: var(--color-brand-charcoal);
+  }
+}
+
+
+.active{
+  text-decoration: underline;
+  color:var(--color-brand-cedar) ;
+  text-underline-offset: 8px;
+}

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&amp;family=Cormorant+Garamond:wght@300;400&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Icon: stylized room outline — arch window + floor line -->
+  <!-- Room arch -->
+  <g transform="translate(10, 10)">
+    <!-- Outer arch frame -->
+    <path d="M10,52 L10,24 Q10,8 26,8 Q42,8 42,24 L42,52 Z"
+          fill="none" stroke="#7B4F2E" stroke-width="2.2" stroke-linejoin="round"/>
+
+    <!-- Inner arch (window pane) -->
+    <path d="M16,52 L16,26 Q16,14 26,14 Q36,14 36,26 L36,52 Z"
+          fill="#F5EFE6" stroke="#7B4F2E" stroke-width="1.2"/>
+
+    <!-- Horizontal crossbar -->
+    <line x1="10" y1="38" x2="42" y2="38" stroke="#7B4F2E" stroke-width="1.2"/>
+
+    <!-- Vertical crossbar in arch -->
+    <line x1="26" y1="14" x2="26" y2="38" stroke="#7B4F2E" stroke-width="1"/>
+
+    <!-- Floor line -->
+    <line x1="4" y1="52" x2="48" y2="52" stroke="#7B4F2E" stroke-width="2.2" stroke-linecap="round"/>
+
+    <!-- Small plant dot (organic touch) -->
+    <circle cx="26" cy="6" r="2.5" fill="#8B9E6B"/>
+    <line x1="26" y1="8" x2="26" y2="14" stroke="#8B9E6B" stroke-width="1"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text
+    x="72" y="38"
+    font-family="'Playfair Display', 'Georgia', serif"
+    font-size="26"
+    font-weight="500"
+    letter-spacing="1"
+    fill="#2C1F0E"
+  >Roomify</text>
+
+  <!-- Tagline -->
+  <text
+    x="73" y="53"
+    font-family="'Cormorant Garamond', 'Georgia', serif"
+    font-size="9.5"
+    font-weight="300"
+    letter-spacing="3.5"
+    fill="#8B7355"
+  >YOUR SPACE · YOUR STORY</text>
+</svg>

@@ -27,17 +27,24 @@ exports.getProducts = async (req, res) => {
     if (req.query.maxPrice) {
       q.price.$lte = Number(req.query.maxPrice);
     }
+    
+    let sortOption = {};
+    if (req.query.sort === 'newest') {
+      sortOption = { createdAt: -1 }; 
+    } else if (req.query.sort === 'price_asc') {
+      sortOption = { price: 1 }; 
+    }else if (req.query.sort === 'price_desc') {
+      sortOption = { price: -1 }; 
+    }
 
     const options = {
       page: parseInt(req.query.page) || 1,
-      limit: parseInt(req.query.limit) || 10,
+      limit: parseInt(req.query.limit) || 12,
+      sort: sortOption
     };
-    const products = await Product.paginate(q, options);
+    const products = await Product.paginate(q, options)
 
-    if (products.docs.length === 0)
-      return res
-        .status(404)
-        .json({ message: "No products match your criteria" });
+   
     res.status(200).json(products);
   } catch (e) {
     res.status(500).json({ message: e.message });
@@ -50,7 +57,7 @@ exports.getProductById = async (req, res) => {
 
     const product = await Product.findById(id);
 
-    if (!Product)
+    if (!product)
       return res
         .status(404)
         .json({ message: "Can't find product with this id" });

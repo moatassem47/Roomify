@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80">
+  <g transform="translate(10,10)">
+    <path d="M10,52 L10,24 Q10,8 26,8 Q42,8 42,24 L42,52 Z" fill="none" stroke="#FAF7F2" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M16,52 L16,26 Q16,14 26,14 Q36,14 36,26 L36,52 Z" fill="rgba(250,247,242,0.12)" stroke="#FAF7F2" stroke-width="1.2"/>
+    <line x1="10" y1="38" x2="42" y2="38" stroke="#FAF7F2" stroke-width="1.2"/>
+    <line x1="26" y1="14" x2="26" y2="38" stroke="#FAF7F2" stroke-width="1"/>
+    <line x1="4"  y1="52" x2="48" y2="52" stroke="#FAF7F2" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="26" cy="6" r="2.5" fill="#C5D4A0"/>
+    <line x1="26" y1="8" x2="26" y2="14" stroke="#C5D4A0" stroke-width="1"/>
+  </g>
+  <text x="72" y="38" font-family="'Playfair Display','Georgia',serif" font-size="26" font-weight="500" letter-spacing="1" fill="#FAF7F2">Roomify</text>
+  <text x="73" y="53" font-family="'Cormorant Garamond','Georgia',serif" font-size="9.5" font-weight="300" letter-spacing="3.5" fill="rgba(250,247,242,0.6)">YOUR SPACE · YOUR STORY</text>
+</svg>

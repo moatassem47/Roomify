@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 68" width="68" height="68">
+
+  <!-- Outer arch frame -->
+  <path d="M13,60 L13,27 Q13,9 34,9 Q55,9 55,27 L55,60 Z"
+        fill="none" stroke="#7B4F2E" stroke-width="2.6" stroke-linejoin="round"/>
+
+  <!-- Inner arch (window pane) -->
+  <path d="M20,60 L20,30 Q20,17 34,17 Q48,17 48,30 L48,60 Z"
+        fill="#F5EFE6" stroke="#7B4F2E" stroke-width="1.5"/>
+
+  <!-- Horizontal crossbar -->
+  <line x1="13" y1="44" x2="55" y2="44" stroke="#7B4F2E" stroke-width="1.5"/>
+
+  <!-- Vertical crossbar -->
+  <line x1="34" y1="17" x2="34" y2="44" stroke="#7B4F2E" stroke-width="1.2"/>
+
+  <!-- Floor line -->
+  <line x1="6" y1="60" x2="62" y2="60" stroke="#7B4F2E" stroke-width="2.8" stroke-linecap="round"/>
+
+  <!-- Plant stem -->
+  <line x1="34" y1="9" x2="34" y2="17" stroke="#8B9E6B" stroke-width="1.2"/>
+
+  <!-- Leaves -->
+  <ellipse cx="27" cy="6" rx="4" ry="6" fill="#8B9E6B" transform="rotate(-20 27 6)"/>
+  <ellipse cx="41" cy="5" rx="3.5" ry="5.5" fill="#A3B57A" transform="rotate(18 41 5)"/>
+
+</svg>

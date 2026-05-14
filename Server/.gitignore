@@ -1,0 +1,10 @@
+
+# Environment variables
+.env
+.env.*
+
+
+#unnecessary data
+
+uploads
+node_modules
