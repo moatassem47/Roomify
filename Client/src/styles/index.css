@@ -53,3 +53,21 @@
   color:var(--color-brand-cedar) ;
   text-underline-offset: 8px;
 }
+
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background:#b6a69b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-cedar);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-cedar-hover);
+}
+

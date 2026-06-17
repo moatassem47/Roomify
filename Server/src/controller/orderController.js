@@ -34,14 +34,6 @@ const createOrder=async(req,res)=>{
             }
         ))
 
-        const order= await Order.create([{
-            userId,
-            totalAmount,
-            shippingAddress,
-            items:orderItems,
-            paymentMethod
-        }],{session})
-        
         for(const item of cart.items){
             const updateProduct=await Product.updateOne(
                 {_id:item.productId._id,stockQuantity:{$gte:item.quantity}},
@@ -51,10 +43,17 @@ const createOrder=async(req,res)=>{
 
             if(updateProduct.modifiedCount===0){
                 await session.abortTransaction()
-                return res.status(400).json({message:`sorry,there's no enough of ${item.productId.name} in our storage`})
+                return res.status(400).json({message:`Sorry, there's not enough of ${item.productId.name} in our storage`})
             }
         }
 
+        const order= await Order.create([{
+            userId,
+            totalAmount,
+            shippingAddress,
+            items:orderItems,
+            paymentMethod
+        }],{session})
 
         cart.items=[]
         await cart.save({session})
@@ -64,7 +63,8 @@ const createOrder=async(req,res)=>{
         res.status(201).json({message:"order created",order:order[0]})
     }catch(e){
          await session.abortTransaction()
-         res.status(500).json({ name: e.name, message: e.message });
+         console.error(e);
+         res.status(500).json({ message: "Internal server error" });
     }finally{
         session.endSession()
     }
@@ -102,7 +102,8 @@ const showOrders = async (req, res) => {
         res.status(200).json(orders);
 
     } catch (e) {
-        res.status(500).json({ name: e.name, message: e.message });
+        console.error(e);
+        res.status(500).json({ message: "Internal server error" });
     }
 }
 
@@ -121,7 +122,8 @@ const getOrderByID=async(req,res)=>{
         res.status(200).json(order)
 
     }catch(e){
-        res.status(500).json({ name: e.name, message: e.message });
+        console.error(e);
+        res.status(500).json({ message: "Internal server error" });
     }
 }
 
@@ -158,7 +160,8 @@ const cancelOrder=async(req,res)=>{
 
     }catch(e){
         await session.abortTransaction()
-        res.status(500).json({ name: e.name, message: e.message });
+        console.error(e);
+        res.status(500).json({ message: "Internal server error" });
     }finally{
         session.endSession()
     }

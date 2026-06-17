@@ -10,6 +10,9 @@ import ProductActions from '../features/products/components/ProductActions';
 import ProductTrustBadges from '../features/products/components/ProductTrustBadges';
 import InfoTabs from '../features/products/components/InfoTabs';
 import SuggestedProduct from '../features/products/components/SuggestedProduct';
+import Loading from '../components/common/Loading';
+import Error from '../components/common/Error';
+
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -17,19 +20,12 @@ const ProductDetails = () => {
 
   if (isLoading)
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-10 h-10 rounded-full border-4 border-brand-surface-dim border-t-brand-cedar animate-spin" />
-          <p className="text-sm font-sans text-brand-text">Loading product…</p>
-        </div>
-      </div>
+      <Loading text="Loading Product ..."/>
     );
 
   if (error)
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <p className="text-brand-error font-sans">{error.message}</p>
-      </div>
+      <Error error={error}/>
     );
 
   const specs = product?.specs || {};
@@ -51,7 +47,7 @@ const ProductDetails = () => {
         <div className="grid md:grid-cols-2 grid-cols-1 gap-10 lg:gap-16">
         
           <div>
-            <ImageGallery images={product.imageUrls} />
+            <ImageGallery images={product.imageUrls} model={product.model3dUrl}/>
           </div>
 
         

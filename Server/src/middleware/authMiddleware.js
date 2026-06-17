@@ -15,7 +15,7 @@ const verfiyToken=(req,res,next)=>{
 
     }catch(e){
          console.log(e);
-         res.status(403).json({
+         res.status(401).json({
             name:e.name,
             message:e.message
          })

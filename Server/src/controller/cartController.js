@@ -41,10 +41,12 @@ const addToCart = async (req, res) => {
       await cart.save();
     }
 
+    const totalQuantity=cart.items.reduce((total,item)=>(total+item.quantity),0)
     res.status(201).json({
-      message: "item added succefully to cart",
-      cartLength: cart.items.length,
+      message: "Item added succefully to cart",
+      totalQuantity:totalQuantity,
     });
+
   } catch (e) {
     console.log(e);
 
@@ -105,7 +107,8 @@ const deleteItem = async (req, res) => {
     if (itemIndex > -1) {
       cart.items.splice(itemIndex, 1);
       await cart.save();
-      return res.status(200).json({ message: "Item deleted successfully" });
+      const totalQuantity = cart.items.reduce((total, item) => total + item.quantity, 0);
+      return res.status(200).json({ message: "Item deleted successfully", totalQuantity });
     } else {
       return res.status(404).json({ message: "Product not found in cart" });
     }
@@ -162,7 +165,8 @@ const updateQuantity = async (req, res) => {
         }
       }
       await cart.save();
-      return res.status(200).json({ message: "Quantity updated successfully" });
+      const totalQuantity = cart.items.reduce((total, item) => total + item.quantity, 0);
+      return res.status(200).json({ message: "Quantity updated successfully" ,totalQuantity});
 
     } else {
       return res.status(404).json({ message: "Product not found in cart" });

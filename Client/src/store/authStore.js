@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import api from "../utils/axios";
 import LogoutApi from "../features/auth/apis/LogoutApi";
+import useCart from "./cartStore";
+
 const useAuth = create((set) => ({
   user: null,
   isAuthenticated: false,
@@ -13,6 +15,8 @@ const useAuth = create((set) => ({
   updateUser: (updatedUser) => set({ user: updatedUser }),
   logout: async () => {
     set({ user: null, isAuthenticated: false });
+    
+    useCart.getState().setTotalQuantity(0);
 
     try {
       await LogoutApi();
@@ -27,6 +31,7 @@ const useAuth = create((set) => ({
     } catch (e) {
         console.log(e)
       set({ user: null, isAuthenticated: false, isCheckingAuth: false });
+      useCart.getState().setTotalQuantity(0);
     }
   },
 }));

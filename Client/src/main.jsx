@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter} from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactLenis } from "lenis/react";
-
+import { Toaster } from 'react-hot-toast';
 import "./styles/index.css";
 import "lenis/dist/lenis.css";
 import App from "./App.jsx";
@@ -16,6 +16,7 @@ createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter >
         <ReactLenis root>
+          <Toaster/>
           <App />
         </ReactLenis>
       </BrowserRouter>  

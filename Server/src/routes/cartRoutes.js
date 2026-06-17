@@ -8,9 +8,9 @@ router.post("/add",verfiyToken,addToCart)
 
 router.get("/",verfiyToken,getCart)
 
-router.delete("/delete/:productID",verfiyToken,deleteItem)
-
 router.delete("/delete/clear",verfiyToken,clearCart)
+
+router.delete("/delete/:productId",verfiyToken,deleteItem)
 
 router.patch("/update",verfiyToken,updateQuantity)
 

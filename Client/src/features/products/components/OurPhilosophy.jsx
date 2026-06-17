@@ -39,7 +39,7 @@ const OurPhilosophy = () => {
                     <p className="text-gray-700 tracking-wider md:text-base md:text-start text-sm text-center">We focus on the small details that bring a smile to your face every morning.</p>
                 </div>
             </div>
-            <Button className="text-brand-cedar! underline underline-offset-8 md:text-start text-center bg-inherit! shadow-none hover:shadow-none font-normal!" onClick={()=>navigate("/")}>Read Our Full Story</Button>
+            <Button className="text-brand-cedar! underline underline-offset-8 md:text-start text-center bg-inherit! shadow-none hover:shadow-none font-normal!" onClick={()=>navigate("/story")}>Read Our Full Story</Button>
         </div>
     </section>
   )

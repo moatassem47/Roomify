@@ -10,10 +10,10 @@ import { AnimatePresence } from 'framer-motion'
 const MainLayout = () => {
   const {isPopUp}=useAuth()
   return (
-    <div className='relative flex flex-col min-h-screen'>
+    <div className='relative flex flex-col min-h-screen  '>
         <NavBar/>
 
-        <main className="grow">
+        <main className="grow  min-h-150">
             <Outlet/>
         </main>
         <Footer/>

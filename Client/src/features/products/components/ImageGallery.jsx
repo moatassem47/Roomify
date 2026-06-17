@@ -1,18 +1,38 @@
 import {useState} from 'react'
-
-const ImageGallery = ({images}) => {
+import {Box} from "lucide-react"
+import Viewin3D from './Viewin3D';
+const ImageGallery = ({images,model}) => {
 
   const [activeImage,setActiveImage]=useState(images[0])
+  const [show3D, setShow3D] = useState(false);
 
   if(!images || images.length===0)return null;
   
 
   return (
     <div className="flex flex-col gap-4">
-        <div className="w-full overflow-hidden rounded-2xl bg-brand-surface-container/30">
-            <img src={activeImage} alt='Product feature' key={activeImage}
-            className="w-full h-auto object-contain animate-fade-in"
-            />
+        <div className="w-full h-100 overflow-hidden rounded-2xl bg-brand-surface-container/30 relative flex items-center justify-center">
+            {show3D && model ? (
+                <Viewin3D model={model} />
+            ) : (
+                <img src={activeImage} alt='Product feature' key={activeImage}
+                className="w-full h-full object-contain object-center animate-fade-in p-4"
+                />
+            )}
+            
+            {model && (
+                <button
+                  onClick={() => setShow3D(!show3D)}
+                  className={`absolute top-3 right-4 p-2.5 shadow-ambient rounded-full cursor-pointer transition-all duration-300 z-10 ${
+                    show3D 
+                      ? 'bg-brand-cedar text-white hover:bg-brand-cedar-hover' 
+                      : 'bg-white text-brand-charcoal hover:bg-brand-surface-container'
+                  }`}
+                  title={show3D ? "View Gallery" : "View in 3D"}
+                >
+                    <Box size={20} />
+                </button>
+            )}
         </div>
         <div className='flex gap-4 overflow-x-auto pb-2'>
             {images.map((image,i)=>(

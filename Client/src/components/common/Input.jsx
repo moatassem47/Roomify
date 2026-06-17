@@ -30,6 +30,7 @@ const Input = ({
         type={type} 
         placeholder={placeHolder}
        {...(register ? register(name, {
+            valueAsNumber: type === "number",
             onChange: (e) => {
                 if (onChange) onChange(e); 
             }

@@ -11,7 +11,7 @@ const EmptyState = ({image,alt,title,text,button}) => {
         </figure>
         <h1 className="text-5xl font-semibold text-center">{title}</h1>
         <p className="w-100 text-center tracking-wider text-brand-cedar">{text}</p>
-        {button&&<Button onClick={()=>navigate("/")}>{button}</Button>}
+        {button&&<Button onClick={()=>navigate("/shop")}>{button}</Button>}
     </div>
   )
 }

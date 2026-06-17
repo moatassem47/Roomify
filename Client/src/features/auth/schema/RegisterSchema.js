@@ -15,7 +15,11 @@ const registerSchema = z.object({
   confirmPassword: z.string().trim(),
 
   phone: z.string()
-    .trim().length(11, "Phone number must be 11 digits"),
+  .trim()
+  .regex(
+    /^(?:\+20)?\d{11}$/, 
+    "Phone number must be 11 digits"
+  ),
   
     terms: z.literal(true, {
     message: "You must agree to the Terms of Service and Privacy Policy" 

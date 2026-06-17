@@ -10,9 +10,9 @@ export const getNewArrival=async()=>{
     }
 }
 
-export const GetProducts=async({search="",minPrice="",maxPrice="",sort="",page="",limit=""} = {})=>{
+export const GetProducts=async({search="",minPrice="",maxPrice="",sort="",page="",limit="",category=""} = {})=>{
     try{
-        const res= await api.get(`/products?sort=${sort}&limit=${limit}&maxPrice=${maxPrice}&minPrice=${minPrice}&search=${search}&page=${page}`)
+        const res= await api.get(`/products?sort=${sort}&limit=${limit}&maxPrice=${maxPrice}&minPrice=${minPrice}&search=${search}&page=${page}&category=${category}`)
         return res.data
     }catch(e){
         throw e.response?.data || e.message;

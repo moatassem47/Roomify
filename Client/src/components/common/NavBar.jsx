@@ -4,10 +4,22 @@ import { ShoppingBag } from "lucide-react";
 import UserDropdown from "./UserDropdown";
 import Button from "./Button";
 import MobileMenu from "./MobileMenu";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import useCart from "../../store/cartStore";
+import { useGetCart } from "../../features/cart/apis/useCart";
+import Categories from "../../pages/Categories";
+import { useState } from "react";
+
 const NavBar = () => {
   const { openPopUp, isAuthenticated } = useAuth();
+  const [active,setActive]=useState(false)
+  const navigate=useNavigate()
+  const {totalQuantity}=useCart()
+
+
+  useGetCart({ enabled: isAuthenticated });
   return (
+    <>
     <nav className="bg-white flex items-center justify-between shadow-ambient h-20">
       <figure className="lg:w-80 w-44">
         <img src={myIcon} alt="logo"/>
@@ -20,7 +32,7 @@ const NavBar = () => {
           <NavLink to="/shop">Shop All</NavLink>
          </li>
         <li>
-          <NavLink to="/categories">Categories</NavLink>
+          <button className={`cursor-pointer ${active&&`text-brand-cedar`}`} onClick={()=>setActive(!active)}>Categories</button>
         </li>
         <li>
           <NavLink to="/story">Our Story</NavLink>
@@ -30,7 +42,14 @@ const NavBar = () => {
       <div className="flex max-w-70 flex-2 justify-center md:gap-8 gap-3 items-center">
         {isAuthenticated ? (
           <>
-            <ShoppingBag color="#825032" className="cursor-pointer hover:-translate-y-1  transition-all duration-300 active:opacity-80" />
+            <div className="relative inline-block cursor-pointer hover:-translate-y-1  transition-all duration-300 active:opacity-80"
+            onClick={()=>navigate("/cart")}>
+            <ShoppingBag color="#825031" />
+            <span className={`absolute w-5 h-5 flex justify-center items-center bg-brand-cedar text-white rounded-full -top-2 -right-3 text-xs
+              ${totalQuantity===0&&`hidden`}` }>
+              {totalQuantity}
+            </span>
+            </div>
             <UserDropdown/>
           </>
         ) : (
@@ -54,6 +73,11 @@ const NavBar = () => {
          <MobileMenu />
       </div>
     </nav>
+     {active&&
+      <Categories setActive={setActive}/>
+     }
+    </>
+
   );
 };
 

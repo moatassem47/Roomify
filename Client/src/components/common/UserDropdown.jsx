@@ -3,18 +3,22 @@ import { Link } from "react-router-dom";
 import useAuth from "../../store/authStore";
 import {  User } from "lucide-react";
 import {motion,AnimatePresence} from "framer-motion"
+import { useQueryClient } from "@tanstack/react-query";
+
 const UserDropdown = () => {
   
   const { user, logout } = useAuth();
+  const queryClient = useQueryClient();
   
  
-  const [isOpen, setIsOpen] = useState(false);
-
-  
-  const handleLogout = () => {
-    setIsOpen(false);
-    logout();
-  };
+   const [isOpen, setIsOpen] = useState(false);
+ 
+   
+   const handleLogout = () => {
+     setIsOpen(false);
+     logout();
+     queryClient.clear();
+   };
 
   return (
     

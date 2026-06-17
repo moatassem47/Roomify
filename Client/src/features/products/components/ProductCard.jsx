@@ -30,9 +30,10 @@ const ProductCard = ({ product, variant = "vertical", className = "" }) => {
 
           
           <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
-            <button className="w-full flex items-center justify-center gap-2 bg-brand-cedar hover:bg-brand-cedar-hover text-white text-xs font-semibold tracking-widest uppercase py-3 transition-colors duration-200">
+            <button className="w-full flex items-center justify-center gap-2 bg-brand-cedar hover:bg-brand-cedar-hover text-white text-xs font-semibold tracking-widest uppercase py-3 transition-colors duration-200"
+            >
               <ShoppingBag className="w-4 h-4" />
-              Add to Cart
+              Show More
             </button>
           </div>
         </div>
