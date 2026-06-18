@@ -1,66 +1,90 @@
-# Roomify
-Easy way to view furniture in your home before buying
+# Roomify Frontend Architecture
 
-
-
-# frontend Architecture
-
+```text
 roomify-frontend/
-├── public/                 # ملفات عامة زي الـ favicon
+├── public/                           # ملفات عامة متاحة مباشرة للمتصفح
+│                                      # favicon, logos, robots.txt
 │
 ├── src/
-│   ├── assets/             # :art: الصور الثابتة وملف الـ CSS العالمي
-│   │   ├── images/
-│   │   └── index.css       # (إعدادات Tailwind الأساسية هنا)
+│   ├── assets/                       # الصور والملفات الثابتة
+│   │   ├── images/                   # صور المنتجات، اللوجو، البانرات
+│   │   └── index.css                 # Tailwind directives + global styles
 │   │
-│   ├── components/         # :jigsaw: المكونات المرئية المشتركة (بدون Logic معقد)
-│   │   ├── ui/             # (مكونات Shadcn الجاهزة بتنزل هنا أوتوماتيك: Button, Input)
-│   │   └── common/         # (مكوناتك العامة: LoadingSpinner, ErrorBoundary, Modal)
+│   ├── components/                   # Components مشتركة على مستوى المشروع كله
+│   │   ├── ui/                       # Shadcn Components (Button, Input, Dialog...)
+│   │   └── common/                   # LoadingSpinner, Modal, EmptyState, ErrorBoundary
 │   │
-│   ├── features/           # :brain: العقل المدبر (كل ميزة في صندوق مقفول)
+│   ├── features/                     # كل Feature معزولة لوحدها
+│   │
+│   │   ├── auth/
+│   │   │   ├── api/                  # login, register, logout, refresh token requests
+│   │   │   ├── components/           # LoginForm, RegisterForm
+│   │   │   └── schemas/              # Zod validation schemas
 │   │   │
-│   │   ├── auth/           # :closed_lock_with_key: ميزة تسجيل الدخول والتوثيق
-│   │   │   ├── api/        # (authApi.js, useLogin.js, useRegister.js)
-│   │   │   ├── components/ # (LoginForm.jsx, RegisterForm.jsx)
-│   │   │   └── schemas/    # (loginSchema.js, registerSchema.js) <-- Zod Validation
+│   │   ├── products/
+│   │   │   ├── api/                  # get products, product details, search, filters
+│   │   │   └── components/           # ProductCard, ProductGrid, Filters
 │   │   │
-│   │   ├── products/       # :shopping_bags: ميزة المنتجات
-│   │   │   ├── api/        # (productsApi.js, useGetProducts.js, useGetProductById.js)
-│   │   │   └── components/ # (ProductCard.jsx, ProductList.jsx, Filters.jsx)
+│   │   ├── cart/
+│   │   │   ├── api/                  # update cart, sync cart with backend
+│   │   │   └── components/           # CartItem, QuantitySelector, CartSummary
 │   │   │
-│   │   ├── cart/           # :shopping_cart: ميزة سلة المشتريات
-│   │   │   ├── api/        # (لو السلة بتتسجل في الداتا بيز: cartApi.js, useUpdateCart.js)
-│   │   │   └── components/ # (CartItem.jsx, CartSummary.jsx)
+│   │   ├── orders/
+│   │   │   ├── api/                  # create order, get order details
+│   │   │   ├── components/           # CheckoutForm, OrderSummary
+│   │   │   └── schemas/              # checkout validation
 │   │   │
-│   │   └── orders/         # :credit_card: ميزة الدفع والطلبات
-│   │       ├── api/        # (ordersApi.js, useCreateOrder.js)
-│   │       ├── components/ # (CheckoutForm.jsx)
-│   │       └── schemas/    # (checkoutSchema.js) <-- Zod Validation لبيانات الشحن
+│   │   ├── admin/
+│   │   │   ├── api/                  # CRUD products, users, orders
+│   │   │   ├── components/           # ProductTable, UserTable, DashboardCards
+│   │   │   └── pages/                # Admin Dashboard pages
+│   │   │
+│   │   └── delivery/
+│   │       ├── api/                  # assigned orders, update delivery status
+│   │       ├── components/           # DeliveryOrderCard, StatusBadge
+│   │       └── pages/                # Delivery dashboard pages
 │   │
-│   ├── hooks/              # :hook: الـ Custom Hooks للـ UI (ملهاش علاقة بالـ API)
-│   │   ├── useClickOutside.js
-│   │   └── useDebounce.js  # (مفيد جداً في البحث عن المنتجات)
+│   ├── hooks/                        # Custom hooks خاصة بالـ UI
+│   │   ├── useClickOutside.js        # غلق المودال عند الضغط خارجها
+│   │   ├── useDebounce.js            # تأخير البحث
+│   │   └── useLocalStorage.js        # التعامل مع localStorage
 │   │
-│   ├── layouts/            # :frame_photo: هياكل الصفحات الثابتة
-│   │   ├── MainLayout.jsx  # (جواه Navbar + <Outlet /> + Footer)
-│   │   └── AdminLayout.jsx # (جواه Sidebar + <Outlet />)
+│   ├── layouts/                      # الهياكل الرئيسية للصفحات
+│   │   ├── MainLayout.jsx            # Navbar + Footer + Outlet
+│   │   ├── AdminLayout.jsx           # Sidebar Admin + Outlet
+│   │   └── DeliveryLayout.jsx        # Sidebar Delivery + Outlet
 │   │
-│   ├── pages/              # :page_facing_up: الصفحات الأساسية (تجميع المكونات من الـ features)
+│   ├── pages/                        # صفحات العميل العادية
 │   │   ├── Home.jsx
 │   │   ├── ProductsPage.jsx
 │   │   ├── ProductDetails.jsx
 │   │   ├── CartPage.jsx
-│   │   └── CheckoutPage.jsx
+│   │   ├── CheckoutPage.jsx
+│   │   ├── Login.jsx
+│   │   └── Register.jsx
 │   │
-│   ├── router/             # :motorway: إعدادات مسارات الموقع بالكامل
-│   │   └── index.jsx       # (هنا بنعمل createBrowserRouter)
+│   ├── router/
+│   │   └── index.jsx                 # createBrowserRouter + protected routes
 │   │
-│   ├── store/              # :convenience_store: مخازن الـ Global State (Zustand)
-│   │   ├── useAuthStore.js # (لتخزين حالة اليوزر وهل هو مسجل دخول ولا لأ)
-│   │   └── useCartStore.js # (لتخزين المنتجات اللي في السلة محلياً)
+│   ├── store/                        # Zustand Stores
+│   │   ├── useAuthStore.js           # user + token + auth state
+│   │   ├── useCartStore.js           # cart state
+│   │   └── useThemeStore.js          # dark/light mode
 │   │
-│   ├── utils/              # :tools: أدوات مساعدة وتهيئة
-│   │   ├── axios.js        # (إعدادات الـ Interceptors والـ withCredentials للكوكيز)
-│   │   └── formatters.js   # (دوال تنسيق السعر والتاريخ)
+│   ├── utils/                        # Helper functions
+│   │   ├── axios.js                  # axios instance + interceptors
+│   │   ├── constants.js              # app constants
+│   │   ├── formatters.js             # price/date formatting
+│   │   └── validators.js             # helper validation functions
 │   │
-│   └── main.jsx            # :rocket: نقطة البداية (فيها QueryClientProvider و RouterProvider)
+│   ├── services/                     # خدمات خارجية
+│   │   ├── stripe.js                 # Stripe integration
+│   │   └── cloudinary.js             # Image upload helpers
+│   │
+│   ├── types/                        # لو حولت TypeScript مستقبلاً
+│   │
+│   └── main.jsx                      # App Entry Point
+│                                      # QueryClientProvider
+│                                      # RouterProvider
+│                                      # ThemeProvider
+```
