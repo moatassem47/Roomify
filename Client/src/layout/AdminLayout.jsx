@@ -4,11 +4,15 @@ import SideBar from "../features/admin/components/SideBar"
 
 const AdminLayout = () => {
   return (
-    <div className="flex ">
-    <SideBar/>
-    <Outlet/>
-    </div>
-  )
-}
+    <div className="flex h-screen">
+      <SideBar />
 
-export default AdminLayout
+      <main className="flex-1 overflow-y-auto">
+        <Outlet />
+      </main>
+    </div>
+  );
+};
+
+export default AdminLayout;
+
