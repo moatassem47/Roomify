@@ -89,18 +89,24 @@ function App() {
               </AnimationPage>
             }
           />
-          <Route path="checkout/cancel" element={
-            <AnimationPage>
-              <ProtectedRoute>
-                <CheckoutFailed />
-              </ProtectedRoute>
-            </AnimationPage>
-          } />
-          <Route path="story" element={
-            <AnimationPage>
-                <OurStory /> 
-            </AnimationPage>
-          } />
+          <Route
+            path="checkout/cancel"
+            element={
+              <AnimationPage>
+                <ProtectedRoute>
+                  <CheckoutFailed />
+                </ProtectedRoute>
+              </AnimationPage>
+            }
+          />
+          <Route
+            path="story"
+            element={
+              <AnimationPage>
+                <OurStory />
+              </AnimationPage>
+            }
+          />
           <Route
             path="admin/products"
             element={
@@ -117,6 +123,55 @@ function App() {
               <AnimationPage>
                 <Page404 />
               </AnimationPage>
+            }
+          />
+        </Route>
+        <Route
+          path="/admin"
+          element={
+              <AdminRoute>
+                <AdminLayout />
+              </AdminRoute>
+          }
+        >
+          <Route
+            index
+            element={
+              <AnimatedAdminPages>
+                <AdminRoute>
+                  <Dashboard />
+                </AdminRoute>
+              </AnimatedAdminPages>
+            }
+          />
+          <Route
+            path="inventory"
+            element={
+              <AnimatedAdminPages>
+                <AdminRoute>
+                  <Inventory />
+                </AdminRoute>
+              </AnimatedAdminPages>
+            }
+          />
+          <Route
+            path="orders"
+            element={
+              <AnimatedAdminPages>
+                <AdminRoute>
+                  <Orders />
+                </AdminRoute>
+              </AnimatedAdminPages>
+            }
+          />
+          <Route
+            path="delivery"
+            element={
+              <AnimatedAdminPages>
+                <AdminRoute>
+                  <Delivery />
+                </AdminRoute>
+              </AnimatedAdminPages>
             }
           />
         </Route>
