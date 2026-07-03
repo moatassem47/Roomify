@@ -19,7 +19,7 @@ const SideBar = () => {
         onClick={() => setIsMobileOpen(true)}
         aria-label="Open menu"
       >
-        <Menu color="#825032" size={22} />
+        <Menu className="text-primary" size={22} />
       </button>
 
      
@@ -44,7 +44,7 @@ const SideBar = () => {
           onClick={() => setIsMobileOpen(false)}
           aria-label="Close menu"
         >
-          <X color="#825032" size={20} />
+          <X className="text-primary" size={20} />
         </button>
 
         <figure><img src={logo} alt="roomify logo" /></figure>
@@ -55,8 +55,8 @@ const SideBar = () => {
               <NavLink to="/admin" end className={navLinkClass} onClick={() => setIsMobileOpen(false)}>
                 {({ isActive }) => (
                   <>
-                    <LayoutDashboard color={isActive ? "#825032" : "#79716b"} />
-                    <span className={isActive ? "text-brand-cedar" : ""}>Dashboard</span>
+                    <LayoutDashboard className={isActive ? "text-primary" : "text-on-surface-variant"} />
+                    <span className={isActive ? "text-primary" : ""}>Dashboard</span>
                   </>
                 )}
               </NavLink>
@@ -66,8 +66,8 @@ const SideBar = () => {
               <NavLink to="inventory" className={navLinkClass} onClick={() => setIsMobileOpen(false)}>
                 {({ isActive }) => (
                   <>
-                    <ShoppingCart color={isActive ? "#825032" : "#79716b"} />
-                    <span className={isActive ? "text-brand-cedar" : ""}>Inventory</span>
+                    <ShoppingCart className={isActive ? "text-primary" : "text-on-surface-variant"} />
+                    <span className={isActive ? "text-primary" : ""}>Inventory</span>
                   </>
                 )}
               </NavLink>
@@ -77,8 +77,8 @@ const SideBar = () => {
               <NavLink to="orders" className={navLinkClass} onClick={() => setIsMobileOpen(false)}>
                 {({ isActive }) => (
                   <>
-                    <PackageSearch color={isActive ? "#825032" : "#79716b"} />
-                    <span className={isActive ? "text-brand-cedar" : ""}>Orders</span>
+                    <PackageSearch className={isActive ? "text-primary" : "text-on-surface-variant"} />
+                    <span className={isActive ? "text-primary" : ""}>Orders</span>
                   </>
                 )}
               </NavLink>
@@ -88,8 +88,8 @@ const SideBar = () => {
               <NavLink to="delivery" className={navLinkClass} onClick={() => setIsMobileOpen(false)}>
                 {({ isActive }) => (
                   <>
-                    <Motorbike color={isActive ? "#825032" : "#79716b"} />
-                    <span className={isActive ? "text-brand-cedar" : ""}>Delivery</span>
+                    <Motorbike className={isActive ? "text-primary" : "text-on-surface-variant"} />
+                    <span className={isActive ? "text-primary" : ""}>Delivery</span>
                   </>
                 )}
               </NavLink>
@@ -100,7 +100,6 @@ const SideBar = () => {
         <UserDropdown
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          links={[{ to: "/", label: "Go to UserHome" }, { to: "/delivery", label: "Go to Delivery" }]}
           children={
             <div
               className="flex bg-brand-cedar/10 px-2 py-3 rounded-xl mr-2 gap-3 mb-8 cursor-pointer"
@@ -113,7 +112,7 @@ const SideBar = () => {
               </div>
             </div>
           }
-          className={"-top-30 -right-55"}
+          className={"-top-50 -right-55"}
         />
       </aside>
     </>

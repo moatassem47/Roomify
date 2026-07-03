@@ -5,7 +5,8 @@ const mongoosePaginate=require("mongoose-paginate-v2")
 const addressSchema= new mongoose.Schema({
   city:{
     type:String,
-    required:true
+    required:true,
+    uppercase: true,
   },
   streetAddress:{
     type:String,
@@ -37,12 +38,15 @@ const userSchema=new mongoose.Schema({
     firstName:{
         type:String,
         required:true,
-        trim: true
+        trim: true,
+         uppercase: true,
+        
     },
      lastName:{
         type:String,
         required:true,
-        trim: true
+        trim: true,
+         uppercase: true,
     },
     email:{
         type:String,
@@ -73,11 +77,18 @@ const userSchema=new mongoose.Schema({
     },
     address:addressSchema,
     deliveryDetails:deliverySchema,
-    isActive: {
-        type: Boolean,
-        default: true
+    isDeleted:{
+        type:Boolean,
+        default:false
     },
-    refreshToken: String
+    deletedAt:Date,
+    refreshToken: String,
+    wishlist: [
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product"
+    }
+]
 },
 {
     timestamps:true,
@@ -88,6 +99,11 @@ userSchema.plugin(mongoosePaginate)
 userSchema.pre("save",async function(){
     if(!this.isModified("password")) return ;
     this.password=await bcrypt.hash(this.password,12);
+})
+
+userSchema.pre("save",async function(){
+    if(!this.isModified("isDeleted")) return ;
+    this.deletedAt=Date.now();
 })
 
 const User=mongoose.model("User",userSchema)

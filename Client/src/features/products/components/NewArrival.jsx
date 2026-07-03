@@ -31,7 +31,7 @@ const NewArrival = () => {
   if (!data || data.length === 0) return null;
   const listData=data.slice(1)
   const featuredProduct=data[0]
-  console.log(listData)
+
   return (
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">

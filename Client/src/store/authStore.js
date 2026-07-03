@@ -11,11 +11,17 @@ const useAuth = create((set) => ({
   popUpType: "login",
   openPopUp: (type) => set({ isPopUp: true, popUpType: type }),
   closePopUp: () => set({ isPopUp: false }),
-  login: (userData) => set({ user: userData, isAuthenticated: true }),
-  updateUser: (updatedUser) => set({ user: updatedUser }),
+  login: () => set({ isAuthenticated: true }),
+  updateUser: (updatedUser) =>
+    set((state) => ({
+      user: {
+        ...state.user,
+        ...updatedUser,
+      },
+    })),
   logout: async () => {
     set({ user: null, isAuthenticated: false });
-    
+
     useCart.getState().setTotalQuantity(0);
 
     try {
@@ -29,7 +35,7 @@ const useAuth = create((set) => ({
       const res = await api.get("/user");
       set({ user: res.data, isAuthenticated: true, isCheckingAuth: false });
     } catch (e) {
-        console.log(e)
+      console.log(e);
       set({ user: null, isAuthenticated: false, isCheckingAuth: false });
       useCart.getState().setTotalQuantity(0);
     }

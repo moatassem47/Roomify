@@ -36,12 +36,12 @@ const CheckoutSuccess = () => {
       </h1>
 
       
-      <p className="text-brand-text max-w-md text-center mb-8 leading-relaxed">
+      <p className="text-brand-text max-w-fit text-center mb-8 leading-relaxed">
         Thank you for your purchase. Your payment was completed successfully, and your sanctuary is on the way.
       </p>
 
       
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-ambient border border-brand-surface-container overflow-hidden mb-8">
+      <div className="w-full max-w-fit bg-white rounded-2xl shadow-ambient border border-brand-surface-container overflow-hidden mb-8">
         <div className="px-5 py-3 bg-brand-surface-container/60 border-b border-brand-surface-container">
           <span className="text-xs font-bold uppercase tracking-wider text-brand-text/70 font-sans">
             Confirmed Order Details
@@ -108,7 +108,7 @@ const CheckoutSuccess = () => {
      
       <Link
         to="/orders"
-        className="flex items-center justify-center gap-2 bg-brand-cedar hover:bg-brand-cedar-hover text-white font-semibold py-3.5 px-8 rounded-xl transition-all duration-300 shadow-sm w-full max-w-xs mb-6"
+        className="flex items-center justify-center gap-2 bg-brand-cedar hover:bg-brand-cedar-hover text-white font-semibold py-3.5 px-8 rounded-xl transition-all duration-300 shadow-sm w-full max-w-fit mb-6"
       >
         <span>View My Orders</span>
         <ArrowRight className="w-4 h-4" />

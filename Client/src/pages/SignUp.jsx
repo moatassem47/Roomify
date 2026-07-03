@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const SignUp = () => {
   return (
     
-   <motion.div className="flex flex-row h-screen w-screen overflow-hidden bg-brand-cream" initial={{opacity:0,y:-50}}
+   <motion.div className="flex mt-10 flex-row h-screen w-screen overflow-hidden bg-brand-cream" initial={{opacity:0,y:-50}}
     animate={{opacity:1,y:0}}
     exit={{opacity:0,y:50}}
     transition={{duration:0.35}}>

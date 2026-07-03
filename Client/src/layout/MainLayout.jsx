@@ -13,7 +13,7 @@ const MainLayout = () => {
     <div className='relative flex flex-col min-h-screen  '>
         <NavBar/>
 
-        <main className="grow  min-h-150">
+        <main className="grow  min-h-150 mt-20">
             <Outlet/>
         </main>
         <Footer/>

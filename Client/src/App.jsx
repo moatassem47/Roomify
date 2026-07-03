@@ -15,6 +15,16 @@ import CheckoutSuccess from "./pages/CheckoutSuccess";
 import CheckoutFailed from "./pages/CheckoutFailed";
 import OurStory from "./pages/OurStory";
 import AdminProducts from "./features/admin/pages/AdminProducts";
+import AnimatedAdminPages from "./features/admin/components/AnimatedAdminPages"
+import AdminRoute from "./features/admin/components/AdminRoute"
+import AdminLayout from "./layout/AdminLayout"
+import Dashboard from "./features/admin/pages/Dashboard"
+import Orders from "./features/admin/pages/Orders"
+import Delivery from "./features/admin/pages/Delivery"
+import MyOrders from "./pages/MyOrders";
+import OrderDetails from "./pages/OrderDetails";
+import Profile from "./pages/Profile";
+import Wishlist from "./pages/Wishlist";
 function App() {
   const location = useLocation();
   const { checkAuth, isCheckingAuth } = useAuth();
@@ -100,20 +110,50 @@ function App() {
             }
           />
           <Route
-            path="story"
+            path="orders"
             element={
               <AnimationPage>
-                <OurStory />
+                <ProtectedRoute>
+                  <MyOrders />
+                </ProtectedRoute>
               </AnimationPage>
             }
           />
           <Route
-            path="admin/products"
+            path="orders/:id"
             element={
               <AnimationPage>
                 <ProtectedRoute>
-                  <AdminProducts />
+                  <OrderDetails />
                 </ProtectedRoute>
+              </AnimationPage>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              <AnimationPage>
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              </AnimationPage>
+            }
+          />
+          <Route
+            path="wishlist"
+            element={
+              <AnimationPage>
+                <ProtectedRoute>
+                  <Wishlist />
+                </ProtectedRoute>
+              </AnimationPage>
+            }
+          />
+          <Route
+            path="story"
+            element={
+              <AnimationPage>
+                <OurStory />
               </AnimationPage>
             }
           />
@@ -149,7 +189,7 @@ function App() {
             element={
               <AnimatedAdminPages>
                 <AdminRoute>
-                  <Inventory />
+                  <AdminProducts />
                 </AdminRoute>
               </AnimatedAdminPages>
             }

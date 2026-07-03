@@ -1,7 +1,8 @@
-import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { addToCart, deleteItem, getCart, updateQuantity } from "./cartApis"
+import {useMutation, useQueryClient} from "@tanstack/react-query"
+import { addToCart, deleteItem, updateQuantity } from "./cartApis"
 import useCart from "../../../store/cartStore";
 import toast from 'react-hot-toast';
+import useFetchQuery from "../../../hooks/useFetchQuery";
 
 export const useAddToCart=()=>{
      const { setTotalQuantity} = useCart();
@@ -38,10 +39,8 @@ export const useAddToCart=()=>{
 
 export const useGetCart = (options = {}) => {
     const { setTotalQuantity } = useCart();
-    return useQuery({
-        queryKey: ["cart"],
-        queryFn: async () => {
-            const data = await getCart();
+    return useFetchQuery("/cart", ["cart"], {
+        selectData: (data) => {
             if (data?.cart?.items) {
                 const total = data.cart.items.reduce((sum, item) => sum + (item.quantity || 0), 0);
                 setTotalQuantity(total);

@@ -57,7 +57,7 @@ const RegisterForm = () => {
     <FormProvider {...methods}>
       <motion.form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white rounded-large shadow-ambient p-8 w-full max-w-lg"
+        className="bg-white rounded-large shadow-ambient p-8 w-full max-w-150"
         layout
         transition={{duration:0.05}}
       >

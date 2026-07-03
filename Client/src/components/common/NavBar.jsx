@@ -7,12 +7,10 @@ import MobileMenu from "./MobileMenu";
 import { NavLink, useNavigate } from "react-router-dom";
 import useCart from "../../store/cartStore";
 import { useGetCart } from "../../features/cart/apis/useCart";
-import Categories from "../../pages/Categories";
 import { useState } from "react";
 
 const NavBar = () => {
   const { openPopUp, isAuthenticated } = useAuth();
-  const [active, setActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const { totalQuantity } = useCart();
@@ -20,7 +18,7 @@ const NavBar = () => {
   useGetCart({ enabled: isAuthenticated });
   return (
     <>
-      <nav className="bg-white flex items-center justify-between shadow-ambient h-20">
+      <nav className="bg-white fixed right-0 left-0 top-0 z-50 flex items-center justify-between shadow-ambient h-20">
         <figure className="lg:w-80 w-44">
           <img src={myIcon} alt="logo" />
         </figure>
@@ -30,14 +28,6 @@ const NavBar = () => {
           </li>
           <li>
             <NavLink to="/shop">Shop All</NavLink>
-          </li>
-          <li>
-            <button
-              className={`cursor-pointer ${active && `text-brand-cedar`}`}
-              onClick={() => setActive(!active)}
-            >
-              Categories
-            </button>
           </li>
           <li>
             <NavLink to="/story">Our Story</NavLink>
@@ -96,7 +86,6 @@ const NavBar = () => {
           <MobileMenu />
         </div>
       </nav>
-      {active && <Categories setActive={setActive} />}
     </>
   );
 };

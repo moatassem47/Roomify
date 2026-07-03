@@ -24,12 +24,12 @@ const CheckoutFailed = () => {
       </h1>
 
       {/* Subtitle */}
-      <p className="text-brand-text max-w-md text-center mb-8 leading-relaxed">
+      <p className="text-brand-text max-w-fit text-center mb-8 leading-relaxed">
         We were unable to process your order. Your sanctuary is waiting, but your payment was declined by the bank.
       </p>
 
       {/* FAILED ORDER DETAILS Container */}
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-ambient border border-brand-surface-container overflow-hidden mb-8">
+      <div className="w-full max-w-fit bg-white rounded-2xl shadow-ambient border border-brand-surface-container overflow-hidden mb-8">
         <div className="px-5 py-3 bg-brand-surface-container/60 border-b border-brand-surface-container">
           <span className="text-xs font-bold uppercase tracking-wider text-brand-text/70 font-sans">
             Failed Order Details

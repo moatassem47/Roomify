@@ -39,7 +39,7 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-white rounded-large shadow-ambient p-8 w-full max-w-lg flex flex-col gap-3"
+      className="bg-white rounded-large shadow-ambient p-8 w-full max-w-fit flex flex-col gap-3"
     >
       <div className="mb-5">
         <h1 className="text-3xl text-center">Welcome Back</h1>

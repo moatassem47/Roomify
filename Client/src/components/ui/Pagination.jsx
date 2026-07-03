@@ -45,14 +45,14 @@ export default function Pagination({ totalPages }) {
 
     const visiblePages = getVisiblePages();
 
-    const btnBase = "flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-base border font-medium text-sm transition-colors";
-    const btnDefault = "bg-white border-brand-surface-container hover:bg-brand-surface-container text-brand-charcoal";
-    const btnActive = "bg-brand-cedar text-white border-brand-cedar";
-    const btnNav = "bg-white border-brand-surface-container hover:bg-brand-surface-container disabled:opacity-40 disabled:cursor-not-allowed";
+    const btnBase = "flex h-11 min-w-11 items-center justify-center rounded-full border px-4 font-semibold text-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-cedar/30";
+    const btnDefault = "bg-white border-brand-surface-container hover:border-brand-cedar/30 hover:bg-brand-cream text-brand-charcoal shadow-sm";
+    const btnActive = "bg-brand-charcoal text-white border-brand-charcoal shadow-ambient";
+    const btnNav = "bg-white border-brand-surface-container hover:border-brand-cedar/30 hover:bg-brand-cream disabled:opacity-40 disabled:cursor-not-allowed shadow-sm";
 
     return (
-        <nav aria-label="Page navigation" className="flex justify-center mt-8">
-            <ul className="flex items-center gap-1 text-sm">
+        <nav aria-label="Page navigation" className="flex justify-center mt-10">
+            <ul className="flex flex-wrap items-center justify-center gap-2 text-sm">
 
                 {/* Previous */}
                 <li>
@@ -63,6 +63,7 @@ export default function Pagination({ totalPages }) {
                         aria-label="Previous page"
                     >
                         <ChevronLeft className="w-4 h-4" />
+                        <span className="hidden sm:inline">Previous</span>
                     </button>
                 </li>
 
@@ -70,7 +71,7 @@ export default function Pagination({ totalPages }) {
                 {visiblePages.map((page, i) =>
                     page === "..." ? (
                         <li key={`dots-${i}`}>
-                            <span className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center text-brand-surface-dim select-none">
+                            <span className="flex h-11 min-w-11 items-center justify-center rounded-full px-2 text-brand-surface-dim select-none">
                                 &hellip;
                             </span>
                         </li>
@@ -95,6 +96,7 @@ export default function Pagination({ totalPages }) {
                         className={`${btnBase} ${btnNav}`}
                         aria-label="Next page"
                     >
+                        <span className="hidden sm:inline">Next</span>
                         <ChevronRight className="w-4 h-4" />
                     </button>
                 </li>

@@ -1,34 +1,40 @@
-import {useQuery} from "@tanstack/react-query"
-import { getNewArrival ,GetProducts,GetProductByID, suggestedProducts } from "./productApis"
+import useFetchQuery from "../../../hooks/useFetchQuery";
 
 export const useNewArrival=()=>{
-    return useQuery({
-        queryKey:["products","new_arrivals"],
-        queryFn:getNewArrival
+    return useFetchQuery("/products?sort=newest&limit=5", ["products", "new_arrivals"], {
+        selectData: (data) => data.docs,
     })
 }
 
 export const useGetProducts=(filters = {})=>{
-    return useQuery({
-        queryKey:["products", filters],
-        queryFn:()=>GetProducts(filters),
-        staleTime: 1000 * 60 * 2,
-        placeholderData:(prev)=>prev   
-    })
+    const {
+        search = "",
+        minPrice = "",
+        maxPrice = "",
+        sort = "",
+        page = "",
+        limit = "",
+        category = "",
+        available = "",
+    } = filters;
+
+    return useFetchQuery(
+        `/products?sort=${sort}&limit=${limit}&maxPrice=${maxPrice}&minPrice=${minPrice}&search=${search}&page=${page}&category=${category}&available=${available}`,
+        ["products", filters]
+    )
 }
 
 export const useGetSindgleProduct=(id)=>{
-    return useQuery({
-        queryKey:["products", id],
-        queryFn:()=>GetProductByID(id),
-        staleTime: 1000 * 60 * 2,  
-    })
+    return useFetchQuery(`/products/${id}`, ["products", id])
 }
 
 export const useSuggestProduct=(category,productId)=>{
-return useQuery({
-        queryKey:["products", "suggested",category],
-        queryFn:()=>suggestedProducts(category,productId),
-        enabled:!!category
+return useFetchQuery(`/products?category=${category}&limit=5`, ["products", "suggested",category], {
+        enabled:!!category,
+        selectData: (data) => {
+            const products = data?.docs || [];
+            const filteredProduct = products.filter((product) => product._id !== productId);
+            return { docs: filteredProduct.slice(0, 4) };
+        },
     })
 }

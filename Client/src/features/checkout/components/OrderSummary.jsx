@@ -31,7 +31,7 @@ const OrderSummary = () => {
             }
         </div>
         <div className="bg-brand-surface-dim h-[0.5px]"></div>
-        <div className="mt-4 flex flex-col justify-between content-between gap-5 text-[#777070] text-sm">
+        <div className="mt-4 flex flex-col justify-between content-between gap-5 text-on-surface-variant text-sm">
         <div className="flex justify-between">
           <span>Subtotal</span>
           <span>{totalPrice.toFixed(2)} EG</span>
@@ -45,8 +45,8 @@ const OrderSummary = () => {
           <span>0</span>
         </div>
 
-        <div className="flex justify-between font-bold mt-4 pt-4 border-t border-[#efe8e8] text-xl font-serif">
-          <span className="text-black">Total</span>
+        <div className="flex justify-between font-bold mt-4 pt-4 border-t border-surface-variant text-xl font-serif">
+          <span className="text-on-surface">Total</span>
           <span className="text-brand-cedar lg:text-2xl md:text-xl text-lg">
             {totalPrice.toFixed(2)} EG
           </span>

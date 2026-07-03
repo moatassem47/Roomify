@@ -56,7 +56,7 @@ const MobileMenu = () => {
               initial="closed"
               animate="open"
               exit="closed"
-              className="fixed top-0 right-0 bottom-0 w-[80vw] max-w-sm bg-white z-50 flex flex-col shadow-2xl"
+              className="fixed top-0 right-0 bottom-0 w-[80vw] max-w-fit bg-white z-50 flex flex-col shadow-2xl"
             >
               
               <div className="flex justify-end p-6">

@@ -11,10 +11,11 @@ const useLogin=()=>{
         mutationFn:(userData)=>LoginApi(userData),
         onSuccess:(data)=>{
             console.log(`you logged in Succefully `,data)
-            login(data?.data)
+            login()
             if(data?.data?.role=="admin"){
                 navigate("/admin")
             }
+            window.location.reload();
             closePopUp()
         }
     })

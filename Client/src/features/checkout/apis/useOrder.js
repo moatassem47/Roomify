@@ -1,6 +1,7 @@
-import {useMutation, useQuery} from "@tanstack/react-query"
-import { createCardOrder, createCashOrder, getOrderById } from "./orderApis"
+import {useMutation} from "@tanstack/react-query"
+import { createCardOrder, createCashOrder } from "./orderApis"
 import { useNavigate } from "react-router-dom";
+import useFetchQuery from "../../../hooks/useFetchQuery";
 
 export const useCreateCashOrder=()=>{
     const navigate=useNavigate()
@@ -30,9 +31,7 @@ export const useCreateCardOrder=()=>{
 }
 
 export const useGetOrderById=(orderId)=>{
-    return useQuery({
-        queryKey:["order",orderId],
-        queryFn:()=>getOrderById(orderId),
+    return useFetchQuery(`/order/${orderId}`, ["order",orderId], {
         enabled:!!orderId
     })
 }

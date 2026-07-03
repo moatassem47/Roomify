@@ -14,7 +14,7 @@ const Home = () => {
       <Hero background={LandingPage} backgroundStyle="h-screen" title="Create a Sanctuary of Comfort & Joy"
       text="Thoughtfully designed furniture that turns every corner of your home into a restorative escape. Sustainable materials, timeless design, and a touch of warmth for your modern hearth."
       button="Shop the Collection"
-      textStyle={"md:w-140 w-90 text-gray-700 tracking-wider "}
+      textStyle={"md:w-140 w-90 text-on-surface-variant tracking-wider "}
       onClick={()=>navigate("/shop")}
       />
 
@@ -24,7 +24,7 @@ const Home = () => {
                 <h2 className="text-brand-cedar tracking-widest font-sans md:text-base text-sm">Curated Selection</h2>
                 <span className="font-serif md:text-base text-sm">The New Arrivals</span>
               </div>
-              <Button className="text-[#84746c]! bg-inherit! shadow-none hover:shadow-none font-normal! md:text-base text-sm" onClick={()=>navigate("shop")} >{"Explore All >"}</Button>
+              <Button className="text-outline! bg-inherit! shadow-none hover:shadow-none font-normal! md:text-base text-sm" onClick={()=>navigate("shop")} >{"Explore All >"}</Button>
             </div>
               <NewArrival/>
       </section>

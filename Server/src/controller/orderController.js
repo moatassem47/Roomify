@@ -52,7 +52,11 @@ const createOrder=async(req,res)=>{
             totalAmount,
             shippingAddress,
             items:orderItems,
-            paymentMethod
+            paymentMethod,
+            statusHistory:{
+                status:"Placed",
+                date: new Date()
+            }
         }],{session})
 
         cart.items=[]
@@ -146,7 +150,10 @@ const cancelOrder=async(req,res)=>{
         }
 
         order.status="Cancelled"
-
+        order.statusHistory.push({
+            status:"Cancelled",
+            date:new Date()
+        })
         for(const item of order.items){
             await Product.updateOne({_id:item.productId},
                 {$inc:{stockQuantity:+item.quantity}},
@@ -156,7 +163,7 @@ const cancelOrder=async(req,res)=>{
 
         await order.save({session})
         await session.commitTransaction()
-        res.status(200).json({message:"Order cancelled successfully"})
+        res.status(200).json({message:"Order Cancelled Successfully"})
 
     }catch(e){
         await session.abortTransaction()

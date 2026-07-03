@@ -138,7 +138,7 @@ const AdminProducts = () => {
         content="Manage Roomify catalogue products."
       />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-10">
+      <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-8 py-10 ">
         <div className="mb-8 flex flex-col gap-2">
           <p className="font-sans text-sm font-semibold text-brand-cedar">
             Admin
@@ -176,7 +176,7 @@ const AdminProducts = () => {
             </div>
 
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[760px] text-left">
+              <table className="w-full min-w-190 text-left">
                 <thead className="bg-brand-surface-container text-brand-text text-xs uppercase tracking-wider">
                   <tr>
                     <th className="px-5 py-3 font-semibold">Product</th>

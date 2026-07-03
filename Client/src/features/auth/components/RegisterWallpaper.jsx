@@ -14,7 +14,7 @@ const RegisterWallpaper = () => {
             <h2 className="text-white text-4xl font-bold w-100">
                 Design your sanctuary.
             </h2>
-            <span className="text-white text-xl w-110">
+            <span className="text-white text-xl w-110 mb-5">
                 Join a community of curators who value quality, comfort, and the art of living well.
             </span>
         </div>

@@ -28,7 +28,7 @@ const AuthPopUp = () => {
 
       <div 
         onClick={closePopUp}
-        className='fixed top-8 right-8 z-25 p-3 bg-brand-cedar rounded-full cursor-pointer shadow-2xl hover:scale-110 transition-all border-2 border-white'
+        className='fixed top-25 right-8 z-25 p-3 bg-brand-cedar rounded-full cursor-pointer shadow-2xl hover:scale-110 transition-all border-2 border-white'
         >
         <X className='text-white' size={28} />
       </div>

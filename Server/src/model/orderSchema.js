@@ -18,6 +18,21 @@ const orderItemSchema = new mongoose.Schema({
     }
 }, { _id: false });
 
+const statusHistorySchema = new mongoose.Schema(
+  {
+    status: {
+      type: String,
+      enum: ["Placed", "Packed", "Out for Delivery", "Delivered", "Cancelled"],
+      required: true,
+    },
+    date: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  { _id: false }
+);
+
 const orderSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -58,9 +73,7 @@ const orderSchema = new mongoose.Schema({
     stripeSessionId: {
         type: String
     },
-    deliveredAt: {
-        type: Date 
-    }
+    statusHistory:[statusHistorySchema]
 }, { timestamps: true });
 
 orderSchema.index({ status: 1, userId: 1 });

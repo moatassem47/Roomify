@@ -47,7 +47,7 @@ const OurStory = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="font-sans text-lg md:text-xl text-white/90 max-w-xl mx-auto font-light"
+            className="font-sans text-lg md:text-xl text-white/90 max-w-3xl mx-auto font-light"
           >
             The journey behind our obsession with thoughtful design and structural integrity.
           </motion.p>
@@ -104,7 +104,7 @@ const OurStory = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInSpread}
-            className="max-w-xl mx-auto mb-16"
+            className="max-w-6xl mx-auto mb-16"
           >
             <h2 className="font-serif text-3xl md:text-4xl text-brand-cedar font-semibold mb-4">
               The Pillars of Our Process
@@ -180,7 +180,7 @@ const OurStory = () => {
           <h2 className="font-serif text-3xl md:text-5xl text-brand-cedar font-semibold leading-tight">
             Ready to redesign your daily horizon?
           </h2>
-          <p className="text-gray-600 max-w-xl mx-auto font-sans text-sm md:text-base">
+          <p className="text-gray-600 max-w-3xl mx-auto font-sans text-sm md:text-base">
             Explore our curated collections of living room, bedroom, and workspace essentials designed to center your living space.
           </p>
           <div className="pt-4">
