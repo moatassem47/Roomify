@@ -1,9 +1,7 @@
 const mongoose=require("mongoose")
 const User=require("../../model/userSchema")
+const Order=require("../../model/orderSchema")
 const { updateMany } = require("../../model/productSchema")
-
-
-
 const addDeliveryUser=async(req,res)=>{
     try{
         
@@ -113,8 +111,79 @@ const showDeliveryUserByID=async(req,res)=>{
   });
     } 
 }
+const updateDeliveryUser=async(req,res)=>{
+     try{
+        const {id}=req.params
+        const {firstName,lastName,phone,address,vehicleType,licensePlate}=req.body
 
+        const updateData = {
+            firstName,
+            lastName,
+            phone,
+            address,
+            deliveryDetails: { vehicleType, licensePlate }
+        }
 
+        const updatedUser= await User.findOneAndUpdate({_id:id ,role:"delivery"}, updateData, {new: true})
+        
+        if(!updatedUser){
+            return res.status(404).json({message:"there is no delivery user with this id"})
+        }
+            
+        res.status(200).json({message:"delivery user updated succefully", data:updatedUser})
 
+    }catch(e){
+        console.error(e);
+        res.status(500).json({
+            name: e.name,
+            message: e.message,
+        });
+    } 
+}
 
-module.exports={addDeliveryUser,deleteDeliveryUser,showAllDeliverieUsers,showDeliveryUserByID}
+const toggleDeliveryUserStatus=async(req,res)=>{
+     try{
+        const {id}=req.params
+        const {isActive}=req.body
+
+        const updatedUser= await User.findOneAndUpdate({_id:id ,role:"delivery"}, {isActive}, {new: true})
+        
+        if(!updatedUser){
+            return res.status(404).json({message:"there is no delivery user with this id"})
+        }
+            
+        res.status(200).json({message:"delivery user status updated succefully", data:updatedUser})
+
+    }catch(e){
+        console.error(e);
+        res.status(500).json({
+            name: e.name,
+            message: e.message,
+        });
+    } 
+}
+
+const getDeliveryUserHistory=async(req,res)=>{
+    try{
+        const {id}=req.params
+        const orders = await Order.find({ deliveryPersonId: id }).sort({ createdAt: -1 }).populate('items.productId');
+
+        res.status(200).json({ data: orders })
+    }catch(e){
+        console.error(e);
+        res.status(500).json({
+            name: e.name,
+            message: e.message,
+        });
+    } 
+}
+
+module.exports={
+    addDeliveryUser,
+    deleteDeliveryUser,
+    showAllDeliverieUsers,
+    showDeliveryUserByID,
+    updateDeliveryUser,
+    toggleDeliveryUserStatus,
+    getDeliveryUserHistory
+}

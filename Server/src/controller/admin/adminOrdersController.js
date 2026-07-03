@@ -83,4 +83,28 @@ const updateOrderStatus = async (req, res) => {
   }
 };
 
-module.exports = { showAllOrders, updateOrderStatus };
+const assignOrder = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { deliveryPersonId } = req.body;
+
+    const order = await Order.findById(id);
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    order.deliveryPersonId = deliveryPersonId;
+    order.status = "Out for Delivery"; // Automatically update status when assigned
+
+    await order.save();
+
+    res.status(200).json({
+      message: `Order assigned to delivery personnel`,
+      order,
+    });
+  } catch (e) {
+    res.status(500).json({ name: e.name, message: e.message });
+  }
+};
+
+module.exports = { showAllOrders, updateOrderStatus, assignOrder };
