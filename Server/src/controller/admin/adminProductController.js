@@ -3,6 +3,52 @@ const mongoose=require("mongoose")
 const {uploudToCloudinary,DeleteProductFromCloudinary}=require("../../utils/cloudinaryHandler")
 const upload=require("../../middleware/uploadMiddleware")
 
+const hasValue=(value)=>value !== undefined && value !== null && value !== ""
+
+const normalizeList=(value)=>{
+    if(Array.isArray(value)){
+        return value
+    }
+
+    if(typeof value === "string"){
+        return value.split(",").map((item)=>item.trim()).filter(Boolean)
+    }
+
+    return []
+}
+
+const normalizeSpecs=(specs)=>{
+    if(!specs){
+        return undefined
+    }
+
+    let parsedSpecs=specs
+
+    if(typeof specs === "string"){
+        try{
+            parsedSpecs=JSON.parse(specs)
+        }catch(e){
+            return undefined
+        }
+    }
+
+    if(!parsedSpecs || typeof parsedSpecs !== "object"){
+        return undefined
+    }
+
+    const nextSpecs={...parsedSpecs}
+
+    if("material" in nextSpecs){
+        nextSpecs.material=normalizeList(nextSpecs.material)
+    }
+
+    if("color" in nextSpecs){
+        nextSpecs.color=normalizeList(nextSpecs.color)
+    }
+
+    return nextSpecs
+}
+
 
 exports.addProduct=async(req,res)=>{
     try{
@@ -38,7 +84,7 @@ exports.addProduct=async(req,res)=>{
                 stockQuantity,
                 category,
                 rating,
-                specs,
+                specs:normalizeSpecs(specs),
                 imageUrls:imagesUrl,
                 model3dUrl:modelurl
             }
@@ -48,7 +94,7 @@ exports.addProduct=async(req,res)=>{
 
     }catch(e){
         console.log(e.message)
-        res.status(500).json(e)
+        res.status(500).json({message:e.message})
     }
 }
 
@@ -86,7 +132,7 @@ exports.deleteProduct=async(req,res)=>{
 exports.updateProduct=async(req,res)=>{
     try{
         const id=req.params.id
-        const{name,description,price,stockQuantity,specs}=req.body
+        const{name,description,price,stockQuantity,category,rating,specs}=req.body
     
         const product=await Product.findById(id)
 
@@ -94,20 +140,28 @@ exports.updateProduct=async(req,res)=>{
             return res.status(404).json({message:"this no product with this id"})
         }
 
-        if(name){
+        if(hasValue(name)){
             product.name=name
         }
-        if(description){
+        if(hasValue(description)){
             product.description=description
         }
-        if(price){
+        if(hasValue(price)){
             product.price=price
         }
-        if(stockQuantity){
+        if(hasValue(stockQuantity)){
             product.stockQuantity=stockQuantity
         }
-        if(specs){
-            product.specs = { ...product.specs.toObject(), ...specs };
+        if(hasValue(category)){
+            product.category=category
+        }
+        if(hasValue(rating)){
+            product.rating=rating
+        }
+
+        const nextSpecs=normalizeSpecs(specs)
+        if(nextSpecs){
+            product.specs = { ...(product.specs?.toObject?.() || product.specs || {}), ...nextSpecs };
         }
         
         await product.save()
@@ -118,7 +172,7 @@ exports.updateProduct=async(req,res)=>{
         })
 
     }catch(e){
-        res.status(500).json(e.message)
+        res.status(500).json({message:e.message})
     }
 
 }

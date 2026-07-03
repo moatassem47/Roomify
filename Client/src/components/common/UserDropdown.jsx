@@ -40,18 +40,29 @@ const UserDropdown = ({children ,isOpen,setIsOpen,links,className}) => {
 
             
             <div className="py-1">
-              {
-                links.map((link)=>(
-                <Link 
-                  to={link.to} 
+              {user?.role === "admin" && (
+                <Link
+                  to="/admin/products"
                   onClick={() => setIsOpen(false)}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-surface hover:text-brand-brown transition-colors"
                 >
-                  {link.label}
+                  Admin Products
                 </Link>
-
-                ))
-              }
+              )}
+              <Link 
+                to="/profile" 
+                onClick={() => setIsOpen(false)}
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-surface hover:text-brand-brown transition-colors"
+              >
+                My Profile
+              </Link>
+              <Link 
+                to="/orders" 
+                onClick={() => setIsOpen(false)}
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-surface hover:text-brand-brown transition-colors"
+              >
+                My Orders
+              </Link>
             </div>
 
             
