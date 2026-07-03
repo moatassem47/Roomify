@@ -73,6 +73,10 @@ const userSchema=new mongoose.Schema({
     },
     address:addressSchema,
     deliveryDetails:deliverySchema,
+    isActive: {
+        type: Boolean,
+        default: true
+    },
     refreshToken: String
 },
 {

@@ -3,8 +3,8 @@ const {addProduct,deleteProduct,updateProduct}=require("../controller/admin/admi
 const upload=require("../middleware/uploadMiddleware")
 const router=express.Router()
 const {verfiyToken,restrictedTo}=require("../middleware/authMiddleware")
-const {addDeliveryUser,deleteDeliveryUser,showAllDeliverieUsers,showDeliveryUserByID}=require("../controller/admin/adminDelvieryController")
-const {showAllOrders,updateOrderStatus}=require("../controller/admin/adminOrdersController")
+const {addDeliveryUser,deleteDeliveryUser,showAllDeliverieUsers,showDeliveryUserByID, updateDeliveryUser, toggleDeliveryUserStatus, getDeliveryUserHistory}=require("../controller/admin/adminDelvieryController")
+const {showAllOrders,updateOrderStatus,assignOrder}=require("../controller/admin/adminOrdersController")
 const {getDashboardStats}=require("../controller/admin/analysisController")
 const uploadFields=upload.fields([
     {name:"images",maxCount:6},
@@ -21,10 +21,14 @@ router.post("/delivery/add",verfiyToken,restrictedTo("admin"),addDeliveryUser)
 router.delete("/delivery/delete/:id",verfiyToken,restrictedTo("admin"),deleteDeliveryUser)
 router.get("/delivery",verfiyToken,restrictedTo("admin"),showAllDeliverieUsers)
 router.get("/delivery/:id",verfiyToken,restrictedTo("admin"),showDeliveryUserByID)
+router.patch("/delivery/update/:id",verfiyToken,restrictedTo("admin"),updateDeliveryUser)
+router.patch("/delivery/status/:id",verfiyToken,restrictedTo("admin"),toggleDeliveryUserStatus)
+router.get("/delivery/:id/history",verfiyToken,restrictedTo("admin"),getDeliveryUserHistory)
 
 //orders
 router.get("/orders",verfiyToken,restrictedTo("admin"),showAllOrders)
 router.patch("/orders/:id",verfiyToken,restrictedTo("admin"),updateOrderStatus)
+router.patch("/orders/assign/:id",verfiyToken,restrictedTo("admin"),assignOrder)
 
 
 //Dashboard
