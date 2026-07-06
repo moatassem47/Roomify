@@ -1,11 +1,11 @@
 import RoleProtectedRoute from "../../../components/common/RoleProtectedRoute";
 
-const AdminRoute = ({ children }) => {
+const DeliveryProtectedRoute = ({ children }) => {
   return (
-    <RoleProtectedRoute allowedRoles={["admin"]}>
+    <RoleProtectedRoute allowedRoles={["delivery"]}>
       {children}
     </RoleProtectedRoute>
   );
 };
 
-export default AdminRoute;
+export default DeliveryProtectedRoute;

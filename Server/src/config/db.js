@@ -1,27 +1,34 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const dns = require("dns");
-
-// Force Node.js to use Google's public DNS servers for resolving MongoDB hostnames
-// This fixes the querySrv ECONNREFUSED error caused by local loopback (127.0.0.1) DNS configurations.
-try {
-  dns.setServers(["8.8.8.8", "8.8.4.4"]);
-} catch (err) {
-  console.warn("Could not set DNS servers programmatically:", err.message);
-}
-
-// Force Node.js to resolve IPv4 addresses first
-dns.setDefaultResultOrder("ipv4first");
-
 dotenv.config();
+
+const getDatabaseName = (url) => {
+  if (process.env.MONGO_DB_NAME) {
+    return process.env.MONGO_DB_NAME;
+  }
+
+  try {
+    const parsedUrl = new URL(url);
+    const uriDatabase = parsedUrl.pathname.replace(/^\/+/, "");
+    return uriDatabase || "Roomify";
+  } catch (e) {
+    return "Roomify";
+  }
+};
 
 const connectDB = async () => {
   try {
     const url = process.env.MONGO_URI;
-    await mongoose.connect(url);
-    console.log("Database connected");
+    if (!url) {
+      throw new Error("MONGO_URI is not set");
+    }
+
+    const dbName = getDatabaseName(url);
+    await mongoose.connect(url, { dbName });
+    console.log(`Database connected: ${mongoose.connection.db.databaseName}`);
   } catch (e) {
-    console.log(e.message);
+    console.error(`Database connection failed: ${e.message}`);
+    process.exit(1);
   }
 };
 

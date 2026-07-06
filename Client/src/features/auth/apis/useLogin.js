@@ -2,21 +2,21 @@ import { useMutation } from "@tanstack/react-query";
 import LoginApi from "./LoginApi";
 import useAuth from "../../../store/authStore";
 import { useNavigate } from "react-router-dom";
+import { getRoleHome } from "../../../utils/roleRoutes";
 
 
 const useLogin=()=>{
-    const {login,closePopUp}=useAuth()
+    const {login,closePopUp,checkAuth}=useAuth()
     const navigate=useNavigate()
     return useMutation({
         mutationFn:(userData)=>LoginApi(userData),
-        onSuccess:(data)=>{
+        onSuccess:async(data)=>{
             console.log(`you logged in Succefully `,data)
-            login()
-            if(data?.data?.role=="admin"){
-                navigate("/admin")
-            }
-            window.location.reload();
+            const user=data?.data
+            login(user)
             closePopUp()
+            navigate(getRoleHome(user?.role), { replace: true })
+            await checkAuth()
         }
     })
 }

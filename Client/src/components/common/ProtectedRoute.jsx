@@ -1,22 +1,12 @@
-import { Navigate } from "react-router-dom"
-import useAuth from "../../store/authStore"
-import { useEffect } from "react"
+import RoleProtectedRoute from "./RoleProtectedRoute";
+import { USER_ROLES } from "../../utils/roleRoutes";
 
-const ProtectedRoute = ({children}) => {
-  const { isAuthenticated,isCheckingAuth, openPopUp } = useAuth()
-  
-  useEffect(() => {
-    if (!isAuthenticated&&!isCheckingAuth) {
-      openPopUp("login")
-      
-    }
-  }, [isAuthenticated, openPopUp,isCheckingAuth])
+const ProtectedRoute = ({ children }) => {
+  return (
+    <RoleProtectedRoute allowedRoles={USER_ROLES}>
+      {children}
+    </RoleProtectedRoute>
+  );
+};
 
-  if(!isAuthenticated){
-    return <Navigate to={"/"} replace />
-  }
-
-  return children;
-}
-
-export default ProtectedRoute
+export default ProtectedRoute;
