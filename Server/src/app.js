@@ -8,11 +8,14 @@ const cartRouter=require("./routes/cartRoutes")
 const orderRouter=require("./routes/orderRoutes")
 const deliveryRouter=require("./routes/deliveryRoutes")
 const userRouter=require("./routes/userRoutes")
+const chatRouter=require("./routes/chatRoutes")
 const app=express();
 const cors = require('cors');
 const cookiesParser=require("cookie-parser")
 const { stripeWebhook } = require("./controller/paymentController");
-
+const passport = require("passport");
+const chatAgentController=require("./controller/chatAgentController")
+require("./middleware/loginWithGoogle");
 
 connectDB()
 
@@ -28,6 +31,7 @@ app.use(cors({
     origin: ["http://localhost:5173"],
     credentials: true
 }))
+app.use(passport.initialize());
 
 //Routes
 app.get("/",(req,res)=>{
@@ -41,8 +45,7 @@ app.get("/checkout", (req, res) => {
     res.render("checkout");
 });
 
-
-
+app.use("/chatBot",chatRouter)
 app.use("/products",productRouter)
 app.use("/admin",adminRouter)
 app.use("/auth",authRouter)

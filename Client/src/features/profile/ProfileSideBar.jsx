@@ -1,12 +1,13 @@
 import { Info, MapPin, ShieldCogCorner, User, UserRound} from "lucide-react";
 
-const ProfileSideBar = ({firstName,lastName,email}) => {
+const ProfileSideBar = ({firstName,lastName,email,avatar}) => {
   return (
     <aside className="w-full md:w-80 space-y-6">
       <div className="bg-white p-8 rounded-xl custom-shadow flex flex-col items-center text-center">
         <div className="relative group mb-6">
           <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-surface-container shadow-inner flex items-center justify-center">
-            <UserRound className="w-20 h-fit" />
+           {avatar? <img src={avatar} alt={`${firstName} profile picture`} className="w-full h-full" referrerPolicy="no-referrer"/> :
+           <UserRound className="w-20 h-fit" />}
           </div>
         </div>
         <h1 className="font-headline-sm text-headline-sm text-on-surface">

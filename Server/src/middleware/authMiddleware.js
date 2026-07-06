@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken")
 const dotenv=require("dotenv").config()
+const User = require("../model/userSchema")
 
 
 const verfiyToken=(req,res,next)=>{
@@ -32,7 +33,33 @@ const restrictedTo=(role)=>{
     }
 }
 
-module.exports={verfiyToken,restrictedTo}
+const isVerified = async (req, res, next) => {
+  try {
+    if (req.user.role === "admin" || req.user.role === "delivery") {
+      return next();
+    }
+
+    const user = await User.findById(req.user.id).select("isVerified");
+    const isUserVerified = user?.isVerified;
+
+    if (!isUserVerified) {
+      return res.status(403).json({
+        message: "Please verify your email first."
+      });
+    }
+
+    next();
+  } catch (e) {
+    res.status(500).json({
+      name: e.name,
+      message: e.message
+    });
+  }
+};
+
+
+
+module.exports={verfiyToken,restrictedTo,isVerified}
 
 
 

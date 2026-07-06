@@ -3,6 +3,16 @@ import api from "../utils/axios";
 import LogoutApi from "../features/auth/apis/LogoutApi";
 import useCart from "./cartStore";
 
+const normalizeUser = (user) => {
+  if (!user) return user;
+
+  return {
+    ...user,
+    isVerified:
+      user.role === "admin" || user.role === "delivery" || Boolean(user.isVerified),
+  };
+};
+
 const useAuth = create((set) => ({
   user: null,
   isAuthenticated: false,
@@ -11,13 +21,13 @@ const useAuth = create((set) => ({
   popUpType: "login",
   openPopUp: (type) => set({ isPopUp: true, popUpType: type }),
   closePopUp: () => set({ isPopUp: false }),
-  login: () => set({ isAuthenticated: true }),
+  login: (user) => set({ user: normalizeUser(user), isAuthenticated: true }),
   updateUser: (updatedUser) =>
     set((state) => ({
-      user: {
+      user: normalizeUser({
         ...state.user,
         ...updatedUser,
-      },
+      }),
     })),
   logout: async () => {
     set({ user: null, isAuthenticated: false });
@@ -33,7 +43,7 @@ const useAuth = create((set) => ({
   checkAuth: async () => {
     try {
       const res = await api.get("/user");
-      set({ user: res.data, isAuthenticated: true, isCheckingAuth: false });
+      set({ user: normalizeUser(res.data), isAuthenticated: true, isCheckingAuth: false });
     } catch (e) {
       console.log(e);
       set({ user: null, isAuthenticated: false, isCheckingAuth: false });

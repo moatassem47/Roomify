@@ -25,7 +25,6 @@ const MobileMenu = () => {
   const links = [
     { name: "Home", path: "/" },
     { name: "Shop All", path: "/shop" },
-    { name: "Categories", path: "/categories" },
     { name: "Our Story", path: "/story" }
   ]
 

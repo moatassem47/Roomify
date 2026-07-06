@@ -2,9 +2,10 @@ const jwt = require("jsonwebtoken");
 const dotenv=require("dotenv").config(); 
 
 const generateTokens = (user) => {
+    const isVerified = user.role === "admin" || user.role === "delivery" || user.isVerified;
 
     const accessToken = jwt.sign(
-        { id: user._id, role: user.role }, 
+        { id: user._id, role: user.role, isVerified }, 
         process.env.JWT_SECRET,
         { expiresIn: process.env.JWT_EXPIRES_IN }
     );

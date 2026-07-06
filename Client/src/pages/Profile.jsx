@@ -55,6 +55,7 @@ const Profile = () => {
           firstName={user.firstName}
           lastName={user.lastName}
           email={user.email}
+          avatar={user.avatar}
         />
         <div className="flex-1 space-y-gutter">
           <PersonalInformation
@@ -63,8 +64,8 @@ const Profile = () => {
             phone={user.phone}
           />
           <ShippingAddress
-            streetAddress={user.address.streetAddress}
-            city={user.address.city}
+            streetAddress={user.address?.streetAddress}
+            city={user.address?.city}
           />
           <Security />
           <section

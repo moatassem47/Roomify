@@ -25,7 +25,7 @@ const changeUserData = async (req, res) => {
     const { firstName, lastName, phone, password, newPassword, address } =
       req.body;
 
-    const user = await User.findById(id);
+    const user = await User.findById(id).select("+password");
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -132,7 +132,7 @@ const deleteAccount = async (req, res) => {
     const { id } = req.user;
     const { password } = req.body;
 
-    const user = await User.findById(id);
+    const user = await User.findById(id).select("+password");
 
     if (!user) {
       return res.status(404).json({

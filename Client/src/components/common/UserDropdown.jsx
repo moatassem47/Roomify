@@ -17,7 +17,7 @@ const UserDropdown = ({ children, isOpen, setIsOpen, className }) => {
   };
 
   return (
-    <div className="relative mt-auto">
+    <div className="relative">
       {children}
 
       <AnimatePresence>

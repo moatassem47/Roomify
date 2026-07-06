@@ -22,7 +22,7 @@ const NavBar = () => {
         <figure className="lg:w-80 w-44">
           <img src={myIcon} alt="logo" />
         </figure>
-        <ul className="md:flex gap-5 text-[#84746c] flex-2 justify-center [&>li:hover]:text-brand-cedar [&>li:hover]:cursor-pointer [&>li:active]:opacity-80 font-semibold hidden  ">
+        <ul className="md:flex gap-5 text-outline flex-2 justify-center [&>li:hover]:text-brand-cedar [&>li:hover]:cursor-pointer [&>li:active]:opacity-80 font-semibold hidden  ">
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
@@ -76,7 +76,7 @@ const NavBar = () => {
                 Sign In
               </Button>
               <Button
-                onClick={() => openPopUp("signUp")}
+                onClick={() => navigate("/signup")}
                 className="md:text-base text-xs  md:size-auto size-7 flex justify-center items-center "
               >
                 Join
