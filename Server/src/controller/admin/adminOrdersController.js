@@ -93,8 +93,13 @@ const assignOrder = async (req, res) => {
       return res.status(404).json({ message: "Order not found" });
     }
 
+    if (order.status !== "Packed" && order.status !== "Out for Delivery") {
+      return res.status(400).json({
+        message: "Only packed or active delivery orders can be assigned",
+      });
+    }
+
     order.deliveryPersonId = deliveryPersonId;
-    order.status = "Out for Delivery"; // Automatically update status when assigned
 
     await order.save();
 

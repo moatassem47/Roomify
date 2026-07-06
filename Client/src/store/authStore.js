@@ -11,7 +11,7 @@ const useAuth = create((set) => ({
   popUpType: "login",
   openPopUp: (type) => set({ isPopUp: true, popUpType: type }),
   closePopUp: () => set({ isPopUp: false }),
-  login: () => set({ isAuthenticated: true }),
+  login: (user) => set({ user: user || null, isAuthenticated: true }),
   updateUser: (updatedUser) =>
     set((state) => ({
       user: {
@@ -20,14 +20,13 @@ const useAuth = create((set) => ({
       },
     })),
   logout: async () => {
-    set({ user: null, isAuthenticated: false });
-
-    useCart.getState().setTotalQuantity(0);
-
     try {
       await LogoutApi();
     } catch (error) {
       console.error("Logout error:", error);
+    } finally {
+      set({ user: null, isAuthenticated: false });
+      useCart.getState().setTotalQuantity(0);
     }
   },
   checkAuth: async () => {

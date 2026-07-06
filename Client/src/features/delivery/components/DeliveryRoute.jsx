@@ -1,18 +1,7 @@
-import useAuth from "../../../store/authStore"
-import { Navigate } from "react-router-dom"
+import DeliveryProtectedRoute from "./DeliveryProtectedRoute";
 
-const DeliveryRoute = ({children}) => {
- const {isAuthenticated,user}=useAuth()
+const DeliveryRoute = ({ children }) => {
+  return <DeliveryProtectedRoute>{children}</DeliveryProtectedRoute>;
+};
 
- if(!isAuthenticated){
-    return <Navigate to="/" replace />
-  }
-
-   if (user?.role !== "delivery") {
-    return <Navigate to="/" replace />;
-  }
-
-  return children
-}
-
-export default DeliveryRoute
+export default DeliveryRoute;
