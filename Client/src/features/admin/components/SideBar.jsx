@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
 import logo from"../../../assets/icons/roomify-logo.svg"
-import { LayoutDashboard, ShoppingCart, PackageSearch, Motorbike, User, Menu, X } from "lucide-react"
+import { LayoutDashboard, ShoppingCart, PackageSearch, Motorbike, User, Menu, X, Users } from "lucide-react"
 import navLinkClass from "./navLinkClass"
 import useAuth from "../../../store/authStore"
 import UserDropdown from "../../../components/common/UserDropdown"
@@ -36,7 +36,7 @@ const SideBar = () => {
           bg-white h-screen w-60 border-r border-r-brand-surface-container flex flex-col gap-5 pl-3
           fixed top-0 left-0 z-50 transition-transform duration-300
           ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}
-          lg:translate-x-0 lg:static lg:z-auto
+          lg:translate-x-0 lg:relative lg:z-50
         `}
       >
         <button
@@ -79,6 +79,17 @@ const SideBar = () => {
                   <>
                     <PackageSearch className={isActive ? "text-primary" : "text-on-surface-variant"} />
                     <span className={isActive ? "text-primary" : ""}>Orders</span>
+                  </>
+                )}
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="customers" className={navLinkClass} onClick={() => setIsMobileOpen(false)}>
+                {({ isActive }) => (
+                  <>
+                    <Users className={isActive ? "text-primary" : "text-on-surface-variant"} />
+                    <span className={isActive ? "text-primary" : ""}>Customers</span>
                   </>
                 )}
               </NavLink>

@@ -9,6 +9,15 @@ export const getDashboard=async()=>{
     }
 }
 
+export const getCustomers = async () => {
+    try {
+        const res = await api.get("/admin/customers");
+        return res.data;
+    } catch (e) {
+        throw e.response?.data || e.message;
+    }
+}
+
 export const getOrders = async (params) => {
     try {
         const res = await api.get("/admin/orders", { params });
