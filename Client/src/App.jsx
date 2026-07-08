@@ -7,7 +7,7 @@ import RoleProtectedRoute from "./components/common/RoleProtectedRoute";
 import { USER_ROLES, getRoleHome } from "./utils/roleRoutes";
 import useAuth from "./store/authStore";
 import MainLayout from "./layout/MainLayout";
-import DeliveryLayout from "./layout/DeliveryLayout";
+const DeliveryLayout =lazy(()=>import("./layout/DeliveryLayout"));
 import Home from "./pages/Home";
 import Page404 from "./pages/Page404";
 const Shop =lazy(()=>import( "./pages/Shop"));
@@ -20,8 +20,8 @@ const OurStory =lazy(()=>import( "./pages/OurStory"));
 const AdminProducts =lazy(()=>import( "./features/admin/pages/AdminProducts"));
 import AnimatedAdminPages from "./features/admin/components/AnimatedAdminPages"
 import AdminRoute from "./features/admin/components/AdminRoute"
-import AdminLayout from "./layout/AdminLayout"
-const Dashboard =lazy(()=>import("./features/admin/pages/Dashboard"))
+const AdminLayout =lazy(()=>import("./layout/AdminLayout"));
+const Dashboard =lazy(()=>import("./features/admin/pages/Dashboard"));
 const Orders =lazy(()=>import("./features/admin/pages/Orders"))
 const Delivery = lazy(()=>import("./features/admin/pages/Delivery"));
 const MyOrders =lazy(()=>import("./pages/MyOrders"));
