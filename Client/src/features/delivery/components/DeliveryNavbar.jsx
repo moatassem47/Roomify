@@ -11,7 +11,7 @@ const pageTitles = [
 ];
 
 const DeliveryNavbar = () => {
-  const { user } = useAuth();
+  const user = useAuth((s)=>s.user);
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 

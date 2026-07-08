@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Edit2, ToggleLeft, ToggleRight, History } from 'lucide-react';
 
 const DeliveryPersonnelTable = ({
@@ -27,7 +27,10 @@ const DeliveryPersonnelTable = ({
               </td>
             </tr>
           ) : (
-            personnel.map((person) => (
+            personnel.map((person) => {
+              const isActive = person.isActive !== false;
+
+              return (
               <tr key={person._id} className="hover:bg-brand-cedar/5 border-b border-brand-cedar/10 transition-colors text-brand-cedar">
                 <td className="p-4">
                   <div className="font-medium">{person.firstName} {person.lastName}</div>
@@ -43,12 +46,12 @@ const DeliveryPersonnelTable = ({
                 <td className="p-4">
                   <span
                     className={`inline-block px-2 py-1 text-xs font-semibold rounded-full ${
-                      person.isActive
+                      isActive
                         ? 'bg-green-100 text-green-800'
                         : 'bg-red-100 text-red-800'
                     }`}
                   >
-                    {person.isActive ? 'Active' : 'Inactive'}
+                    {isActive ? 'Active' : 'Inactive'}
                   </span>
                 </td>
                 <td className="p-4">
@@ -61,15 +64,15 @@ const DeliveryPersonnelTable = ({
                       <Edit2 size={18} />
                     </button>
                     <button
-                      onClick={() => onToggleStatus(person._id, !person.isActive)}
+                      onClick={() => onToggleStatus(person._id, !isActive)}
                       className={`p-1.5 rounded transition-colors cursor-pointer ${
-                        person.isActive
+                        isActive
                           ? 'text-red-600 hover:bg-red-100'
                           : 'text-green-600 hover:bg-green-100'
                       }`}
-                      title={person.isActive ? 'Deactivate' : 'Activate'}
+                      title={isActive ? 'Deactivate' : 'Activate'}
                     >
-                      {person.isActive ? <ToggleRight size={18} /> : <ToggleLeft size={18} />}
+                      {isActive ? <ToggleRight size={18} /> : <ToggleLeft size={18} />}
                     </button>
                     <button
                       onClick={() => onViewHistory(person)}
@@ -81,7 +84,7 @@ const DeliveryPersonnelTable = ({
                   </div>
                 </td>
               </tr>
-            ))
+            )})
           )}
         </tbody>
       </table>

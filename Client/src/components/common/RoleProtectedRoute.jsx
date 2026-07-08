@@ -7,9 +7,11 @@ const RoleProtectedRoute = ({
   allowedRoles = [],
   requireAuth = true,
 }) => {
-  const { isAuthenticated, isCheckingAuth, user } = useAuth();
+  const isAuthenticated = useAuth((s)=>s.isAuthenticated);
+  const isCheckingAuth = useAuth((s)=>s.isCheckingAuth);
+  const  user  = useAuth((s)=>s.user);
   const location = useLocation();
-
+  
   if (isCheckingAuth) {
     return null;
   }
@@ -18,7 +20,7 @@ const RoleProtectedRoute = ({
     if (!requireAuth) {
       return children;
     }
-
+  
     return (
       <Navigate
         to="/login"

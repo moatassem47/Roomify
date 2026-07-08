@@ -1,49 +1,51 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useSearchParams } from "react-router-dom";
 import { ChevronDown, Filter, FunnelX, Search, SlidersHorizontal,  X } from "lucide-react";
+import useDebounce from "../../../hooks/useDebounce";
+import useFilters from "../../../hooks/useFilters";
 
 const categories = ["Living Room", "Bedroom", "Office", "Hallway", "Kitchen"];
 
 const Filters = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [localSearch, setLocalSearch] = useState(searchParams.get("search") || "");
-  const [availableOnly, setAvailableOnly] = useState(searchParams.get("available") === "true");
+  const { currentFilters, setFilters, clearFilters } = useFilters([
+    "search",
+    "sort",
+    "category",
+    "minPrice",
+    "maxPrice",
+    "available",
+    "rating",
+    "page",
+  ]);
+  const [localSearch, setLocalSearch] = useState(currentFilters.search || "");
+  const debouncedSearch = useDebounce(localSearch);
+  const [availableOnly, setAvailableOnly] = useState(currentFilters.available === "true");
   
 
-  const maxPrice = searchParams.get("maxPrice") || "5000";
+  const maxPrice = currentFilters.maxPrice || "5000";
   const hasFilters = useMemo(
-    () => ["search", "sort", "category", "minPrice", "maxPrice", "available", "rating"].some((key) => searchParams.get(key)),
-    [searchParams]
+    () => ["search", "sort", "category", "minPrice", "maxPrice", "available", "rating"].some((key) => currentFilters[key]),
+    [currentFilters]
   );
 
   const updateFilter = useCallback((key, value) => {
-    const params = new URLSearchParams(searchParams);
-
-    if (value) params.set(key, value);
-    else params.delete(key);
-
-    params.set("page", "1");
-    setSearchParams(params);
-  }, [searchParams, setSearchParams]);
+    setFilters({ [key]: value, page: "1" });
+  }, [setFilters]);
 
   const resetFilters = () => {
     setLocalSearch("");
    
     setAvailableOnly(false);
    
-    setSearchParams({});
+    clearFilters();
   };
 
   useEffect(() => {
-    if (localSearch === (searchParams.get("search") || "")) return;
+    if (debouncedSearch === (currentFilters.search || "")) return;
 
-    const timer = setTimeout(() => {
-      updateFilter("search", localSearch);
-    }, 450);
-    return () => clearTimeout(timer);
-  }, [localSearch, searchParams, updateFilter]);
+    updateFilter("search", debouncedSearch);
+  }, [debouncedSearch, currentFilters.search, updateFilter]);
 
   const filterFields = (
     <>
@@ -63,7 +65,7 @@ const Filters = () => {
         <span className="sr-only">Category</span>
         <select
           className="h-12 w-full appearance-none rounded-2xl border border-white/70 bg-white/85 px-4 pr-10 text-sm font-medium text-brand-charcoal outline-none transition focus:border-brand-cedar focus:ring-2 focus:ring-brand-cedar/20"
-          value={searchParams.get("category") || ""}
+          value={currentFilters.category || ""}
           onChange={(e) => updateFilter("category", e.target.value)}
         >
           <option value="">All Categories</option>

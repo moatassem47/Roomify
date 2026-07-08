@@ -10,7 +10,7 @@ const RegisterStep1 = ({ nextStep }) => {
     <div className="flex flex-col gap-2 animate-fade-in">
       
       
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col gap-4 sm:flex-row">
         <Input 
           register={register} 
           error={errors.firstName} 

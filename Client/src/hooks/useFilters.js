@@ -13,19 +13,20 @@ const useFilters=(filterKeys=[])=>{
 
      const setFilters=useCallback((filters)=>{
          setSearchParams((params)=>{
+            const nextParams = new URLSearchParams(params)
             Object.entries(filters).forEach(([key,value])=>{
                 if(value===null||value===""||value===undefined||
                     Array.isArray(value)&& value.length===0
                 ){
-                    params.delete(key)
+                    nextParams.delete(key)
                 }else if (Array.isArray(value)){
-                    params.set(key,value.join(","))
+                    nextParams.set(key,value.join(","))
                 }
                 else{
-                    params.set(key,value)
+                    nextParams.set(key,value)
                 }
             })
-            return params
+            return nextParams
          })
      },[setSearchParams])
      

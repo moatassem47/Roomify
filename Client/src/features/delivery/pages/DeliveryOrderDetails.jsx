@@ -23,8 +23,8 @@ const DeliveryOrderDetails = () => {
   const navigate = useNavigate();
   const { data: order, isLoading, error } = useDeliveryOrder(id);
   const { mutate: startDelivery, isPending: isStarting } = useStartDelivery();
-  const { mutate: markDelivered, isPending: isDelivering } =
-    useMarkDeliveryDelivered();
+  const { mutate: markDelivered, isPending: isDelivering } =useMarkDeliveryDelivered();
+   
 
   if (isLoading) return <Loading text="Loading order details..." />;
   if (error) return <Error error={error} />;
@@ -35,7 +35,7 @@ const DeliveryOrderDetails = () => {
       </div>
     );
   }
-
+  
   const isUpdating = isStarting || isDelivering;
 
   const handleStartDelivery = () => {
@@ -45,7 +45,7 @@ const DeliveryOrderDetails = () => {
         toast.error(err?.message || "Failed to update delivery status"),
     });
   };
-
+  
   const handleDelivered = () => {
     markDelivered(order._id, {
       onSuccess: () => toast.success("Delivery marked as delivered"),
@@ -121,7 +121,7 @@ const DeliveryOrderDetails = () => {
           <section className="rounded-lg border border-surface-variant bg-white p-6 shadow-sm">
             <h3 className="mb-4 text-xl font-semibold">Ordered Items</h3>
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[520px] text-left text-sm">
+              <table className="w-full min-w-130 text-left text-sm">
                 <thead className="border-b border-surface-variant text-xs uppercase text-outline">
                   <tr>
                     <th className="py-3">Item</th>

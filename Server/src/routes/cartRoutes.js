@@ -1,18 +1,18 @@
 const express=require("express")
 const router=express.Router()
 const {addToCart,getCart,deleteItem,clearCart,updateQuantity}=require("../controller/cartController")
-const {verfiyToken}=require("../middleware/authMiddleware")
+const {verfiyToken,isVerified}=require("../middleware/authMiddleware")
 
 
-router.post("/add",verfiyToken,addToCart)
+router.post("/add",verfiyToken,isVerified,addToCart)
 
-router.get("/",verfiyToken,getCart)
+router.get("/",verfiyToken,isVerified,getCart)
 
-router.delete("/delete/clear",verfiyToken,clearCart)
+router.delete("/delete/clear",verfiyToken,isVerified,clearCart)
 
-router.delete("/delete/:productId",verfiyToken,deleteItem)
+router.delete("/delete/:productId",verfiyToken,isVerified,deleteItem)
 
-router.patch("/update",verfiyToken,updateQuantity)
+router.patch("/update",verfiyToken,isVerified,updateQuantity)
 
 
 

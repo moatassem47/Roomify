@@ -10,11 +10,11 @@ const orderSchema=z.object({
     }),
         street:z.string().min(8,"Please enter your full address"),
         phone: z.string()
-        .trim()
-        .regex(
-            /^(?:\+20)?\d{11}$/, 
-            "Phone number must be 11 digits"
-        ),
+      .trim()
+      .regex(
+        /^(01\d{9}|\+20\s?0?1\d{9})$/,
+        "Phone number must be in the format 01234567890 or +20 1234567890",
+      ),
         postalCode: z.coerce.number().int().positive("Please enter a valid postal code")
     }),
     paymentMethod: z.enum(["Cash", "Card"], {

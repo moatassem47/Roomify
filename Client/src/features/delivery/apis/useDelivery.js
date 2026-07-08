@@ -27,14 +27,18 @@ export const useDeliveryOrder = (id) => {
   });
 };
 
+
+
 export const useStartDelivery = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: startDelivery,
-    onSuccess: (data, id) => {
+    onSuccess: (data, orderId) => {
       queryClient.invalidateQueries({ queryKey: deliveryKeys.orders() });
-      queryClient.invalidateQueries({ queryKey: deliveryKeys.order(id) });
+      if (orderId) {
+        queryClient.invalidateQueries({ queryKey: deliveryKeys.order(orderId) });
+      }
     },
   });
 };
@@ -43,10 +47,12 @@ export const useMarkDeliveryDelivered = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: markDeliveryDelivered,
-    onSuccess: (data, id) => {
+    mutationFn: (id) => markDeliveryDelivered(id),
+    onSuccess: (data, orderId) => {
       queryClient.invalidateQueries({ queryKey: deliveryKeys.orders() });
-      queryClient.invalidateQueries({ queryKey: deliveryKeys.order(id) });
+      if (orderId) {
+        queryClient.invalidateQueries({ queryKey: deliveryKeys.order(orderId) });
+      }
     },
   });
 };

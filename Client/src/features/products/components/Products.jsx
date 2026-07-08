@@ -1,17 +1,28 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useSearchParams } from "react-router-dom";
 import { Grid2X2, List, RotateCcw } from "lucide-react";
 import ProductCardSkeleton from "./ProductCardSkeleton";
 import Pagination from "../../../components/ui/Pagination";
 import noProducts from "../../../assets/images/emptyCart.svg";
 import ProductCard from "./ProductCard";
 import useFetchQuery from "../../../hooks/useFetchQuery";
+import useFilters from "../../../hooks/useFilters";
 
 const Products = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { currentFilters, setFilters, clearFilters } = useFilters([
+    "search",
+    "sort",
+    "category",
+    "minPrice",
+    "maxPrice",
+    "available",
+    "rating",
+    "page",
+  ]);
   const [viewMode, setViewMode] = useState("grid");
-  const filters = Object.fromEntries(searchParams.entries());
+  const filters = Object.fromEntries(
+    Object.entries(currentFilters).filter(([, value]) => value),
+  );
   const params = new URLSearchParams(filters);
   const { data, isLoading, isFetching, error } = useFetchQuery(`/products?${params.toString()}`,["products",filters]);
   const {data:wishlist}=useFetchQuery("/user/wishlist",["wishlist"])
@@ -27,7 +38,7 @@ const Products = () => {
 
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center gap-4 rounded-[20px] bg-white px-6 py-20 text-center shadow-ambient">
+      <div className="flex flex-col items-center justify-center gap-4 rounded-[20px]  px-6 py-20 text-center shadow-ambient">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-error-container">
           <RotateCcw className="h-7 w-7 text-brand-error" />
         </div>
@@ -47,15 +58,15 @@ const Products = () => {
 
   if (!data || data.docs?.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-[20px] bg-white px-6 py-16 text-center shadow-ambient">
+      <div className="flex flex-col items-center justify-center rounded-[20px]  px-6 py-16 text-center shadow-ambient">
         <img src={noProducts} alt="" className="mb-6 h-52 w-52" />
         <h2 className="font-serif text-4xl font-semibold text-brand-charcoal">No products found</h2>
-        <p className="mt-3 max-w-md text-sm leading-6 text-brand-text/70">
+        <p className="mt-3 max-w-5xl text-sm leading-6 text-brand-text/70">
           Try a different search, category, or price range to reveal more pieces.
         </p>
         <button
           type="button"
-          onClick={() => setSearchParams({})}
+          onClick={() => clearFilters()}
           className="mt-7 rounded-full bg-brand-charcoal px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-cedar focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-cedar focus-visible:ring-offset-4"
         >
           Reset Filters
@@ -68,11 +79,7 @@ const Products = () => {
   const products = data.docs;
 
   const updateSort = (sort) => {
-    const params = new URLSearchParams(searchParams);
-    if (sort) params.set("sort", sort);
-    else params.delete("sort");
-    params.set("page", "1");
-    setSearchParams(params);
+    setFilters({ sort, page: "1" });
   };
 
   return (
@@ -105,7 +112,7 @@ const Products = () => {
             </button>
           </div>
           <select
-            value={searchParams.get("sort") || ""}
+            value={currentFilters.sort || ""}
             onChange={(e) => updateSort(e.target.value)}
             className="h-11 rounded-full border border-brand-surface-container bg-white px-4 text-sm font-semibold text-brand-charcoal outline-none transition focus:border-brand-cedar focus:ring-2 focus:ring-brand-cedar/20"
             aria-label="Sort products"

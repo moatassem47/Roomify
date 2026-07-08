@@ -2,5 +2,9 @@ const register=require("./register")
 const login=require("./login")
 const refreshToken=require("./refreshToken")
 const logout=require("./logout")
-
-module.exports={register,login,refreshToken,logout}
+const googleLogin=require("./googleLogin")
+const verifyEmail=require("./verifyEmail")
+const resendVerificationEmail=require("./resendVerificationEmail")
+const changeVerificationEmail=require("./changeVerificationEmail")
+const {resetPassword,enterNewPassword}=require("./forgetPassword")
+module.exports={register,login,refreshToken,logout,googleLogin,verifyEmail,resendVerificationEmail,changeVerificationEmail,resetPassword,enterNewPassword}

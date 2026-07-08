@@ -47,24 +47,24 @@ const createOrder=async(req,res)=>{
             }
         }
 
-        const order= await Order.create([{
+        const order= await Order.create({
             userId,
             totalAmount,
             shippingAddress,
             items:orderItems,
             paymentMethod,
-            statusHistory:{
-                status:"Placed",
-                date: new Date()
-            }
-        }],{session})
+            statusHistory:[{
+           status: "Placed",
+            date: new Date(),
+            }] 
+        },{session})
 
         cart.items=[]
         await cart.save({session})
 
         await session.commitTransaction()
 
-        res.status(201).json({message:"order created",order:order[0]})
+        res.status(201).json({message:"order created",order:order})
     }catch(e){
          await session.abortTransaction()
          console.error(e);

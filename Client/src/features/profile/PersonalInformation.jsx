@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../store/authStore";
 import api from "../../utils/axios";
 import z from "zod";
-import UpdateMessage from "./UpdateMessage";
+import UpdateMessage from "../../components/common/UpdateMessage";
 import { useState } from "react";
 
 const profileSchema = z.object({
@@ -13,9 +13,9 @@ const profileSchema = z.object({
   phone: z.string().min(11,"Phone must be 11 characters"),
 });
 
-const PersonalInformation = ({ firstName, lastName, phone }) => {
+const PersonalInformation = ({ firstName, lastName, phone ,isVerified}) => {
   const [message, setMessage] = useState(null);
-  const { updateUser } = useAuth();
+  const updateUser = useAuth((s)=>s.updateUser);
   const {
     register,
     handleSubmit,
@@ -30,18 +30,20 @@ const PersonalInformation = ({ firstName, lastName, phone }) => {
   });
 
   const onSubmit = async (data) => {
-    try {
-      const res = await api.patch(`user/edit`, data);
-      updateUser(res.data.user);
-      setMessage({
-        status: "good",
-        text: "Changes saved successfully. Your profile has been updated.",
-      });
-    } catch (e) {
-      setMessage({
-        status: "bad",
-        text: `Something went wrong:${e.message}`,
-      });
+    if(isVerified()){
+      try {
+        const res = await api.patch(`user/edit`, data);
+        updateUser(res.data.user);
+        setMessage({
+          status: "good",
+          text: "Changes saved successfully. Your profile has been updated.",
+        });
+      } catch (e) {
+        setMessage({
+          status: "bad",
+          text: `Something went wrong:${e.message}`,
+        });
+      }
     }
   };
 

@@ -5,24 +5,30 @@ import UserDropdown from "./UserDropdown";
 import Button from "./Button";
 import MobileMenu from "./MobileMenu";
 import { NavLink, useNavigate } from "react-router-dom";
-import useCart from "../../store/cartStore";
 import { useGetCart } from "../../features/cart/apis/useCart";
 import { useState } from "react";
+import useRequireVerified from '../../hooks/useRequireVerified';
 
 const NavBar = () => {
-  const { openPopUp, isAuthenticated } = useAuth();
+  const  isAuthenticated = useAuth((s)=>s.isAuthenticated);
+  const user = useAuth((s)=>s.user);
   const [isOpen, setIsOpen] = useState(false);
+  const isVerified = useRequireVerified();
+  const { data } = useGetCart({ enabled: Boolean(isAuthenticated && user?.isVerified) });
+  const totalQuantity = data?.totalQuantity || 0;
   const navigate = useNavigate();
-  const { totalQuantity } = useCart();
 
-  useGetCart({ enabled: isAuthenticated });
+  const handleCartClick = () => {
+  if (!isVerified()) return;
+  navigate("/cart");
+};
   return (
     <>
       <nav className="bg-white fixed right-0 left-0 top-0 z-50 flex items-center justify-between shadow-ambient h-20">
         <figure className="lg:w-80 w-44">
           <img src={myIcon} alt="logo" />
         </figure>
-        <ul className="md:flex gap-5 text-[#84746c] flex-2 justify-center [&>li:hover]:text-brand-cedar [&>li:hover]:cursor-pointer [&>li:active]:opacity-80 font-semibold hidden  ">
+        <ul className="md:flex gap-5 text-outline flex-2 justify-center [&>li:hover]:text-brand-cedar [&>li:hover]:cursor-pointer [&>li:active]:opacity-80 font-semibold hidden  ">
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
@@ -39,7 +45,7 @@ const NavBar = () => {
             <>
               <div
                 className="relative inline-block cursor-pointer hover:-translate-y-1  transition-all duration-300 active:opacity-80"
-                onClick={() => navigate("/cart")}
+                onClick={() =>handleCartClick()}
               >
                 <ShoppingBag color="#825031" />
                 <span
@@ -71,12 +77,12 @@ const NavBar = () => {
             <>
               <Button
                 className="text-brand-cedar! bg-white! px-0! py-0! shadow-none! md:text-base text-xs"
-                onClick={() => openPopUp("login")}
+                onClick={() => navigate("/login")}
               >
                 Sign In
               </Button>
               <Button
-                onClick={() => openPopUp("signUp")}
+                onClick={() => navigate("/signup")}
                 className="md:text-base text-xs  md:size-auto size-7 flex justify-center items-center "
               >
                 Join

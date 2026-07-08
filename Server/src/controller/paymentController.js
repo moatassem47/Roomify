@@ -62,6 +62,10 @@ const createPaymentSession = async (req, res) => {
       items: orderItems,
       paymentMethod,
       status: "Placed",
+      statusHistory: [{
+        status: "Placed",
+        date: new Date()
+        }],
       paymentStatus: "Pending"
     }], { session });
 

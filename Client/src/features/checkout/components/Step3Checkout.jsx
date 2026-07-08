@@ -4,7 +4,7 @@ import Button from "../../../components/common/Button"
 
 
 const Step3Checkout = ({setStep}) => {
-    const {user}=useAuth()
+    const user=useAuth((s)=>s.user)
     const {getValues}=useFormContext()
 
     

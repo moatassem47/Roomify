@@ -5,7 +5,8 @@ import Loading from "../../../components/common/Loading";
 import useAuth from "../../../store/authStore";
 
 const DeliveryProfile = () => {
-  const { user, logout } = useAuth();
+  const user = useAuth((s)=>s.user);
+  const  logout  = useAuth((s)=>s.logout);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 

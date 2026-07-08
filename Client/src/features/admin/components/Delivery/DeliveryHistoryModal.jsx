@@ -1,26 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { X } from 'lucide-react';
 import api from '../../../../utils/axios';
 
 const DeliveryHistoryModal = ({ isOpen, onClose, personnel }) => {
-  const [history, setHistory] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (isOpen && personnel) {
-      setLoading(true);
-      api.get(`/admin/delivery/${personnel._id}/history`)
-        .then(res => {
-          setHistory(res.data.data || []);
-        })
-        .catch(err => {
-          console.error("Failed to fetch history", err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
-  }, [isOpen, personnel]);
+  const { data: history = [], isLoading: loading } = useQuery({
+    queryKey: ['admin', 'delivery-history', personnel?._id],
+    enabled: Boolean(isOpen && personnel?._id),
+    queryFn: async () => {
+      const res = await api.get(`/admin/delivery/${personnel._id}/history`);
+      return res.data.data || [];
+    },
+  });
 
   if (!isOpen || !personnel) return null;
 

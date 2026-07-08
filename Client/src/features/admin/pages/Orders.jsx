@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
 import { useOrders, useUpdateOrderStatus } from '../apis/useAdmin';
-import { Loader2, Search, Calendar, ChevronLeft, ChevronRight, Package, Truck, CheckCircle, XCircle } from 'lucide-react';
+import { Loader2, ChevronLeft, ChevronRight, Package, Truck, CheckCircle, XCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
+import useFilters from '../../../hooks/useFilters';
 
 const Orders = () => {
-  const [page, setPage] = useState(1);
-  const [statusFilter, setStatusFilter] = useState('');
+  const { currentFilters, setFilters } = useFilters(['status', 'page']);
+  const page = Number(currentFilters.page) || 1;
+  const statusFilter = currentFilters.status || '';
   
   const { data, isLoading, isError, error } = useOrders({ page, limit: 10, status: statusFilter });
   const { mutate: updateStatus, isPending: isUpdating } = useUpdateOrderStatus();
@@ -53,8 +54,7 @@ const Orders = () => {
             <select
               value={statusFilter}
               onChange={(e) => {
-                setStatusFilter(e.target.value);
-                setPage(1);
+                setFilters({ status: e.target.value, page: '1' });
               }}
               className="bg-white border border-[#E6E0D8] rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#8D6E63] text-gray-700"
             >
@@ -99,7 +99,9 @@ const Orders = () => {
                       #{order._id.slice(-6).toUpperCase()}
                     </td>
                     <td className="px-6 py-4">
-                      <div className="font-medium text-gray-800">{order.userId?.name || 'Unknown'}</div>
+                      <div className="font-medium text-gray-800">
+                        {[order.userId?.firstName, order.userId?.lastName].filter(Boolean).join(' ') || 'Unknown'}
+                      </div>
                       <div className="text-xs text-gray-500">{order.userId?.email || ''}</div>
                       <div className="text-xs text-gray-400 mt-1">{order.shippingAddress?.phone}</div>
                     </td>
@@ -154,14 +156,14 @@ const Orders = () => {
             </div>
             <div className="flex gap-2">
               <button
-                onClick={() => setPage(p => Math.max(1, p - 1))}
+                onClick={() => setFilters({ page: String(Math.max(1, page - 1)) })}
                 disabled={page === 1}
                 className="p-2 rounded-lg border border-[#E6E0D8] bg-white text-gray-600 hover:bg-gray-50 disabled:opacity-50 transition-all"
               >
                 <ChevronLeft size={18} />
               </button>
               <button
-                onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                onClick={() => setFilters({ page: String(Math.min(totalPages, page + 1)) })}
                 disabled={page === totalPages}
                 className="p-2 rounded-lg border border-[#E6E0D8] bg-white text-gray-600 hover:bg-gray-50 disabled:opacity-50 transition-all"
               >

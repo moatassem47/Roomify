@@ -7,7 +7,7 @@ import UserDropdown from "../../../components/common/UserDropdown"
 import { useState } from "react"
 
 const SideBar = () => {
-  const { user } = useAuth()
+  const  user  = useAuth((s)=>s.user)
   const [isOpen, setIsOpen] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
 

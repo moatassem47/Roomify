@@ -5,9 +5,9 @@ import useAuth from "../../store/authStore";
 import { useForm } from "react-hook-form";
 import api from "../../utils/axios";
 import { zodResolver } from "@hookform/resolvers/zod";
-import UpdateMessage from "./UpdateMessage";
+import UpdateMessage from "../../components/common/UpdateMessage";
 
-const Security = () => {
+const Security = ({isVerified}) => {
   const profileSchema = z.object({
     password:z.string().trim().min(1, "Current password is required"),
     newPassword: z.string()
@@ -28,7 +28,7 @@ const Security = () => {
   const [showCurrent, setShowCurrent] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [message, setMessage] = useState(null);
-  const { updateUser } = useAuth();
+  const updateUser  = useAuth((s)=>s.updateUser);
   const {
     register,
     handleSubmit,
@@ -37,22 +37,24 @@ const Security = () => {
   } = useForm({resolver: zodResolver(profileSchema),});
 
   const onSubmit = async (data) => {
-    try {
-      const res = await api.patch(`user/edit`,{
-        password:data.password,
-        newPassword:data.newPassword
-      });
-      updateUser(res.data.user);
-      setMessage({
-        status: "good",
-        text: "Password changed successfully. Your profile has been updated.",
-      });
-      reset()
-    } catch (e) {
-      setMessage({
-        status: "bad",
-        text: e.response?.data?.message || "Something went wrong",
-      });
+    if(isVerified()){
+      try {
+        const res = await api.patch(`user/edit`,{
+          password:data.password,
+          newPassword:data.newPassword
+        });
+        updateUser(res.data.user);
+        setMessage({
+          status: "good",
+          text: "Password changed successfully. Your profile has been updated.",
+        });
+        reset()
+      } catch (e) {
+        setMessage({
+          status: "bad",
+          text: e.response?.data?.message || "Something went wrong",
+        });
+      }
     }
   };
 

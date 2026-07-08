@@ -4,10 +4,10 @@ import SideBar from "../features/admin/components/SideBar"
 
 const AdminLayout = () => {
   return (
-    <div className="flex h-screen overflow-auto relative">
+    <div className="flex min-h-screen relative">
       <SideBar />
 
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1 min-w-0">
         <Outlet />
       </main>
     </div>

@@ -7,7 +7,8 @@ import CancelPopUp from "./CancelPopUp";
 import { USER_ROLES } from "../../utils/roleRoutes";
 
 const UserDropdown = ({ children, isOpen, setIsOpen, className }) => {
-  const { user, logout } = useAuth();
+  const user = useAuth((s)=>s.user);
+  const  logout = useAuth((s)=>s.logout);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -22,7 +23,7 @@ const UserDropdown = ({ children, isOpen, setIsOpen, className }) => {
   };
 
   return (
-    <div className="relative mt-auto">
+    <div className="relative">
       {children}
 
       <AnimatePresence>

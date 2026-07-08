@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import {
   Package,
@@ -12,6 +12,8 @@ import {
 import Loading from "../../../components/common/Loading";
 import Error from "../../../components/common/Error";
 import useAuth from "../../../store/authStore";
+import useDebounce from "../../../hooks/useDebounce";
+import useFilters from "../../../hooks/useFilters";
 import { useGetProducts } from "../../products/apis/useProducts";
 import {
   useAddAdminProduct,
@@ -43,19 +45,26 @@ const currencyFormatter = new Intl.NumberFormat("en-US", {
 });
 
 const AdminProducts = () => {
-  const { user } = useAuth();
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
+  const  user = useAuth((s)=>s.user);
+  const { currentFilters, setFilters } = useFilters(["search", "page"]);
+  const page = Number(currentFilters.page) || 1;
+  const [search, setSearch] = useState(currentFilters.search || "");
+  const debouncedSearch = useDebounce(search);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [fileInputKey, setFileInputKey] = useState(0);
   const [form, setForm] = useState(initialForm);
 
   const filters = {
-    search,
+    search: currentFilters.search || "",
     page,
     limit: 8,
     sort: "newest",
   };
+
+  useEffect(() => {
+    if (debouncedSearch === (currentFilters.search || "")) return;
+    setFilters({ search: debouncedSearch, page: "1" });
+  }, [debouncedSearch, currentFilters.search, setFilters]);
 
   const { data, isLoading, error } = useGetProducts(filters);
   const addProduct = useAddAdminProduct();
@@ -104,7 +113,6 @@ const AdminProducts = () => {
 
   const handleDelete = (product) => {
     const confirmed = window.confirm(`Delete ${product.name}?`);
-
     if (confirmed) {
       deleteProduct.mutate(product._id);
     }
@@ -167,7 +175,6 @@ const AdminProducts = () => {
                   value={search}
                   onChange={(e) => {
                     setSearch(e.target.value);
-                    setPage(1);
                   }}
                   placeholder="Search products"
                   className="w-full pl-10 pr-4 py-2.5 bg-brand-cream border border-brand-surface-container rounded-base shadow-inset-soft outline-none focus:border-brand-cedar focus:ring-1 focus:ring-brand-cedar transition-all text-sm"
@@ -240,7 +247,7 @@ const AdminProducts = () => {
                             className="inline-flex items-center gap-2 px-3 py-2 rounded-base border border-brand-error-container text-sm font-semibold text-brand-error hover:bg-brand-error-container transition-colors disabled:opacity-60"
                           >
                             <Trash2 className="w-4 h-4" />
-                            Delete
+                            {deleteProduct.isPending ? "Deleting..." : "Delete"}
                           </button>
                         </div>
                       </td>
@@ -260,7 +267,7 @@ const AdminProducts = () => {
               <div className="p-5 border-t border-brand-surface-container flex items-center justify-between">
                 <button
                   type="button"
-                  onClick={() => setPage((currentPage) => currentPage - 1)}
+                  onClick={() => setFilters({ page: String(Math.max(1, page - 1)) })}
                   disabled={!data?.hasPrevPage}
                   className="px-4 py-2 rounded-base border border-brand-surface-container text-sm font-semibold text-brand-cedar disabled:opacity-40"
                 >
@@ -271,7 +278,7 @@ const AdminProducts = () => {
                 </p>
                 <button
                   type="button"
-                  onClick={() => setPage((currentPage) => currentPage + 1)}
+                  onClick={() => setFilters({ page: String(page + 1) })}
                   disabled={!data?.hasNextPage}
                   className="px-4 py-2 rounded-base border border-brand-surface-container text-sm font-semibold text-brand-cedar disabled:opacity-40"
                 >
@@ -310,6 +317,7 @@ const AdminProducts = () => {
               onSubmit={handleSubmit}
               className="flex flex-col gap-4"
             >
+              {!selectedProduct &&
               <label className="flex flex-col gap-2 text-sm font-semibold text-brand-cedar">
                 Name
                 <input
@@ -319,7 +327,7 @@ const AdminProducts = () => {
                   required
                   className="h-11 px-4 bg-brand-cream rounded-base shadow-inset-soft outline-none font-normal text-brand-charcoal focus:ring-1 focus:ring-brand-cedar"
                 />
-              </label>
+              </label>}
 
               <label className="flex flex-col gap-2 text-sm font-semibold text-brand-cedar">
                 Category

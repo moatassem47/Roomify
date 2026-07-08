@@ -10,6 +10,7 @@ const Footer = () => {
         </figure>
         <p className="w-70 text-brand-cedar-hover tracking-wider text-base/6">Crafting spaces that reflect your unique journey through quality furniture and thoughtful design.</p>
       </div>
+      <div className="flex flex-1 gap-2">
       <div className="flex flex-col gap-5 flex-1 ">
         <span >Support</span>
         <ul className="flex flex-col gap-3 [&>li:hover]:text-brand-cedar text-brand-cedar-hover tracking-wider ">
@@ -25,6 +26,7 @@ const Footer = () => {
           <li>Terms of Service</li>
           <li>Cookie Policy</li>
         </ul>
+      </div>
       </div>
       
       </div>

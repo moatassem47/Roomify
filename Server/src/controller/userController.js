@@ -1,12 +1,21 @@
 const User = require("../model/userSchema");
 const bcrypt = require("bcrypt");
 const Product = require("../model/productSchema");
+const Order = require("../model/orderSchema");
+const Cart = require("../model/cartSchema");
+const mongoose = require("mongoose");
+
+const cookieOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "strict",
+};
 
 const getUserData = async (req, res) => {
   try {
     const id = req.user.id;
 
-    const user = await User.findById(id).select("-password -__v");
+    const user = await User.findOne({ _id: id, isDeleted: { $ne: true } }).select("-password -__v");
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -25,7 +34,7 @@ const changeUserData = async (req, res) => {
     const { firstName, lastName, phone, password, newPassword, address } =
       req.body;
 
-    const user = await User.findById(id);
+    const user = await User.findOne({ _id: id, isDeleted: { $ne: true } }).select("+password");
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -86,7 +95,7 @@ const toggleWishlist = async (req, res) => {
     const { id } = req.user;
     const { ProductID } = req.params;
 
-    const user = await User.findById(id);
+    const user = await User.findOne({ _id: id, isDeleted: { $ne: true } });
     const productExists = await Product.exists({ _id: ProductID });
     if (!user) {
       return res.status(404).json({
@@ -128,41 +137,87 @@ const toggleWishlist = async (req, res) => {
 };
 
 const deleteAccount = async (req, res) => {
+
+  const session=await mongoose.startSession()
+  session.startTransaction()
+
   try {
     const { id } = req.user;
     const { password } = req.body;
 
-    const user = await User.findById(id);
+    const user = await User.findOne({ _id: id, isDeleted: { $ne: true } }).session(session).select("+password");
 
     if (!user) {
+      await session.abortTransaction();
       return res.status(404).json({
         message: "User not found.",
       });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const activeOrder = await Order.findOne({
+    userId: id,
+    status: { $nin: ["Delivered", "Cancelled"] },
+    }).session(session);
 
-    if (!isMatch) {
+    if (activeOrder) {
+      await session.abortTransaction();
       return res.status(400).json({
-        message: "Password is incorrect.",
+        message:
+          "Please cancel your active orders first or wait until they are completed.",
       });
+    }
+
+
+
+    if (user.providers.includes("local")) {
+      if (!password) {
+        await session.abortTransaction();
+        return res.status(400).json({
+          message: "Password is required.",
+        });
+      }
+
+      const isMatch = await bcrypt.compare(password, user.password);
+
+      if (!isMatch) {
+        await session.abortTransaction();
+        return res.status(400).json({
+          message: "Password is incorrect.",
+        });
+      }
     }
 
     user.isDeleted = true;
     user.email = `deleted_${user._id}@deleted.local`;
     user.refreshToken = null;
+    user.tokenVersion += 1;
+    user.googleId = null;
+    user.providers = [];
+    user.avatar = "";
+    user.address = {};
     user.wishlist = [];
 
-    await user.save();
+    await user.save({session});
 
+   await Cart.deleteOne({ userId: id }).session(session)
+
+    await session.commitTransaction()
+
+    res.clearCookie("accessToken", cookieOptions);
+    res.clearCookie("refreshToken", cookieOptions);
     return res.status(200).json({
       message: "User deleted successfully.",
     });
   } catch (e) {
+    if (session.inTransaction()) {
+      await session.abortTransaction();
+    }
     return res.status(500).json({
       name: e.name,
       message: e.message,
     });
+  }finally{
+     session.endSession()
   }
 };
 
@@ -170,7 +225,7 @@ const getWishlist = async (req, res) => {
   try {
     const { id } = req.user;
 
-    const user = await User.findById(id).populate(
+    const user = await User.findOne({ _id: id, isDeleted: { $ne: true } }).populate(
       "wishlist",
       "name price imageUrls",
     );

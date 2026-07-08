@@ -12,7 +12,8 @@ const OrderBreadCrump = ({ statusHistory }) => {
       minute: "2-digit",
     }),
   }));
- 
+  
+  console.log(statusHistory)
 
   const steps = [
   {
