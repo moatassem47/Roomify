@@ -68,15 +68,14 @@ const userSchema = new mongoose.Schema(
       select: false,
     },
     phone: {
-      type: String,
-      minLength: 11,
-      validate: {
-        validator: (v) => {
-          return /^01[0-9]{9}$/.test(v);
-        },
-        message: "Phone must contain only numbers",
+    type: String,
+    validate: {
+      validator: (v) => {
+        return /^(01\d{9}|\+20\s?0?1\d{9})$/.test(v);
       },
+      message: "Phone number must be in the format 01234567890 or +20 01234567890",
     },
+  },
     role: {
       type: String,
       enum: ["admin", "delivery", "customer"],
@@ -88,10 +87,18 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
     deletedAt: Date,
     refreshToken: {
       type: String,
       select: false,
+    },
+    tokenVersion: {
+      type: Number,
+      default: 0
     },
     wishlist: [
       {

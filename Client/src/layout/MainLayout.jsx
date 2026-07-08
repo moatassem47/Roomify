@@ -1,7 +1,7 @@
 
 import Footer from '../components/common/Footer'
 import NavBar from '../components/common/NavBar'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import useAuth from '../store/authStore'
 import AuthPopUp from '../features/auth/components/AuthPopUp'
 import { AnimatePresence } from 'framer-motion'
@@ -9,7 +9,8 @@ import ChatWidget from '../components/common/ChatWidget'
 
 
 const MainLayout = () => {
-  const {isPopUp}=useAuth()
+  const isPopUp=useAuth((s)=>s.isPopUp)
+  const location=useLocation()
   return (
     <div className='relative flex flex-col min-h-screen  '>
         <NavBar/>
@@ -18,7 +19,7 @@ const MainLayout = () => {
             <Outlet/>
         </main>
         <Footer/>
-        <ChatWidget/>
+        {location.pathname !== "/signup" && location.pathname !== "/login" && <ChatWidget />}
       <AnimatePresence>
         {isPopUp&& <AuthPopUp/>}
         

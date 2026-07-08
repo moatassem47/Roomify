@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import api from "../utils/axios";
 import LogoutApi from "../features/auth/apis/LogoutApi";
-import useCart from "./cartStore";
 
 const normalizeUser = (user) => {
   if (!user) return user;
@@ -18,7 +17,7 @@ const useAuth = create((set) => ({
   isAuthenticated: false,
   isCheckingAuth: true,
   isPopUp: false,
-  popUpType: "login",
+  popUpType: "verifyEmail",
   openPopUp: (type) => set({ isPopUp: true, popUpType: type }),
   closePopUp: () => set({ isPopUp: false }),
   login: (user) => set({ user: normalizeUser(user), isAuthenticated: true }),
@@ -30,14 +29,12 @@ const useAuth = create((set) => ({
       }),
     })),
   logout: async () => {
-    set({ user: null, isAuthenticated: false });
-
-    useCart.getState().setTotalQuantity(0);
-
     try {
       await LogoutApi();
     } catch (error) {
       console.error("Logout error:", error);
+    } finally {
+      set({ user: null, isAuthenticated: false });
     }
   },
   checkAuth: async () => {
@@ -47,7 +44,6 @@ const useAuth = create((set) => ({
     } catch (e) {
       console.log(e);
       set({ user: null, isAuthenticated: false, isCheckingAuth: false });
-      useCart.getState().setTotalQuantity(0);
     }
   },
 }));

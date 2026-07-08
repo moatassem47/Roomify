@@ -5,10 +5,11 @@ import useFilters from "../../hooks/useFilters";
 import emptyCart from "../../assets/images/NoItemsCart.svg";
 import OrderCard from "./OrderCard";
 import Error from "../../components/common/Error";
+import useAuth from "../../store/authStore";
 
 const ViewOrders = () => {
   const { currentFilters } = useFilters(["status", "startDate", "endDate"]);
-
+  const user=useAuth((s)=>s.user)
   const endpoint = `/order/?status=${currentFilters.status || ""}&endDate=${currentFilters.endDate || ""}&startDate=${currentFilters.startDate || ""}`;
 
   const { data:orders, isLoading, error } = useFetchQuery(endpoint, [
@@ -18,7 +19,7 @@ const ViewOrders = () => {
   ]);
   if (isLoading) return <Loading />;
   if (error) return  <Error error={error} />
-  if (orders?.length === 0) {
+  if (orders?.length === 0||!user?.isVerified) {
     return (
       <EmptyState
         alt="no orders found"

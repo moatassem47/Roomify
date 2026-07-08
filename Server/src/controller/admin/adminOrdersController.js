@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Order = require("../../model/orderSchema");
+const User = require("../../model/userSchema");
 
 const showAllOrders = async (req, res) => {
   try {
@@ -32,7 +33,7 @@ const showAllOrders = async (req, res) => {
         },
         {
           path: "userId",
-          select: "name email phone",
+          select: "firstName lastName email phone",
         },
       ],
     };
@@ -88,13 +89,29 @@ const assignOrder = async (req, res) => {
     const { id } = req.params;
     const { deliveryPersonId } = req.body;
 
+    const deliveryPerson = await User.findOne({
+      _id: deliveryPersonId,
+      role: "delivery",
+      isDeleted: { $ne: true },
+      isActive: { $ne: false },
+    });
+
+    if (!deliveryPerson) {
+      return res.status(400).json({ message: "Invalid or inactive delivery user" });
+    }
+
     const order = await Order.findById(id);
     if (!order) {
       return res.status(404).json({ message: "Order not found" });
     }
 
+    if (order.status !== "Packed" && order.status !== "Out for Delivery") {
+      return res.status(400).json({
+        message: "Only packed or active delivery orders can be assigned",
+      });
+    }
+
     order.deliveryPersonId = deliveryPersonId;
-    order.status = "Out for Delivery"; // Automatically update status when assigned
 
     await order.save();
 

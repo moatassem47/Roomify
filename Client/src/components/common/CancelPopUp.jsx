@@ -2,7 +2,7 @@ import { TriangleAlert } from "lucide-react";
 import { createPortal } from "react-dom";
 
 
-const CancelPopUp = ({setOpenPopUp,title,handleClick,message,acceptMessage,refuseMessage,children}) => {
+const CancelPopUp = ({setOpenPopUp,title,handleClick,message,acceptMessage,refuseMessage,children,prop=null}) => {
    
   return createPortal(
     <div
@@ -25,7 +25,7 @@ const CancelPopUp = ({setOpenPopUp,title,handleClick,message,acceptMessage,refus
         <div className="w-full flex flex-col gap-sm">
           <button
             className="w-full py-md bg-error text-on-error font-label-md text-label-md rounded-lg hover:shadow-lg transition-all active:opacity-90"
-            onClick={()=>handleClick()}
+            onClick={()=>handleClick(prop)}
           >
             {acceptMessage}
           </button>

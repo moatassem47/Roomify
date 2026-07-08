@@ -8,17 +8,18 @@ import RegisterStep2 from "./RegisterStep2";
 import RegisterStep3 from "./RegisterStep3";
 import { motion, AnimatePresence } from "framer-motion";
 import useAuth from "../../../store/authStore";
-import RegisterVerifeyEmail from "./RegisterVerifeyEmail";
+import {useNavigate} from "react-router-dom"
 
 const RegisterForm = () => {
   const [step, setStep] = useState(1);
-  const [email, setEmail] = useState("");
+  const Navigate=useNavigate()
   const { mutate, isPending } = useRegister();
   const methods = useForm({
     resolver: zodResolver(registerSchema),
     mode: "onTouched",
   });
-  const { openPopUp, login } = useAuth();
+  const openPopUp = useAuth((s)=>s.openPopUp);
+  const  login = useAuth((s)=>s.login);
   const {
     trigger,
     handleSubmit,
@@ -60,8 +61,7 @@ const RegisterForm = () => {
       onSuccess: (data) => {
         console.log("Registration successful! Response data:", data);
         login(data?.data);
-        setEmail(data?.data?.email || backendData.email);
-        setStep(4);
+        openPopUp("verifyEmail")
       },
     });
   };
@@ -69,11 +69,6 @@ const RegisterForm = () => {
   const handleClick = () => {
     window.location.href = "http://localhost:4000/auth/google";
   };
-
-  if (step === 4) {
-    return <RegisterVerifeyEmail email={email} />;
-  }
-
 
   return (
     <FormProvider {...methods}>
@@ -150,7 +145,7 @@ const RegisterForm = () => {
           Already have an account?{" "}
           <a
             className="text-brand-cedar font-semibold cursor-pointer"
-            onClick={() => openPopUp("login")}
+            onClick={() => Navigate("/login")}
           >
             Sign in
           </a>

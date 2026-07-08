@@ -2,8 +2,10 @@ const crypto = require("crypto");
 const User = require("../../model/userSchema");
 const sendEmail = require("../../utils/sendEmails");
 
-const sendVerificationEmail = async (user) => {
-  const verificationLink = `${process.env.FRONTEND_URL}/verify-email/${user.verificationToken}`;
+const hashToken = (token) => crypto.createHash("sha256").update(token).digest("hex");
+
+const sendVerificationEmail = async (user, token) => {
+  const verificationLink = `${process.env.FRONTEND_URL}/verify-email/${token}`;
 
   await sendEmail({
     to: user.email,
@@ -35,12 +37,12 @@ const changeVerificationEmail = async (req, res) => {
   try {
     const { email } = req.body;
 
-    if (!email) {
+    if (typeof email !== "string" || !email.trim()) {
       return res.status(400).json({ message: "Email is required" });
     }
 
     const normalizedEmail = email.trim().toLowerCase();
-    const user = await User.findById(req.user.id);
+    const user = await User.findOne({ _id: req.user.id, isDeleted: { $ne: true } });
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -61,6 +63,7 @@ const changeVerificationEmail = async (req, res) => {
     const existingUser = await User.findOne({
       email: normalizedEmail,
       _id: { $ne: user._id },
+      isDeleted: { $ne: true },
     });
 
     if (existingUser) {
@@ -70,11 +73,12 @@ const changeVerificationEmail = async (req, res) => {
     }
 
     user.email = normalizedEmail;
-    user.verificationToken = crypto.randomBytes(32).toString("hex");
+    const verificationToken = crypto.randomBytes(32).toString("hex");
+    user.verificationToken = hashToken(verificationToken);
     user.verificationExpires = Date.now() + 1000 * 60 * 60;
 
     await user.save({ validateBeforeSave: false });
-    await sendVerificationEmail(user);
+    await sendVerificationEmail(user, verificationToken);
 
     return res.status(200).json({
       message: "Email updated. Verification email sent successfully.",

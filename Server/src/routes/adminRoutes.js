@@ -20,10 +20,10 @@ router.patch("/product/update/:id",verfiyToken,restrictedTo("admin"),updateProdu
 router.post("/delivery/add",verfiyToken,restrictedTo("admin"),addDeliveryUser)
 router.delete("/delivery/delete/:id",verfiyToken,restrictedTo("admin"),deleteDeliveryUser)
 router.get("/delivery",verfiyToken,restrictedTo("admin"),showAllDeliverieUsers)
+router.get("/delivery/:id/history",verfiyToken,restrictedTo("admin"),getDeliveryUserHistory)
 router.get("/delivery/:id",verfiyToken,restrictedTo("admin"),showDeliveryUserByID)
 router.patch("/delivery/update/:id",verfiyToken,restrictedTo("admin"),updateDeliveryUser)
 router.patch("/delivery/status/:id",verfiyToken,restrictedTo("admin"),toggleDeliveryUserStatus)
-router.get("/delivery/:id/history",verfiyToken,restrictedTo("admin"),getDeliveryUserHistory)
 
 //orders
 router.get("/orders",verfiyToken,restrictedTo("admin"),showAllOrders)

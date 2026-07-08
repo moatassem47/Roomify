@@ -3,15 +3,32 @@ const dotenv=require("dotenv").config()
 const User = require("../model/userSchema")
 
 
-const verfiyToken=(req,res,next)=>{
+const verfiyToken=async (req,res,next)=>{
     try{
         const token=req.cookies.accessToken
         if(!token){
-            return res.status(401).json({message:"there's no token plz login first"})
+            return res.status(401).json({message:"There's no token please Login First"})
         }
         const decode= jwt.verify(token,process.env.JWT_SECRET)
-        
-        req.user=decode
+        const currentUser= await User.findOne({_id:decode.id,isDeleted: { $ne: true } })
+        if(!currentUser){
+          return res.status(401).json({ 
+                message: "The user belonging to this token no longer exists or has been deleted." 
+            });
+        }
+
+        if (currentUser.role === "delivery" && currentUser.isActive === false) {
+          return res.status(403).json({ message: "This delivery account is inactive." });
+        }
+
+        req.user={
+          id: currentUser._id,
+          role: currentUser.role,
+          isVerified:
+            currentUser.role === "admin" ||
+            currentUser.role === "delivery" ||
+            Boolean(currentUser.isVerified),
+        }
         next()
 
     }catch(e){
@@ -39,10 +56,7 @@ const isVerified = async (req, res, next) => {
       return next();
     }
 
-    const user = await User.findById(req.user.id).select("isVerified");
-    const isUserVerified = user?.isVerified;
-
-    if (!isUserVerified) {
+    if (!req.user.isVerified) {
       return res.status(403).json({
         message: "Please verify your email first."
       });
@@ -50,7 +64,7 @@ const isVerified = async (req, res, next) => {
 
     next();
   } catch (e) {
-    res.status(500).json({
+    return res.status(500).json({
       name: e.name,
       message: e.message
     });

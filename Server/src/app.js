@@ -17,7 +17,13 @@ const passport = require("passport");
 const chatAgentController=require("./controller/chatAgentController")
 require("./middleware/loginWithGoogle");
 
-connectDB()
+const allowedOrigins = [
+    process.env.FrontEND_URL,
+    process.env.FRONTEND_URL,
+    "http://localhost:5173",
+    "http://localhost:5174",
+].filter(Boolean)
+
 
 app.post('/order/webhook', express.raw({ type: 'application/json' }), stripeWebhook);
 
@@ -28,7 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.use(cookiesParser())
 app.use(cors({
-    origin: ["http://localhost:5173"],
+    origin: allowedOrigins,
     credentials: true
 }))
 app.use(passport.initialize());
@@ -56,12 +62,13 @@ app.use("/user",userRouter)
 
 
 
-const PORT=process.env.PORT
-app.listen(PORT,()=>{
-    try{
+const PORT=process.env.PORT || 4000
+
+const startServer=async()=>{
+    await connectDB()
+    app.listen(PORT,()=>{
         console.log(`Server is open on http://localhost:${PORT}`);
-    }catch(e){
-        console.log(e);
-        
-    }
-})
+    })
+}
+
+startServer()

@@ -1,4 +1,4 @@
-import Chair from "../../../assets/images/chair.jpg"
+import Chair from "../../../assets/images/chair.webp"
 import Button from '../../../components/common/Button'
 import { Flower,Heart ,Leaf} from 'lucide-react';
 import {useNavigate} from "react-router-dom"
@@ -8,7 +8,7 @@ const OurPhilosophy = () => {
   return (
     <section className="flex  gap-20 items-center justify-center  p-30 bg-brand-surface-container flex-wrap">
         <figure className="flex-1 relative">
-            <img src={Chair} alt="chair photo" className=" min-w-50  object-cover object-bottom md:size-200 sm:size-120  size-90 rounded-2xl "/>
+            <img src={Chair} alt="chair photo" className=" min-w-50  object-cover object-bottom md:size-200 sm:size-120  size-90 rounded-2xl " loading="lazy"/>
             <div className="bg-white px-12 py-7 hidden md:flex flex-col gap-5 absolute rounded-2xl shadow-lg -right-8 -bottom-8 ">
                 <div className="flex items-center gap-3 ">
                     <div className="w-13 h-13 rounded-full bg-green-200 flex justify-center items-center">

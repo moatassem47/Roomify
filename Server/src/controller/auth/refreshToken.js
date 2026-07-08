@@ -3,9 +3,15 @@ const User = require("../../model/userSchema");
 const dotenv = require("dotenv").config();
 const {generateTokens} = require("../../utils/generateTokens");
 
+const cookieOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "strict",
+};
+
 const refreshToken = async (req, res) => {
   try {
-    const currentRefreshToken = req.cookies.refreshToken;
+    const currentRefreshToken = req.cookies?.refreshToken;
 
     if (!currentRefreshToken) {
       return res
@@ -21,6 +27,7 @@ const refreshToken = async (req, res) => {
     const user = await User.findOne({
       _id: decode.id,
       refreshToken: currentRefreshToken,
+     isDeleted: { $ne: true },
     });
 
     if (!user) {
@@ -29,31 +36,55 @@ const refreshToken = async (req, res) => {
         .json({ message: "Invalid or expired refresh token" });
     }
 
-    const { accessToken, refreshToken:newRefreshToken } = generateTokens(user);
+    if (decode.tokenVersion !== user.tokenVersion) {
+      
+    
+      user.tokenVersion += 1;
+      await user.save({ validateBeforeSave: false });
 
-    user.refreshToken = newRefreshToken;
-    await user.save({ validateBeforeSave: false });
+      
+      res.clearCookie("accessToken", cookieOptions);
+      res.clearCookie("refreshToken", cookieOptions);
+      return res.status(403).json({ message: "Compromised session detected. All sessions revoked for security." });
+    }
 
-    const CookieOptions = {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-    };
+    const updatedUser = await User.findOneAndUpdate(
+      {
+        _id: user._id,
+        refreshToken: currentRefreshToken,
+        tokenVersion: user.tokenVersion,
+        isDeleted: { $ne: true },
+      },
+      { $inc: { tokenVersion: 1 } },
+      { new: true }        
+    );
+
+    if (!updatedUser) {
+       return res.status(409).json({ message: "Concurrent request, please try again." });
+    }
+
+
+
+    const { accessToken, refreshToken:newRefreshToken } = generateTokens(updatedUser);
+
+    updatedUser.refreshToken = newRefreshToken;
+    await updatedUser.save({ validateBeforeSave: false });
 
     res.cookie("accessToken", accessToken, {
-      ...CookieOptions,
-      expires: new Date(Date.now() + 3 * 60 * 1000),
+      ...cookieOptions,
+      expires: new Date(Date.now() + 10 * 60 * 1000),
     });
 
     res.cookie("refreshToken", newRefreshToken, {
-      ...CookieOptions,
+      ...cookieOptions,
       expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     });
 
     res.status(200).json({message:"token refreshed succefully"})
   } catch (e) {
     console.log(e);
-    res.status(500).json({
+    const status = e.name === "JsonWebTokenError" || e.name === "TokenExpiredError" ? 401 : 500;
+    res.status(status).json({
       name: e.name,
       message: e.message,
     });

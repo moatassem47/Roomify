@@ -16,9 +16,9 @@ const AddressSchema = z.object({
   }),
 });
 
-const ShippingAddress = ({ streetAddress, city }) => {
+const ShippingAddress = ({ streetAddress, city ,isVerified}) => {
   const [message, setMessage] = useState(null);
-  const { updateUser } = useAuth();
+  const  updateUser  = useAuth((s)=>s.updateUser);
   const {
     register,
     handleSubmit,
@@ -34,18 +34,20 @@ const ShippingAddress = ({ streetAddress, city }) => {
   });
 
   const onSubmit = async (data) => {
-    try {
-      const res = await api.patch(`user/edit`, data);
-      updateUser(res.data.user);
-      setMessage({
-        status: "good",
-        text: "Changes saved successfully. Your Address has been updated.",
-      });
-    } catch (e) {
-      setMessage({
-        status: "bad",
-        text: `Something went wrong:${e.message}`,
-      });
+    if(isVerified()){
+      try {
+        const res = await api.patch(`user/edit`, data);
+        updateUser(res.data.user);
+        setMessage({
+          status: "good",
+          text: "Changes saved successfully. Your Address has been updated.",
+        });
+      } catch (e) {
+        setMessage({
+          status: "bad",
+          text: `Something went wrong:${e.message}`,
+        });
+      }
     }
   };
   return (

@@ -78,7 +78,7 @@ const MobileMenu = () => {
                     <NavLink
                       to={link.path}
                       onClick={() => setIsOpen(false)}
-                      className="text-3xl font-semibold text-[#84746c] hover:text-brand-cedar transition-colors block"
+                      className="text-3xl font-semibold text-outline hover:text-brand-cedar transition-colors block"
                     >
                       {link.name}
                     </NavLink>

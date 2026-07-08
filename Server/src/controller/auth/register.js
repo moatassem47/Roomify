@@ -1,19 +1,20 @@
 const mongoose = require("mongoose");
 const User = require("../../model/userSchema");
 const crypto = require("crypto");
-const sendEmail = require("../../utils/sendEmails");
 const { generateTokens } = require("../../utils/generateTokens");
+const sendEmail = require("../../utils/sendEmails");
 
+const hashToken = (token) => crypto.createHash("sha256").update(token).digest("hex");
 
-const sendVerificationEmail = async (user) => {
-  const verificationLink = `${process.env.FRONTEND_URL}/verify-email/${user.verificationToken}`;
+const sendVerificationEmail = async (user, token) => {
+  const verificationLink = `${process.env.FRONTEND_URL}/verify-email/${token}`;
+
   await sendEmail({
     to: user.email,
     subject: "Verify your email",
     html: `
-      <h2>Welcome to Roomify 👋</h2>
+      <h2>Welcome to Roomify</h2>
       <p>Please verify your email by clicking the button below.</p>
-
       <a href="${verificationLink}"
       style="background:#8B5E3C; color:white; padding:12px 20px; text-decoration:none; border-radius:8px;display:inline-block;">
         Verify Email
@@ -21,6 +22,8 @@ const sendVerificationEmail = async (user) => {
     `,
   });
 };
+
+
 
 const sanitizeUser = (user) => {
   const userResponse = user.toObject();
@@ -65,49 +68,42 @@ const loginUnverifiedUser = async (user, res) => {
 const register = async (req, res) => {
   try {
     const { firstName, lastName, email, password, phone, address } = req.body;
+    if (typeof email !== "string") {
+      return res.status(400).json({ message: "Invalid email" });
+    }
+    const normalizedEmail = email.trim().toLowerCase();
     
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ email: normalizedEmail, isDeleted: { $ne: true } });
 
     if (user) {
-      if (user.providers?.includes("local")) {
-        return res.status(400).json({ message: "User already exists" });
-      } else {
-        user.firstName = firstName;
-        user.lastName = lastName;
-        user.password = password;
-        user.phone = phone;
-        user.address = address;
-        user.providers = [...(user.providers || []), "local"];
-        user.verificationToken = crypto.randomBytes(32).toString("hex");
-        user.verificationExpires = Date.now() + 1000 * 60 * 60;
-        await user.save();
-        await sendVerificationEmail(user);
-        await loginUnverifiedUser(user, res);
-        const userResponse = sanitizeUser(user);
-
-        return res.status(201).json({
-          message:
-            "Account updated successfully. You can now login using Google or email and password.",
-          data: userResponse,
+     if (user.providers && user.providers.includes("google") && !user.providers.includes("local")) {
+        return res.status(409).json({
+          message: "Account exists with Google. Sign in with Google to add a password.",
         });
       }
-    }
 
+      return res.status(409).json({
+    message: "This user already exist",
+  });
+}
+    
+
+    const verificationToken = crypto.randomBytes(32).toString("hex");
     const newUser = await User.create({
       firstName,
       lastName,
-      email,
+      email: normalizedEmail,
       password,
       phone,
       address,
-      verificationToken: crypto.randomBytes(32).toString("hex"),
+      verificationToken: hashToken(verificationToken),
       verificationExpires: Date.now() + 1000 * 60 * 60,
       role: "customer",
       providers: ["local"],
     });
 
     const userResponse = sanitizeUser(newUser);
-    await sendVerificationEmail(newUser);
+    await sendVerificationEmail(newUser, verificationToken);
     await loginUnverifiedUser(newUser, res);
 
     res

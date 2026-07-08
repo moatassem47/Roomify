@@ -1,36 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import api from '../../../../utils/axios';
 import { Package, Truck } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const ActiveDeliveries = ({ personnel }) => {
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchOrders = () => {
-    setLoading(true);
-    api.get('/admin/orders')
-      .then(res => {
-        setOrders(res.data.docs || []);
-      })
-      .catch(err => {
-        console.error("Failed to fetch orders", err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    fetchOrders();
-  }, []);
+  const { data: orders = [], isLoading: loading, refetch } = useQuery({
+    queryKey: ['admin', 'delivery-active-orders'],
+    queryFn: async () => {
+      const res = await api.get('/admin/orders');
+      return res.data.docs || [];
+    },
+  });
 
   const handleAssignOrder = async (orderId, deliveryPersonId) => {
     if (!deliveryPersonId) return;
     try {
       await api.patch(`/admin/orders/assign/${orderId}`, { deliveryPersonId });
       toast.success('Order assigned successfully');
-      fetchOrders();
+      refetch();
     } catch (err) {
       toast.error('Failed to assign order');
       console.error(err);
@@ -77,7 +64,7 @@ const ActiveDeliveries = ({ personnel }) => {
                     onChange={(e) => handleAssignOrder(order._id, e.target.value)}
                   >
                     <option value="" disabled>Assign Delivery Person</option>
-                    {personnel.filter(p => p.isActive).map(p => (
+                    {personnel.filter(p => p.isActive !== false).map(p => (
                       <option key={p._id} value={p._id}>
                         {p.firstName} {p.lastName} - {p.deliveryDetails?.vehicleType}
                       </option>

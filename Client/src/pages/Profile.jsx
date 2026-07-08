@@ -8,10 +8,13 @@ import CancelPopUp from "../components/common/CancelPopUp";
 import { useState } from "react";
 import api from "../utils/axios";
 import toast from "react-hot-toast";
+import useRequireVerified from '../hooks/useRequireVerified';
 const Profile = () => {
-  const { user, logout } = useAuth();
+  const user = useAuth((s)=>s.user);
+  const logout  = useAuth((s)=>s.logout);
   const [openPopUp, setOpenPopUp] = useState(false);
   const [password, setPassword] = useState("");
+  const isVerified=useRequireVerified()
   if (!user) {
     return <Loading />;
   }
@@ -62,12 +65,14 @@ const Profile = () => {
             firstName={user.firstName}
             lastName={user.lastName}
             phone={user.phone}
+            isVerified={isVerified}
           />
           <ShippingAddress
             streetAddress={user.address?.streetAddress}
             city={user.address?.city}
+            isVerified={isVerified}
           />
-          <Security />
+          <Security isVerified={isVerified}/>
           <section
             className="bg-surface-container/50 p-8 rounded-xl border border-stone-200/40"
             id="status"
@@ -75,12 +80,18 @@ const Profile = () => {
             <h2 className="font-headline-sm text-headline-sm text-on-surface mb-6">
               Account Information
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="p-4 bg-white rounded-xl custom-shadow">
                 <p className="text-xs font-semibold text-outline uppercase tracking-widest mb-1">
                   Email Address
                 </p>
                 <p className="font-body-md text-on-surface">{user.email}</p>
+              </div>
+              <div className="p-4 bg-white rounded-xl custom-shadow">
+                <p className="text-xs font-semibold text-outline uppercase tracking-widest mb-1">
+                 Status
+                </p>
+                <p className="font-body-md text-on-surface">{user.isVerified?"Verified":"Not Verified"}</p>
               </div>
               <div className="p-4 bg-white rounded-xl custom-shadow">
                 <p className="text-xs font-semibold text-outline uppercase tracking-widest mb-1">

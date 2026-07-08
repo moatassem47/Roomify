@@ -25,10 +25,21 @@ const login = async (req,res) => {
 
     const {email,password}=req.body
 
-    const user=await User.findOne({email:email}).select("+password")
+    if (typeof email !== "string" || typeof password !== "string") {
+        return res.status(400).json({message:"Invalid email or password"})
+    }
+
+    const user=await User.findOne({
+      email: email.trim().toLowerCase(),
+      isDeleted: { $ne: true },
+    }).select("+password")
 
     if(!user){
         return res.status(400).json({message:"Invalid email or password"})
+    }
+
+    if (user.role === "delivery" && user.isActive === false) {
+        return res.status(403).json({message:"This delivery account is inactive"})
     }
    
     if(!user.providers?.includes("local")&&user.role==="customer"){
@@ -36,6 +47,10 @@ const login = async (req,res) => {
   "message": "This account uses Google sign-in. Please continue with Google or set a password first in register."
 })
     }
+    if (!user.password) {
+         return res.status(403).json({message:"Invalid email or password"})
+    }
+
     const isPassword= await bcrypt.compare(password,user.password)
     
     if(!isPassword){

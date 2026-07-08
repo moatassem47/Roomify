@@ -1,40 +1,46 @@
 import { MailCheck } from "lucide-react";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 import Button from "../../../components/common/Button";
 import useAuth from "../../../store/authStore";
 import useResendVerficationEmail from "../apis/useResendVerficationEmail";
-import toast from "react-hot-toast";
-import { useEffect, useState } from "react";
 import useChangeVerificationEmail from "../apis/useChangeVerificationEmail";
-const RegisterVerifeyEmail = ({ email }) => {
-  const { openPopUp, updateUser } = useAuth();
+
+const RegisterVerifeyEmail = () => {
+  const  updateUser = useAuth((s)=>s.updateUser);
+  const  user  = useAuth((s)=>s.user);
+
   const { mutate, isPending } = useResendVerficationEmail();
   const { mutate: changeEmail, isPending: isChangingEmail } =
     useChangeVerificationEmail();
-  const [currentEmail, setCurrentEmail] = useState(email || "");
+
+  const [currentEmail, setCurrentEmail] = useState(user?.email || "");
   const [newEmail, setNewEmail] = useState("");
   const [isEditingEmail, setIsEditingEmail] = useState(false);
   const [timeLeft, setTimeLeft] = useState(60);
+  const [hasSentEmail, setHasSentEmail] = useState(false);
 
   useEffect(() => {
-    setCurrentEmail(email || "");
-  }, [email]);
-
-  useEffect(() => {
-    if (timeLeft <= 0) return;
+    if (!hasSentEmail || timeLeft <= 0) return;
 
     const timer = setInterval(() => {
       setTimeLeft((prev) => prev - 1);
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeLeft]);
+  }, [timeLeft, hasSentEmail]);
 
-  const onResend = () => {
-    if (!currentEmail || timeLeft > 0 || isPending) return;
+  const onSendEmail = () => {
+    if (!currentEmail || isPending) return;
+
+    if (hasSentEmail && timeLeft > 0) return;
 
     mutate(currentEmail, {
       onSuccess: (data) => {
+        setHasSentEmail(true);
+        setTimeLeft(60);
+
         toast.success(data.message, {
           duration: 2000,
           position: "bottom-center",
@@ -48,11 +54,12 @@ const RegisterVerifeyEmail = ({ email }) => {
             secondary: "#FFFAEE",
           },
         });
-        setTimeLeft(60);
       },
-      onError:(error)=>{
-        toast.error(error?.message || "Something went wrong. Please try again later.")
-      }
+      onError: (error) => {
+        toast.error(
+          error?.message || "Something went wrong. Please try again later."
+        );
+      },
     });
   };
 
@@ -60,24 +67,38 @@ const RegisterVerifeyEmail = ({ email }) => {
     event.preventDefault();
 
     const trimmedEmail = newEmail.trim();
+
     if (!trimmedEmail || isChangingEmail) return;
 
     changeEmail(trimmedEmail, {
       onSuccess: (data) => {
         const updatedEmail = data?.data?.email || trimmedEmail;
-        updateUser({ email: updatedEmail, isVerified: false });
+
+        updateUser({
+          email: updatedEmail,
+          isVerified: false,
+        });
+
         setCurrentEmail(updatedEmail);
         setNewEmail("");
         setIsEditingEmail(false);
+
+        // Reset sending state for the new email
+        setHasSentEmail(false);
         setTimeLeft(60);
-        toast.success(data.message || "Verification email sent successfully.", {
-          duration: 2000,
-          position: "bottom-center",
-        });
+
+        toast.success(
+          data.message || "Email updated successfully.",
+          {
+            duration: 2000,
+            position: "bottom-center",
+          }
+        );
       },
       onError: (error) => {
         toast.error(
-          error?.message || "Could not update email. Please try again later.",
+          error?.message ||
+            "Could not update email. Please try again later."
         );
       },
     });
@@ -85,75 +106,95 @@ const RegisterVerifeyEmail = ({ email }) => {
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center rounded-large bg-white p-4 text-center shadow-ambient sm:p-8">
-      <div className="w-20 h-20 rounded-full bg-brand-cedar/10 flex items-center justify-center mb-6">
-        <MailCheck className="w-10 h-10 text-brand-cedar" />
+      <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-brand-cedar/10">
+        <MailCheck className="h-10 w-10 text-brand-cedar" />
       </div>
 
-      <h2 className="text-3xl font-semibold mb-3">Check your email</h2>
+      <h2 className="mb-3 text-3xl font-semibold">
+        Verify Your Email
+      </h2>
 
-      <p className="text-brand-cedar max-w-3xl leading-7">
-        We've sent a verification link to
+      <p className="max-w-3xl leading-7 text-brand-cedar">
+        {hasSentEmail
+          ? "We've sent a verification link to:"
+          : "To activate your account, send a verification email to:"}
       </p>
 
       <p className="mt-2 break-all text-base font-semibold sm:text-lg">
         {currentEmail || "your email address"}
       </p>
 
-      <p className="text-brand-cedar mt-6 leading-7">
-        Please verify your email
+      <p className="mt-6 leading-7 text-brand-cedar">
+        {hasSentEmail
+          ? "Please check your inbox (and spam folder) and click the verification link."
+          : "Click the button below to receive your verification email."}
       </p>
 
       <button
         type="button"
-        onClick={() => setIsEditingEmail((isEditing) => !isEditing)}
+        onClick={() => setIsEditingEmail((prev) => !prev)}
         className="mt-3 text-sm font-semibold text-brand-cedar underline"
       >
         Wrong email?
       </button>
 
       {isEditingEmail && (
-        <form onSubmit={onChangeEmail} className="mt-4 flex w-full flex-col gap-3">
+        <form
+          onSubmit={onChangeEmail}
+          className="mt-4 flex w-full flex-col gap-3"
+        >
           <input
             type="email"
             value={newEmail}
-            onChange={(event) => setNewEmail(event.target.value)}
+            onChange={(e) => setNewEmail(e.target.value)}
             placeholder="Enter the correct email"
             className="w-full rounded-lg border border-brand-cedar/30 px-4 py-3 outline-none focus:border-brand-cedar"
           />
+
           <Button
             type="submit"
             disabled={isChangingEmail || !newEmail.trim()}
-            className={`${isChangingEmail || !newEmail.trim() ? "opacity-50 cursor-not-allowed" : ""}`}
+            className={
+              isChangingEmail || !newEmail.trim()
+                ? "cursor-not-allowed opacity-50"
+                : ""
+            }
           >
-            {isChangingEmail ? "Sending..." : "Update Email"}
+            {isChangingEmail ? "Updating..." : "Update Email"}
           </Button>
         </form>
       )}
-       
-       {timeLeft > 0 && (
-          <p className="text-sm text-gray-500 text-center">
-            You can resend the email in{" "}
-            <span className="font-semibold">{timeLeft}s</span>.
-          </p>
-        )}
 
-      <div className="flex flex-col w-full gap-3 mt-8">
+      {hasSentEmail && timeLeft > 0 && (
+        <p className="mt-5 text-center text-sm text-gray-500">
+          You can resend the email in{" "}
+          <span className="font-semibold">{timeLeft}s</span>.
+        </p>
+      )}
+
+      <div className="mt-8 flex w-full flex-col gap-3">
         <Button
           type="button"
-          onClick={onResend}
-          disabled={timeLeft > 0 || isPending || !currentEmail}
-          className={`${timeLeft > 0 || isPending || !currentEmail ? "opacity-50 cursor-not-allowed" : ""}`}
+          onClick={onSendEmail}
+          disabled={
+            isPending ||
+            !currentEmail ||
+            (hasSentEmail && timeLeft > 0)
+          }
+          className={
+            isPending ||
+            !currentEmail ||
+            (hasSentEmail && timeLeft > 0)
+              ? "cursor-not-allowed opacity-50"
+              : ""
+          }
         >
-          {isPending ? "Sending..." : "Resend Email"}
+          {isPending
+            ? "Sending..."
+            : hasSentEmail
+            ? "Resend Email"
+            : "Send Verification Email"}
         </Button>
-
-        <button
-          type="button"
-          onClick={() => openPopUp("login")}
-          className="border border-brand-cedar text-brand-cedar rounded-lg py-3 font-medium hover:bg-brand-cedar hover:text-white transition"
-        >
-          Back to Login
-        </button>
       </div>
     </div>
   );

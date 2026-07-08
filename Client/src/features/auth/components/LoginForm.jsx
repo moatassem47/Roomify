@@ -14,7 +14,7 @@ import ForgotPasswordForm from "./ForgotPasswordForm";
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
-  const { closePopUp } = useAuth();
+  const  closePopUp  = useAuth((s)=>s.closePopUp);
   const navigate = useNavigate();
 
   const {
@@ -56,7 +56,7 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-white rounded-large shadow-ambient p-8 w-full max-w-fit flex flex-col gap-1 mt-15"
+      className="bg-white rounded-large shadow-ambient p-8 w-full max-w-fit flex flex-col gap-1"
     >
       <div className="mb-5">
         <h1 className="text-3xl text-center">Welcome Back</h1>
@@ -88,12 +88,12 @@ const LoginForm = () => {
         children={
           showPassword ? (
             <EyeClosed
-              className="absolute top-1/2 right-5"
+              className={`absolute right-5 ${errors.password||errors.confirmPassword?"top-[35%]":"top-1/2"}  cursor-pointer`}
               onClick={() => setShowPassword(!showPassword)}
             />
           ) : (
             <Eye
-              className="absolute top-1/2 right-5"
+              className={`absolute right-5 ${errors.password||errors.confirmPassword?"top-[35%]":"top-1/2"}  cursor-pointer`}
               onClick={() => setShowPassword(!showPassword)}
             />
           )

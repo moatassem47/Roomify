@@ -1,19 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../store/authStore";
 import { motion, AnimatePresence } from "framer-motion";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import CancelPopUp from "./CancelPopUp";
+import { USER_ROLES } from "../../utils/roleRoutes";
 
 const UserDropdown = ({ children, isOpen, setIsOpen, className }) => {
-  const { user, logout } = useAuth();
+  const user = useAuth((s)=>s.user);
+  const  logout = useAuth((s)=>s.logout);
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const isUser = USER_ROLES.includes(user?.role);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setIsOpen(false);
-    logout();
+    setIsPopupOpen(false);
+    await logout();
     queryClient.clear();
+    navigate("/login", { replace: true });
   };
 
   return (
@@ -48,30 +54,43 @@ const UserDropdown = ({ children, isOpen, setIsOpen, className }) => {
                   Admin DashBoard
                 </Link>
               )}
-              {user?.role === "admin" && (
+              {user?.role === "delivery" && (
                 <Link
                   to="/delivery"
                   onClick={() => setIsOpen(false)}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-surface hover:text-brand-brown transition-colors"
                 >
-                  Delivery pages
+                  Delivery Dashboard
                 </Link>
               )}
-              <Link
-                to="/profile"
-                onClick={() => setIsOpen(false)}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-surface hover:text-brand-brown transition-colors"
-              >
-                My Profile
-              </Link>
-              <Link
-                to="/orders"
-                onClick={() => setIsOpen(false)}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-surface hover:text-brand-brown transition-colors"
-              >
-                My Orders
-              </Link>
-              {user?.role === "customer"&&<Link
+              {user?.role === "delivery" && (
+                <Link
+                  to="/delivery/profile"
+                  onClick={() => setIsOpen(false)}
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-surface hover:text-brand-brown transition-colors"
+                >
+                  My Profile
+                </Link>
+              )}
+              {isUser && (
+                <Link
+                  to="/profile"
+                  onClick={() => setIsOpen(false)}
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-surface hover:text-brand-brown transition-colors"
+                >
+                  My Profile
+                </Link>
+              )}
+              {isUser && (
+                <Link
+                  to="/orders"
+                  onClick={() => setIsOpen(false)}
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-surface hover:text-brand-brown transition-colors"
+                >
+                  My Orders
+                </Link>
+              )}
+              {isUser&&<Link
                 to="/wishlist"
                 onClick={() => setIsOpen(false)}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-surface hover:text-brand-brown transition-colors"

@@ -5,7 +5,7 @@ const {verfiyToken,isVerified}=require("../middleware/authMiddleware")
 const { createPaymentSession } = require("../controller/paymentController");
 
 router.post("/add",verfiyToken,isVerified,createOrder)
-router.get("/",verfiyToken,isVerified,showOrders)
+router.get("/",verfiyToken,showOrders)
 router.get("/:id",verfiyToken,isVerified,getOrderByID)
 router.patch("/cancel/:id",verfiyToken,isVerified,cancelOrder)
 router.post("/create-checkout-session", verfiyToken, isVerified, createPaymentSession);

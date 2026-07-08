@@ -27,7 +27,11 @@ const getDashboardStats = async (req, res) => {
           top5Customers: [
             { $match: { status: "Delivered" } }, // ✅
             {
-              $group: { _id: "$userId", totalSpent: { $sum: "$totalAmount" } },
+              $group: {
+                _id: "$userId",
+                totalSpent: { $sum: "$totalAmount" },
+                totalOrders: { $sum: 1 },
+              },
             },
             { $sort: { totalSpent: -1 } },
             { $limit: 5 },
@@ -44,13 +48,18 @@ const getDashboardStats = async (req, res) => {
               $project: {
                 _id: 0,
                 name: {
-                  $concat: [
-                    "$customerInfo.firstName",
-                    " ",
-                    "$customerInfo.lastName",
-                  ],
+                  $trim: {
+                    input: {
+                      $concat: [
+                        { $ifNull: ["$customerInfo.firstName", ""] },
+                        " ",
+                        { $ifNull: ["$customerInfo.lastName", ""] },
+                      ],
+                    },
+                  },
                 },
                 totalSpent: 1,
+                totalOrders: 1,
               },
             },
           ],

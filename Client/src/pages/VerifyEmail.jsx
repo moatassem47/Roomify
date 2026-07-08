@@ -7,7 +7,8 @@ import { useEffect } from "react";
 
 const VerifyEmail = () => {
   const { token } = useParams();
-  const { checkAuth, isAuthenticated } = useAuth();
+  const  isAuthenticated  = useAuth((s)=>s.isAuthenticated);
+  const checkAuth = useAuth((s)=>s.checkAuth);
   const { data, isLoading, isError, error } = useFetchQuery(
     token ? `/auth/verify-email/${token}` : "",
     ["verify-email", token],

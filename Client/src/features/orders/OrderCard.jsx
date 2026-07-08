@@ -39,13 +39,13 @@ const OrderCard = ({ order }) => {
       <div className="px-6 py-3 bg-[#f8f3ec] flex flex-wrap justify-between items-center gap-6">
         <div className="flex gap-6">
           <div className="flex flex-col">
-            <span className="text-[10px] uppercase font-bold text-[#84746c]">
+            <span className="text-[10px] uppercase font-bold text-outline">
               Items
             </span>
             <span className=" font-bold">{order.items.length} Products</span>
           </div>
           <div className="flex flex-col">
-            <span className="text-[10px] uppercase font-bold text-[#84746c]">
+            <span className="text-[10px] uppercase font-bold text-outline">
               Total Price
             </span>
             <span className="text-label-md font-bold text-brand-cedar">

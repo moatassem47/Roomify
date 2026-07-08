@@ -108,13 +108,16 @@ exports.deleteProduct=async(req,res)=>{
         if(!product){
             return res.status(404).json({message:"this no product with this id"})
         }
-
+           console.log({
+            apiKey: process.env.CLOUDINARY_API_KEY,
+            apiSecret: process.env.CLOUDINARY_API_SECRET,
+            });
         const isDeleted=await DeleteProductFromCloudinary(product.name)
         
         if(!isDeleted){
             return res.status(500).json({message:"Can't remove this product from cloudinary"})
         }
-
+     
         const DeletedProduct=await Product.deleteOne({_id:id})
     
         res.status(200).json({
@@ -132,16 +135,12 @@ exports.deleteProduct=async(req,res)=>{
 exports.updateProduct=async(req,res)=>{
     try{
         const id=req.params.id
-        const{name,description,price,stockQuantity,category,rating,specs}=req.body
+        const{description,price,stockQuantity,category,rating,specs}=req.body
     
         const product=await Product.findById(id)
 
         if(!product){
             return res.status(404).json({message:"this no product with this id"})
-        }
-
-        if(hasValue(name)){
-            product.name=name
         }
         if(hasValue(description)){
             product.description=description

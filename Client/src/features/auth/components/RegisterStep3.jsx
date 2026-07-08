@@ -24,12 +24,12 @@ const RegisterStep3 = ({ prevStep, isSubmitting = false }) => {
         >
           {showPassword ? (
             <EyeClosed
-              className="absolute right-5 top-1/2 cursor-pointer"
+              className={`absolute right-5 ${errors.password||errors.confirmPassword?"top-[35%]":"top-1/2"}  cursor-pointer`}
               onClick={() => setShowPassword(false)}
             />
           ) : (
             <Eye
-              className="absolute right-5 top-1/2 cursor-pointer"
+              className={`absolute right-5 ${errors.password||errors.confirmPassword?"top-[35%]":"top-1/2"}  cursor-pointer`}
               onClick={() => setShowPassword(true)}
             />
           )}

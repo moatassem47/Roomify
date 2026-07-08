@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import api from '../../../utils/axios';
 import toast from 'react-hot-toast';
 import { Plus, Users, Truck } from 'lucide-react';
@@ -8,8 +9,6 @@ import DeliveryHistoryModal from '../components/Delivery/DeliveryHistoryModal';
 import ActiveDeliveries from '../components/Delivery/ActiveDeliveries';
 
 const Delivery = () => {
-  const [personnel, setPersonnel] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('personnel'); // 'personnel' | 'deliveries'
   
   // Modal states
@@ -19,26 +18,24 @@ const Delivery = () => {
   const [historyModalOpen, setHistoryModalOpen] = useState(false);
   const [historyPersonnel, setHistoryPersonnel] = useState(null);
 
-  const fetchPersonnel = async () => {
-    setLoading(true);
-    try {
+  const {
+    data: personnel = [],
+    isLoading: loading,
+    refetch: fetchPersonnel,
+  } = useQuery({
+    queryKey: ['admin', 'delivery-personnel'],
+    queryFn: async () => {
       const res = await api.get('/admin/delivery');
-      setPersonnel(res.data.data || []);
-    } catch (err) {
-      if(err.response?.status !== 404) {
-        toast.error('Failed to fetch delivery personnel');
-        console.error(err);
-      } else {
-        setPersonnel([]);
+      return res.data.data || [];
+    },
+    retry: (failureCount, error) => {
+      if (error?.response?.status === 404) {
+        return false;
       }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchPersonnel();
-  }, []);
+      return failureCount < 2;
+    },
+    throwOnError: (error) => error?.response?.status !== 404,
+  });
 
   const handleOpenModal = (person = null) => {
     setPersonnelToEdit(person);
@@ -73,7 +70,7 @@ const Delivery = () => {
       toast.success(`Account ${isActive ? 'activated' : 'deactivated'}`);
       fetchPersonnel();
     } catch (err) {
-      toast.error('Failed to update status');
+      toast.error(err.response?.data?.message || 'Failed to update status');
       console.error(err);
     }
   };

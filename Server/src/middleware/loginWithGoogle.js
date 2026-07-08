@@ -15,7 +15,14 @@ passport.use(
     },
     async (req, accessToken, refreshToken, profile, done) => {
       try{
-        const user= await User.findOne({email:profile.emails[0].value})
+        const email = profile.emails?.[0]?.value?.trim().toLowerCase();
+        const emailVerified = profile.emails?.[0]?.verified !== false;
+
+        if (!email || !emailVerified) {
+          return done(null, false, { message: "Google email must be verified" });
+        }
+
+        const user= await User.findOne({email,isDeleted: { $ne: true }})
         if(user){
           if(user.googleId){
             return done(null,user)
@@ -31,7 +38,7 @@ passport.use(
           const newuser= await User.create({
           firstName:profile.name.givenName,
           lastName:profile.name.familyName,
-          email:profile.emails[0].value,
+          email,
           googleId:profile.id,
           avatar:profile.photos[0].value,
           isVerified:true,
