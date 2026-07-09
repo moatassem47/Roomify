@@ -6,6 +6,7 @@ const {verfiyToken,restrictedTo}=require("../middleware/authMiddleware")
 const {addDeliveryUser,deleteDeliveryUser,showAllDeliverieUsers,showDeliveryUserByID, updateDeliveryUser, toggleDeliveryUserStatus, getDeliveryUserHistory}=require("../controller/admin/adminDelvieryController")
 const {showAllOrders,updateOrderStatus,assignOrder}=require("../controller/admin/adminOrdersController")
 const {getDashboardStats}=require("../controller/admin/analysisController")
+const {showAllCustomers}=require("../controller/admin/adminCustomersController")
 const uploadFields=upload.fields([
     {name:"images",maxCount:6},
     {name:"model",maxCount:1}
@@ -30,6 +31,8 @@ router.get("/orders",verfiyToken,restrictedTo("admin"),showAllOrders)
 router.patch("/orders/:id",verfiyToken,restrictedTo("admin"),updateOrderStatus)
 router.patch("/orders/assign/:id",verfiyToken,restrictedTo("admin"),assignOrder)
 
+//customers
+router.get("/customers",verfiyToken,restrictedTo("admin"),showAllCustomers)
 
 //Dashboard
 router.get("/dashboard",verfiyToken,restrictedTo("admin"),getDashboardStats)

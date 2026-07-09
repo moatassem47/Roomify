@@ -1,10 +1,17 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
-import { getDashboard, getOrders, updateOrderStatus } from "./AdminApis"
+import { getCustomers, getDashboard, getOrders, updateOrderStatus } from "./AdminApis"
 
 export const useDashboard=()=>{
     return useQuery({
         queryKey:["dashboard"],
         queryFn:getDashboard
+    })
+}
+
+export const useCustomers = () => {
+    return useQuery({
+        queryKey: ["customers"],
+        queryFn: getCustomers
     })
 }
 

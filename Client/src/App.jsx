@@ -23,6 +23,7 @@ import AdminRoute from "./features/admin/components/AdminRoute"
 const AdminLayout =lazy(()=>import("./layout/AdminLayout"));
 const Dashboard =lazy(()=>import("./features/admin/pages/Dashboard"));
 const Orders =lazy(()=>import("./features/admin/pages/Orders"))
+const Customers =lazy(()=>import("./features/admin/pages/Customers"))
 const Delivery = lazy(()=>import("./features/admin/pages/Delivery"));
 const MyOrders =lazy(()=>import("./pages/MyOrders"));
 const OrderDetails=lazy(()=>import("./pages/OrderDetails"));
@@ -254,6 +255,16 @@ function App() {
                 <AnimatedAdminPages>
                   <AdminRoute>
                     <Orders />
+                  </AdminRoute>
+                </AnimatedAdminPages>
+              }
+            />
+            <Route
+              path="customers"
+              element={
+                <AnimatedAdminPages>
+                  <AdminRoute>
+                    <Customers />
                   </AdminRoute>
                 </AnimatedAdminPages>
               }
