@@ -1,5 +1,5 @@
-import Error from "../../../components/common/Error";
-import Loading from "../../../components/common/Loading";
+import Error from "../../../components/Error";
+import Loading from "../../../components/Loading";
 import DeliveryOrderCard from "../components/DeliveryOrderCard";
 import { useDeliveryOrders } from "../apis/useDelivery";
 

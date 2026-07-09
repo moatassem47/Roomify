@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Eye, EyeClosed, KeyRound, CheckCircle2, XCircle } from "lucide-react";
 import useChangePassword from "../features/auth/apis/useChangePassword";
-import UpdateMessage from "../components/common/UpdateMessage";
+import UpdateMessage from "../components/UpdateMessage";
 
 const ResetPassword = () => {
   const { token } = useParams();

@@ -1,13 +1,13 @@
-import useAuth from "../../store/authStore";
-import myIcon from "../../assets/icons/roomify-logo.svg";
+import useAuth from "../store/authStore";
+import myIcon from "../assets/icons/roomify-logo.svg";
 import { ShoppingBag, User } from "lucide-react";
 import UserDropdown from "./UserDropdown";
 import Button from "./Button";
 import MobileMenu from "./MobileMenu";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useGetCart } from "../../features/cart/apis/useCart";
+import { useGetCart } from "../features/cart/apis/useCart";
 import { useState } from "react";
-import useRequireVerified from '../../hooks/useRequireVerified';
+import useRequireVerified from '../hooks/useRequireVerified';
 
 const NavBar = () => {
   const  isAuthenticated = useAuth((s)=>s.isAuthenticated);

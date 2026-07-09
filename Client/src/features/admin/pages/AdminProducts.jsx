@@ -9,8 +9,8 @@ import {
   Trash2,
   X,
 } from "lucide-react";
-import Loading from "../../../components/common/Loading";
-import Error from "../../../components/common/Error";
+import Loading from "../../../components/Loading";
+import Error from "../../../components/Error";
 import useAuth from "../../../store/authStore";
 import useDebounce from "../../../hooks/useDebounce";
 import useFilters from "../../../hooks/useFilters";

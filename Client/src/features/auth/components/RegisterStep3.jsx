@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { Eye, EyeClosed } from "lucide-react";
-import Input from "../../../components/common/Input";
-import Button from "../../../components/common/Button";
+import Input from "../../../components/Input";
+import Button from "../../../components/Button";
 
 const RegisterStep3 = ({ prevStep, isSubmitting = false }) => {
   const [showPassword, setShowPassword] = useState(false);

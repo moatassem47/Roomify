@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Loading from "../../../components/common/Loading";
-import Error from "../../../components/common/Error";
+import Loading from "../../../components/Loading";
+import Error from "../../../components/Error";
 import DeliveryOrderCard from "../components/DeliveryOrderCard";
 import { useDeliveryOrders } from "../apis/useDelivery";
 import { CheckCircle, ClipboardList, Truck } from "lucide-react";

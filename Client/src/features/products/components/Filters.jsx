@@ -23,7 +23,7 @@ const Filters = () => {
   const [availableOnly, setAvailableOnly] = useState(currentFilters.available === "true");
   
 
-  const maxPrice = currentFilters.maxPrice || "5000";
+  const maxPrice ="100000";
   const hasFilters = useMemo(
     () => ["search", "sort", "category", "minPrice", "maxPrice", "available", "rating"].some((key) => currentFilters[key]),
     [currentFilters]

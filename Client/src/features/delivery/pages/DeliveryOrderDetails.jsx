@@ -1,8 +1,8 @@
 import { ChevronLeft, MapPin, Phone, ReceiptText, UserRound } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import Error from "../../../components/common/Error";
-import Loading from "../../../components/common/Loading";
+import Error from "../../../components/Error";
+import Loading from "../../../components/Loading";
 import DeliveryStatusBadge from "../components/DeliveryStatusBadge";
 import {
   formatMoney,

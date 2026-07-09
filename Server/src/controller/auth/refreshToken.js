@@ -56,7 +56,7 @@ const refreshToken = async (req, res) => {
         isDeleted: { $ne: true },
       },
       { $inc: { tokenVersion: 1 } },
-      { new: true }        
+      { returnDocument: true }        
     );
 
     if (!updatedUser) {

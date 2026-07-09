@@ -1,5 +1,5 @@
 import RoleProtectedRoute from "./RoleProtectedRoute";
-import { USER_ROLES } from "../../utils/roleRoutes";
+import { USER_ROLES } from "../utils/roleRoutes";
 
 const ProtectedRoute = ({ children }) => {
   return (

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Bot, Send, X, MessageSquare } from "lucide-react";
-import "../../styles/ChatWidget.css";
-import api from "../../utils/axios";
+import "../styles/ChatWidget.css";
+import api from "../utils/axios";
 
 const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);

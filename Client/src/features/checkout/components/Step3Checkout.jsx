@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form"
 import useAuth from "../../../store/authStore"
-import Button from "../../../components/common/Button"
+import Button from "../../../components/Button"
 
 
 const Step3Checkout = ({setStep}) => {

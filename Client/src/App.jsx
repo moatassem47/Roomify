@@ -1,9 +1,9 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { lazy, Suspense, useEffect } from "react";
-import AnimationPage from "./components/common/AnimationPage";
-import ProtectedRoute from "./components/common/ProtectedRoute";
-import RoleProtectedRoute from "./components/common/RoleProtectedRoute";
+import AnimationPage from "./components/AnimationPage";
+import ProtectedRoute from "./components/ProtectedRoute";
+import RoleProtectedRoute from "./components/RoleProtectedRoute";
 import { USER_ROLES, getRoleHome } from "./utils/roleRoutes";
 import useAuth from "./store/authStore";
 import MainLayout from "./layout/MainLayout";
@@ -32,7 +32,7 @@ const  Wishlist=lazy(()=>import("./pages/Wishlist"));
 const VerifyEmail =lazy(()=>import("./pages/VerifyEmail"));
 const SignUp =lazy(()=>import( "./pages/SignUp"));
 const ResetPassword=lazy(()=>import("./pages/ResetPassword"))
-import Loading from "./components/common/Loading";
+import Loading from "./components/Loading";
 import Login from "./pages/Login";
 const DeliveryProtectedRoute=lazy(()=>import( "./features/delivery/components/DeliveryProtectedRoute"));
 const DeliveryDashboard =lazy(()=>import( "./features/delivery/pages/DeliveryDashboard"));

@@ -5,7 +5,7 @@ import useAuth from "../../store/authStore";
 import { useForm } from "react-hook-form";
 import api from "../../utils/axios";
 import { zodResolver } from "@hookform/resolvers/zod";
-import UpdateMessage from "../../components/common/UpdateMessage";
+import UpdateMessage from "../../components/UpdateMessage";
 
 const Security = ({isVerified}) => {
   const profileSchema = z.object({

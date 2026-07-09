@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from "react-router-dom";
 import useFetchQuery from "../hooks/useFetchQuery";
-import Loading from "../components/common/Loading";
-import Erorr from "../components/common/Error";
+import Loading from "../components/Loading";
+import Erorr from "../components/Error";
 import {  ChevronLeft } from "lucide-react";
 import OrderBadge from "../features/orders/OrderBadge";
 import OrderBreadCrump from "../features/orders/OrderBreadCrump";
 import { useState } from "react";
-import CancelPopUp from "../components/common/CancelPopUp";
+import CancelPopUp from "../components/CancelPopUp";
 import { useQueryClient } from "@tanstack/react-query";
 import api from "../utils/axios";
 import toast from "react-hot-toast";

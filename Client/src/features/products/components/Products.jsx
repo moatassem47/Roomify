@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Grid2X2, List, RotateCcw } from "lucide-react";
 import ProductCardSkeleton from "./ProductCardSkeleton";
-import Pagination from "../../../components/ui/Pagination";
+import Pagination from "../../../components/Pagination";
 import noProducts from "../../../assets/images/emptyCart.svg";
 import ProductCard from "./ProductCard";
 import useFetchQuery from "../../../hooks/useFetchQuery";

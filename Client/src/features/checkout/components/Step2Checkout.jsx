@@ -1,6 +1,6 @@
 import { CreditCard, HandCoins ,LockKeyhole ,BadgeCheck,Shield} from "lucide-react";
 import { useFormContext} from "react-hook-form";
-import Button from "../../../components/common/Button";
+import Button from "../../../components/Button";
 
 const Step2Checkout = ({prevStep, nextStep}) => {
   const {

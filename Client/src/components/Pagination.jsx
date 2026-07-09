@@ -54,7 +54,7 @@ export default function Pagination({ totalPages }) {
         <nav aria-label="Page navigation" className="flex justify-center mt-10">
             <ul className="flex flex-wrap items-center justify-center gap-2 text-sm">
 
-                {/* Previous */}
+                
                 <li>
                     <button
                         onClick={() => goToPage(currentPage - 1)}
@@ -67,7 +67,7 @@ export default function Pagination({ totalPages }) {
                     </button>
                 </li>
 
-                {/* Page Numbers with Ellipsis */}
+                
                 {visiblePages.map((page, i) =>
                     page === "..." ? (
                         <li key={`dots-${i}`}>
@@ -88,7 +88,7 @@ export default function Pagination({ totalPages }) {
                     )
                 )}
 
-                {/* Next */}
+              
                 <li>
                     <button
                         onClick={() => goToPage(currentPage + 1)}

@@ -1,10 +1,10 @@
-import Loading from "../components/common/Loading";
+import Loading from "../components/Loading";
 import useAuth from "../store/authStore";
 import ProfileSideBar from "../features/profile/ProfileSideBar";
 import PersonalInformation from "../features/profile/PersonalInformation";
 import ShippingAddress from "../features/profile/ShippingAddress";
 import Security from "../features/profile/Security";
-import CancelPopUp from "../components/common/CancelPopUp";
+import CancelPopUp from "../components/CancelPopUp";
 import { useState } from "react";
 import api from "../utils/axios";
 import toast from "react-hot-toast";

@@ -1,9 +1,9 @@
 import { useGetCart } from "../apis/useCart";
 import ItemsCard from "./ItemsCard";
 import emptyCart from "../../../assets/images/NoItemsCart.svg";
-import EmptyState from "../../../components/common/EmptyState";
-import Loading from "../../../components/common/Loading";
-import Error from "../../../components/common/Error";
+import EmptyState from "../../../components/EmptyState";
+import Loading from "../../../components/Loading";
+import Error from "../../../components/Error";
 export const CartItems = () => {
   const { data: cart, error, isLoading } = useGetCart();
 

@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form";
-import Input from "../../../components/common/Input";
+import Input from "../../../components/Input";
 import { egyptCities } from "../schema/cites";
-import Button from "../../../components/common/Button";
+import Button from "../../../components/Button";
 const Step1Checkout = ({ nextStep }) => {
   const {
     register,

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Button from '../../../components/common/Button';
-import QuantityButton from '../../../components/common/QuantityButton';
+import Button from '../../../components/Button';
+import QuantityButton from '../../../components/QuantityButton';
 import { ShoppingCart } from 'lucide-react';
 import useAuth from "../../../store/authStore"
 import { useParams, useNavigate } from 'react-router-dom';

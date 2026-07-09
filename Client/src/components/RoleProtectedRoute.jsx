@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
-import useAuth from "../../store/authStore";
-import { getRoleHome } from "../../utils/roleRoutes";
+import useAuth from "../store/authStore";
+import { getRoleHome } from "../utils/roleRoutes";
 
 const RoleProtectedRoute = ({
   children,

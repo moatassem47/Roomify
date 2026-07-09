@@ -1,7 +1,7 @@
-import Hero from "../components/common/Hero"
+import Hero from "../components/Hero"
 import LandingPage from "../assets/images/LandingPage.webp"
 import NewArrival from "../features/products/components/NewArrival"
-import Button from "../components/common/Button"
+import Button from "../components/Button"
 import {useNavigate} from "react-router-dom"
 import OurPhilosophy from "../features/products/components/OurPhilosophy"
 

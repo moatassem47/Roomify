@@ -1,5 +1,5 @@
 import { useDashboard } from "../apis/useAdmin";
-import Loading from "../../../components/common/Loading";
+import Loading from "../../../components/Loading";
 import KPISDashboard from "../components/Dashboard/KPISDashboard";
 import ChartsDashboard from "../components/Dashboard/ChartsDashboard";
 

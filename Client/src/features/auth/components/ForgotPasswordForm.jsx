@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Button from "../../../components/common/Button";
-import UpdateMessage from "../../../components/common/UpdateMessage";
+import Button from "../../../components/Button";
+import UpdateMessage from "../../../components/UpdateMessage";
 import useForgotPassword from "../apis/useForgotPassword";
 
 const ForgotPasswordForm = ({ onBack }) => {

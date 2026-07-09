@@ -1,4 +1,4 @@
-import QuantityButton from "../../../components/common/QuantityButton"
+import QuantityButton from "../../../components/QuantityButton"
 import { Trash2 } from 'lucide-react';
 import { useDeleteItem ,useUpdateQuantity} from "../apis/useCart";
 

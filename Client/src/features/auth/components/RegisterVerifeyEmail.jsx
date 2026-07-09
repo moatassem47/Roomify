@@ -2,7 +2,7 @@ import { MailCheck } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-import Button from "../../../components/common/Button";
+import Button from "../../../components/Button";
 import useAuth from "../../../store/authStore";
 import useResendVerficationEmail from "../apis/useResendVerficationEmail";
 import useChangeVerificationEmail from "../apis/useChangeVerificationEmail";

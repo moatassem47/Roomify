@@ -1,7 +1,7 @@
 import { UserRound } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
-import UserDropdown from "../../../components/common/UserDropdown";
+import UserDropdown from "../../../components/UserDropdown";
 import useAuth from "../../../store/authStore";
 
 const pageTitles = [

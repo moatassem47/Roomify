@@ -3,7 +3,7 @@ import logo from"../../../assets/icons/roomify-logo.svg"
 import { LayoutDashboard, ShoppingCart, PackageSearch, Motorbike, User, Menu, X, Users } from "lucide-react"
 import navLinkClass from "./navLinkClass"
 import useAuth from "../../../store/authStore"
-import UserDropdown from "../../../components/common/UserDropdown"
+import UserDropdown from "../../../components/UserDropdown"
 import { useState } from "react"
 
 const SideBar = () => {

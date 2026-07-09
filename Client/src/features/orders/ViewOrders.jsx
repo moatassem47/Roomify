@@ -1,10 +1,10 @@
-import EmptyState from "../../components/common/EmptyState";
-import Loading from "../../components/common/Loading";
+import EmptyState from "../../components/EmptyState";
+import Loading from "../../components/Loading";
 import useFetchQuery from "../../hooks/useFetchQuery";
 import useFilters from "../../hooks/useFilters";
 import emptyCart from "../../assets/images/NoItemsCart.svg";
 import OrderCard from "./OrderCard";
-import Error from "../../components/common/Error";
+import Error from "../../components/Error";
 import useAuth from "../../store/authStore";
 
 const ViewOrders = () => {

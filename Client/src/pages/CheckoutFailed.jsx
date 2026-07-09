@@ -1,34 +1,34 @@
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, Link, useLocation } from "react-router-dom";
 import { useGetOrderById } from "../features/checkout/apis/useOrder";
 import { HeartOff, AlertCircle, ArrowRight, Loader2 } from "lucide-react";
 
 const CheckoutFailed = () => {
+  const {state}=useLocation()
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get("orderId");
-
+  
   const { data: order, isLoading, error } = useGetOrderById(orderId);
 
-  // Format Order ID to display as #RF-XXXXXX (last 6 hex characters of ObjectId capitalized)
   const displayOrderId = orderId ? `#RF-${orderId.slice(-6).toUpperCase()}` : "N/A";
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[75vh] px-4 py-12 bg-brand-cream font-sans">
-      {/* Heart broken icon */}
+      
       <div className="w-16 h-16 flex items-center justify-center rounded-full bg-[#f4efe9] mb-6">
         <HeartOff className="w-8 h-8 text-brand-cedar" strokeWidth={1.5} />
       </div>
 
-      {/* Title */}
+      
       <h1 className="text-3xl sm:text-4xl font-serif text-brand-charcoal mb-4 text-center">
         Something went wrong.
       </h1>
 
-      {/* Subtitle */}
+      
       <p className="text-brand-text max-w-fit text-center mb-8 leading-relaxed">
-        We were unable to process your order. Your sanctuary is waiting, but your payment was declined by the bank.
+        We were unable to process your order. 
       </p>
 
-      {/* FAILED ORDER DETAILS Container */}
+      
       <div className="w-full max-w-fit bg-white rounded-2xl shadow-ambient border border-brand-surface-container overflow-hidden mb-8">
         <div className="px-5 py-3 bg-brand-surface-container/60 border-b border-brand-surface-container">
           <span className="text-xs font-bold uppercase tracking-wider text-brand-text/70 font-sans">
@@ -36,7 +36,7 @@ const CheckoutFailed = () => {
           </span>
         </div>
 
-        {/* Order Items */}
+        
         <div className="p-5 flex flex-col gap-4">
           {isLoading ? (
             <div className="flex items-center justify-center py-6 text-brand-text">
@@ -79,7 +79,7 @@ const CheckoutFailed = () => {
             </span>
             <div className="flex items-center gap-1.5 text-brand-error font-medium">
               <AlertCircle className="w-3.5 h-3.5" />
-              <span>Payment Declined</span>
+              <span>{state.error}</span>
             </div>
           </div>
           <div className="text-right">
@@ -96,7 +96,7 @@ const CheckoutFailed = () => {
       {/* Action Buttons */}
       <Link
         to="/checkout"
-        className="flex items-center justify-center gap-2 bg-brand-cedar hover:bg-brand-cedar-hover text-white font-semibold py-3.5 px-8 rounded-xl transition-all duration-300 shadow-sm w-full max-w-xs mb-6"
+        className="flex items-center justify-center gap-2 bg-brand-cedar hover:bg-brand-cedar-hover text-white font-semibold py-3.5 px-8 rounded-xl transition-all duration-300 shadow-sm w-full max-w-2xl mb-6"
       >
         <span>Retry Payment</span>
         <ArrowRight className="w-4 h-4" />

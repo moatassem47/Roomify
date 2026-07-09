@@ -1,6 +1,6 @@
 import { BadgeCheck, CircleX } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
-import Loading from "../components/common/Loading";
+import Loading from "../components/Loading";
 import useFetchQuery from "../hooks/useFetchQuery";
 import useAuth from "../store/authStore";
 import { useEffect } from "react";

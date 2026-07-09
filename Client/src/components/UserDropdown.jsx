@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../../store/authStore";
+import useAuth from "../store/authStore";
 import { motion, AnimatePresence } from "framer-motion";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import CancelPopUp from "./CancelPopUp";
-import { USER_ROLES } from "../../utils/roleRoutes";
+import { USER_ROLES } from "../utils/roleRoutes";
 
 const UserDropdown = ({ children, isOpen, setIsOpen, className }) => {
   const user = useAuth((s)=>s.user);

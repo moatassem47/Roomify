@@ -1,11 +1,11 @@
 
-import Footer from '../components/common/Footer'
-import NavBar from '../components/common/NavBar'
+import Footer from '../components/Footer'
+import NavBar from '../components/NavBar'
 import { Outlet, useLocation } from 'react-router-dom'
 import useAuth from '../store/authStore'
 import AuthPopUp from '../features/auth/components/AuthPopUp'
 import { AnimatePresence } from 'framer-motion'
-import ChatWidget from '../components/common/ChatWidget'
+import ChatWidget from '../components/ChatWidget'
 
 
 const MainLayout = () => {

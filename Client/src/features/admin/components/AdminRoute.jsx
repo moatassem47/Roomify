@@ -1,4 +1,4 @@
-import RoleProtectedRoute from "../../../components/common/RoleProtectedRoute";
+import RoleProtectedRoute from "../../../components/RoleProtectedRoute";
 
 const AdminRoute = ({ children }) => {
   return (

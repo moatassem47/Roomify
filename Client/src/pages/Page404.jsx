@@ -1,4 +1,4 @@
-import EmptyState from "../components/common/EmptyState"
+import EmptyState from "../components/EmptyState"
 import errorIMage from "../assets/images/error404.svg"
 
 const Page404 = () => {

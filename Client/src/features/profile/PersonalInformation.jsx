@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../store/authStore";
 import api from "../../utils/axios";
 import z from "zod";
-import UpdateMessage from "../../components/common/UpdateMessage";
+import UpdateMessage from "../../components/UpdateMessage";
 import { useState } from "react";
 
 const profileSchema = z.object({

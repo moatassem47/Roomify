@@ -1,5 +1,5 @@
 import Chair from "../../../assets/images/chair.webp"
-import Button from '../../../components/common/Button'
+import Button from '../../../components/Button'
 import { Flower,Heart ,Leaf} from 'lucide-react';
 import {useNavigate} from "react-router-dom"
 

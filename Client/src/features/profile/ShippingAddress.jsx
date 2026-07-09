@@ -5,7 +5,7 @@ import useAuth from "../../store/authStore";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import api from "../../utils/axios";
-import UpdateMessage from "../../components/common/UpdateMessage";
+import UpdateMessage from "../../components/UpdateMessage";
 
 const AddressSchema = z.object({
   address: z.object({

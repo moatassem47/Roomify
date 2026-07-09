@@ -1,13 +1,13 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import LoginSchema from "../schema/LoginSchema";
-import Input from "../../../components/common/Input";
+import Input from "../../../components/Input";
 import useLogin from "../apis/useLogin";
 import { EyeClosed, Eye } from "lucide-react";
 import { useState } from "react";
 import useAuth from "../../../store/authStore";
-import Button from "../../../components/common/Button";
-import UpdateMessage from "../../../components/common/UpdateMessage";
+import Button from "../../../components/Button";
+import UpdateMessage from "../../../components/UpdateMessage";
 import { useNavigate } from "react-router-dom";
 import ForgotPasswordForm from "./ForgotPasswordForm";
 

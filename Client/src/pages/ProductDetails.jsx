@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useGetSindgleProduct } from '../features/products/apis/useProducts';
-import Breadcrumbs from '../components/common/BreadCrumbs';
-import HorizontalLine from '../components/common/HorizontalLine';
+import Breadcrumbs from '../components/BreadCrumbs';
 import ImageGallery from '../features/products/components/ImageGallery';
 import ProductHeader from '../features/products/components/ProductHeader';
 import ProductColors from '../features/products/components/ProductColors';
@@ -10,8 +9,8 @@ import ProductActions from '../features/products/components/ProductActions';
 import ProductTrustBadges from '../features/products/components/ProductTrustBadges';
 import InfoTabs from '../features/products/components/InfoTabs';
 import SuggestedProduct from '../features/products/components/SuggestedProduct';
-import Loading from '../components/common/Loading';
-import Error from '../components/common/Error';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
 
 
 const ProductDetails = () => {
@@ -74,7 +73,7 @@ const ProductDetails = () => {
           </div>
         </div>
       <div className='mt-10 flex flex-col gap-7'>
-      <HorizontalLine />
+       <div className='w-full bg-gray-300 h-[0.5px] '></div>
       <SuggestedProduct category={product.category} productID={product._id} />
       </div>
       </div>

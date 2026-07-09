@@ -1,6 +1,6 @@
 import { 
   Loader2, Mail, Phone, MapPin, 
-  Package, CreditCard, Calendar, CheckCircle, 
+  Package, CreditCard, CheckCircle, 
   XCircle, ChevronDown, User, Shield, Activity,
   Ban, Clock, Search
 } from "lucide-react";
@@ -61,8 +61,9 @@ const Customers = () => {
     );
   }
 
+  console.log(customers)
   return (
-    <div className="min-h-screen bg-gradient-to-br from-brand-cream/50 via-white to-brand-cream/30 p-4 md:p-8">
+    <div className="min-h-screen bg-linear-to-br from-brand-cream/50 via-white to-brand-cream/30 p-4 md:p-8">
       {/* Header Section */}
       <div className="mb-8 relative overflow-hidden rounded-3xl bg-white border border-brand-surface-container shadow-sm p-8">
         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
@@ -70,7 +71,7 @@ const Customers = () => {
         
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-charcoal to-gray-600 tracking-tight">
+            <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-linear-to-br from-brand-charcoal to-gray-600 tracking-tight">
               Customers Directory
             </h1>
             <p className="mt-2 text-brand-text/80 flex items-center gap-2">
@@ -102,7 +103,7 @@ const Customers = () => {
             <p className="text-gray-500 mt-2 max-w-md text-center">There are currently no customers registered in the system. They will appear here once they sign up.</p>
           </div>
         ) : (
-          customers.map((customer, index) => {
+          customers.map((customer) => {
             const orders = customer.orders || [];
             const totalSpent = orders.reduce((sum, order) => {
               return order.paymentStatus === "Completed"
@@ -123,9 +124,9 @@ const Customers = () => {
               >
                 <summary className="grid cursor-pointer gap-6 px-6 py-5 md:grid-cols-[2fr_1.5fr_1fr_1fr_auto] md:items-center relative z-10 transition-colors group-hover:bg-gray-50/50">
                   <div className="flex items-center gap-4">
-                    <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/80 to-primary/40 text-lg font-bold text-white shadow-inner">
+                    <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-linear-to-br from-primary/80 to-primary/40 text-lg font-bold text-white shadow-inner" >
                       {customer.avatar ? (
-                        <img src={customer.avatar} alt="avatar" className="h-full w-full rounded-2xl object-cover" />
+                        <img src={customer.avatar} alt="avatar" className="h-full w-full rounded-2xl object-cover" referrerPolicy="no-referrer" />
                       ) : (
                         initials
                       )}
@@ -223,7 +224,7 @@ const Customers = () => {
                         <p className="text-xs text-gray-500 font-medium mb-1">Restrictions</p>
                         <div className="flex flex-col gap-1">
                           <span className="text-gray-600">Deleted: <span className={customer.isDeleted ? "font-semibold text-red-600" : "font-semibold"}>{customer.isDeleted ? "Yes" : "No"}</span></span>
-                          <span className="text-gray-600 font-mono text-xs mt-1 truncate max-w-[140px]" title={customer._id}>ID: {customer._id}</span>
+                          <span className="text-gray-600 font-mono text-xs mt-1 truncate max-w-35" title={customer._id}>ID: {customer._id}</span>
                         </div>
                       </div>
                     </div>
@@ -268,7 +269,7 @@ const Customers = () => {
                                 <td className="px-5 py-4 text-gray-600 whitespace-nowrap">
                                   {formatDate(order.createdAt)}
                                 </td>
-                                <td className="px-5 py-4 min-w-[200px]">
+                                <td className="px-5 py-4 min-w-50">
                                   <div className="flex flex-col gap-1.5">
                                     {(order.items || []).map((item, index) => (
                                       <div key={`${order._id}-${index}`} className="flex items-center gap-2 text-gray-700">

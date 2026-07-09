@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import useFetchQuery from "../hooks/useFetchQuery";
-import Loading from "../components/common/Loading";
+import Loading from "../components/Loading";
 import { Heart, RotateCcw } from "lucide-react";
-import EmptyState from "../components/common/EmptyState";
+import EmptyState from "../components/EmptyState";
 import ProductCard from "../features/products/components/ProductCard";
 
 const Wishlist = () => {

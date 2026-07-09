@@ -1,4 +1,4 @@
-import myIcon from "../../assets/icons/roomify-logo.svg";
+import myIcon from "../assets/icons/roomify-logo.svg";
 
 const Footer = () => {
   return (
