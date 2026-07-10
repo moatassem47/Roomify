@@ -16,7 +16,7 @@ const formatDate = (date) => {
 const formatMoney = (amount = 0) => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD'
+    currency: 'EGP'
   }).format(amount);
 };
 
@@ -61,7 +61,6 @@ const Customers = () => {
     );
   }
 
-  console.log(customers)
   return (
     <div className="min-h-screen bg-linear-to-br from-brand-cream/50 via-white to-brand-cream/30 p-4 md:p-8">
       {/* Header Section */}
@@ -100,7 +99,7 @@ const Customers = () => {
               <Search className="h-10 w-10 text-gray-400" />
             </div>
             <h3 className="text-xl font-semibold text-gray-700">No Customers Found</h3>
-            <p className="text-gray-500 mt-2 max-w-md text-center">There are currently no customers registered in the system. They will appear here once they sign up.</p>
+            <p className="text-gray-500 mt-2 max-w-3xl text-center">There are currently no customers registered in the system. They will appear here once they sign up.</p>
           </div>
         ) : (
           customers.map((customer) => {

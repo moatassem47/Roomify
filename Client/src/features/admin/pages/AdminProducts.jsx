@@ -39,9 +39,9 @@ const initialForm = {
   model: null,
 };
 
-const currencyFormatter = new Intl.NumberFormat("en-US", {
+const currencyFormatter = new Intl.NumberFormat("en-EG", {
   style: "currency",
-  currency: "USD",
+  currency: "EGP",
 });
 
 const AdminProducts = () => {

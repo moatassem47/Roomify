@@ -3,7 +3,7 @@ import { Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import useToggleWishlist from "../../wishlist/useWishlist";
 
-const formatPrice = (price) => `$${Number(price || 0).toLocaleString()}`;
+const formatPrice = (price) => `${Number(price || 0).toLocaleString()} E£`;
 
 const ProductCard = ({ product, variant = "vertical", className = "" ,wishlist}) => {
   const navigate = useNavigate();

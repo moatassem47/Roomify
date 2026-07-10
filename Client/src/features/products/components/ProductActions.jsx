@@ -7,7 +7,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useAddToCart } from '../../cart/apis/useCart';
 import useRequireVerified from '../../../hooks/useRequireVerified';
 
-const ProductActions = () => {
+const ProductActions = ({stock}) => {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const ProductActions = () => {
       return navigate("/login");
     }
 
-    
+   
 
 
     if (isVerified()) {
@@ -47,9 +47,9 @@ const ProductActions = () => {
       <Button 
         className="flex-1 flex items-center justify-center gap-2" 
         onClick={onClick}
-        disabled={isPending} 
+        disabled={isPending||quantity>stock} 
       >
-        <ShoppingCart/> {isPending ? "Adding..." : "Add to Cart"}
+        <ShoppingCart/> {isPending ? "Adding..." :quantity>stock? "Out of the Stock":"Add to Cart"}
       </Button>
     </div>
   );

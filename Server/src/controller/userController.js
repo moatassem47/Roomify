@@ -45,21 +45,30 @@ const changeUserData = async (req, res) => {
     if (phone) user.phone = phone;
 
     if (newPassword) {
-      if (!password) {
-        return res.status(400).json({
-          message: "Please provide your current password to set a new one",
-        });
-      }
+  const isLocalUser = user.providers.includes("local");
 
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (isMatch) {
-        user.password = newPassword;
-      } else {
-        return res.status(400).json({
-          message: "Current password is incorrect. Please try again.",
-        });
-      }
+  if (isLocalUser && !password) {
+    return res.status(400).json({
+      message: "Please provide your current password to set a new one",
+    });
+  }
+
+  if (!isLocalUser) {
+    user.password = newPassword;
+    user.providers.push("local");
+  } 
+  
+  else {
+    const isMatch = await bcrypt.compare(password, user.password);
+    
+    if (!isMatch) {
+      return res.status(400).json({
+        message: "Current password is incorrect. Please try again.",
+      });
     }
+    user.password = newPassword;
+  }
+}
 
     if (address) {
       user.address = { ...user.address, ...address };

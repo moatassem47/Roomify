@@ -4,11 +4,11 @@ import DeliverySidebar from "../features/delivery/components/DeliverySidebar";
 
 const DeliveryLayout = () => {
   return (
-    <div className="flex h-screen overflow-hidden bg-brand-cream">
+    <div className="flex  bg-brand-cream relative">
       <DeliverySidebar />
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="flex min-w-0 flex-1 flex-col relative lg:ml-64">
         <DeliveryNavbar />
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto  mt-21 ">
           <Outlet />
         </main>
       </div>

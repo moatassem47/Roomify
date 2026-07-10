@@ -7,23 +7,33 @@ import api from "../../utils/axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import UpdateMessage from "../../components/UpdateMessage";
 
-const Security = ({isVerified}) => {
+const Security = ({isVerified,isLocalUser}) => {
   const profileSchema = z.object({
-    password:z.string().trim().min(1, "Current password is required"),
+    password: z.string().trim().optional(), 
     newPassword: z.string()
        .trim()
        .min(8, "Password must be at least 8 characters")
        .max(30, "Password is too long")
        .regex(/[0-9]/, "Password must include at least one number")
        .regex(/[^A-Za-z0-9]/, "Password must include at least one special character"),
-        confirmPassword: z.string().trim(),
-  }).refine(
+    confirmPassword: z.string().trim(),
+  })
+  .refine(
     (data) => data.newPassword === data.confirmPassword,
     {
       path: ["confirmPassword"],
       message: "Passwords do not match",
     }
-  );
+  )
+  .superRefine((data, ctx) => {
+    if (isLocalUser && (!data.password || data.password.length === 0)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["password"],
+        message: "Current password is required to change your password",
+      });
+    }
+  });
 
   const [showCurrent, setShowCurrent] = useState(false);
   const [showNew, setShowNew] = useState(false);

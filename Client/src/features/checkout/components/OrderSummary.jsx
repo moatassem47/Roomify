@@ -8,7 +8,6 @@ const OrderSummary = () => {
   const totalPrice=data.totalPrice
   const items=data.cart.items
   
- console.log(items)
   return (
     <div className="flex-1 bg-white h-fit rounded-2xl border border-brand-surface-container shadow-ambient p-6 flex flex-col gap-7">
         <h2 className="text-xl font-semibold">Order Summary</h2>

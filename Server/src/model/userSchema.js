@@ -93,8 +93,7 @@ const userSchema = new mongoose.Schema(
     },
     deletedAt: Date,
     refreshToken: {
-      type: String,
-      select: false,
+      type: String
     },
     tokenVersion: {
       type: Number,

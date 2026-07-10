@@ -1,35 +1,58 @@
-const mongoose = require("mongoose");
-const {callAgent} =require("../agents/agent")
-const StartChatSession=async(req,res)=>{
-        const {message}=req.body
-        const threadID=Date.now().toString()
-        console.log(message)
-    try{
-        const client = mongoose.connection.getClient();
+const { callAgent } = require("../agents/agent");
 
-        const response= await callAgent(client,message,threadID)
-        res.status(200).json({response,threadID})
-    }catch(e){
-        console.error(e)
-        res.status(500).json(e)
+const StartChatSession = async (req, res) => {
+  try {
+    const { message } = req.body;
+
+    if (!message) {
+      return res.status(400).json({
+        message: "Message is required",
+      });
     }
-}
 
+    const threadID = Date.now().toString();
 
-const ContinueConversation=async(req,res)=>{
-        const {threadID}=req.params
-        const {message}=req.body
-        console.log(message)
-    try{
-        const client = mongoose.connection.getClient();
-        const response= await callAgent(client,message,threadID)
-        res.status(200).json({response})
-    }catch(e){
-        console.error(e)
-        res.status(500).json(e)
+    const response = await callAgent(message, threadID);
+
+    res.json({
+      response,
+      threadID,
+    });
+  } catch (err) {
+    console.error(err);
+
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};
+
+const ContinueConversation = async (req, res) => {
+  try {
+    const { message } = req.body;
+    const { threadID } = req.params;
+
+    if (!message) {
+      return res.status(400).json({
+        message: "Message is required",
+      });
     }
-}
 
+    const response = await callAgent(message, threadID);
 
+    res.json({
+      response,
+    });
+  } catch (err) {
+    console.error(err);
 
-module.exports={StartChatSession,ContinueConversation}
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};
+
+module.exports = {
+  StartChatSession,
+  ContinueConversation,
+};

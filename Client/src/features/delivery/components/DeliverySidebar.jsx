@@ -18,7 +18,7 @@ const DeliverySidebar = () => {
   return (
     <>
       <button
-        className="fixed left-4 top-4 z-50 rounded-lg bg-white p-2 shadow-sm lg:hidden"
+        className="fixed left-4 top-4  z-50 rounded-lg bg-white p-2 shadow-sm lg:hidden"
         onClick={() => setIsOpen(true)}
         aria-label="Open delivery menu"
       >
@@ -33,7 +33,7 @@ const DeliverySidebar = () => {
       )}
 
       <aside
-        className={`fixed left-0 top-0 z-50 flex h-screen w-64 flex-col border-r border-surface-variant bg-white px-4 py-5 transition-transform lg:static lg:z-auto lg:translate-x-0 ${
+        className={`fixed left-0 top-0 bottom-0 z-51 flex  w-64 flex-col border-r border-surface-variant bg-white px-4 py-5 transition-transform  lg:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >

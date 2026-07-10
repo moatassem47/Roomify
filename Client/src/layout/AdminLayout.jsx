@@ -7,7 +7,7 @@ const AdminLayout = () => {
     <div className="flex min-h-screen relative">
       <SideBar />
 
-      <main className="flex-1 min-w-0">
+      <main className="flex-1 min-w-0 lg:ml-60">
         <Outlet />
       </main>
     </div>

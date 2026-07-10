@@ -29,7 +29,6 @@ const LoginForm = () => {
   const { mutate } = useLogin();
 
   const onSubmit = (data) => {
-    console.log(data);
     mutate(data, {
       onError: (error) => {
         setError("root", {

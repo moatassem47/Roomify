@@ -51,6 +51,8 @@ const Profile = () => {
     day: "numeric",
     year: "numeric",
   });
+
+  const isLocalUser = user.providers.includes("local");
   return (
     <div className="max-w-container-max mx-auto px-6 py-12">
       <div className="flex flex-col md:flex-row gap-gutter">
@@ -72,7 +74,7 @@ const Profile = () => {
             city={user.address?.city}
             isVerified={isVerified}
           />
-          <Security isVerified={isVerified}/>
+          <Security isVerified={isVerified} isLocalUser={isLocalUser}/>
           <section
             className="bg-surface-container/50 p-8 rounded-xl border border-stone-200/40"
             id="status"

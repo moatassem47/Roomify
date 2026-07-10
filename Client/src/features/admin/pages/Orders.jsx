@@ -109,7 +109,7 @@ const Orders = () => {
                       {new Date(order.createdAt).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 font-semibold text-gray-800">
-                      ${order.totalAmount?.toFixed(2)}
+                      {order.totalAmount?.toFixed(2)} E£
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex flex-col gap-1">

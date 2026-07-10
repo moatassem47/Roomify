@@ -65,7 +65,7 @@ const ProductDetails = () => {
             
             <ProductQuickInfo specs={specs} materials={materials} />
             
-            <ProductActions />
+            <ProductActions stock={product.stockQuantity}/>
             
             <ProductTrustBadges />
 

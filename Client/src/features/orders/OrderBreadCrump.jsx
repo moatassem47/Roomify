@@ -13,7 +13,6 @@ const OrderBreadCrump = ({ statusHistory }) => {
     }),
   }));
   
-  console.log(statusHistory)
 
   const steps = [
   {

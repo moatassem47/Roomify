@@ -11,7 +11,6 @@ const useLogin=()=>{
     return useMutation({
         mutationFn:(userData)=>LoginApi(userData),
         onSuccess:async(data)=>{
-            console.log(`you logged in Succefully `,data)
             const user=data?.data
             login(user)
             closePopUp()

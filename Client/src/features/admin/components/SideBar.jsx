@@ -15,7 +15,7 @@ const SideBar = () => {
     <>
      
       <button
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 "
+        className="lg:hidden fixed top-4  left-4 z-50 p-2 "
         onClick={() => setIsMobileOpen(true)}
         aria-label="Open menu"
       >
@@ -34,9 +34,9 @@ const SideBar = () => {
       <aside
         className={`
           bg-white h-screen w-60 border-r border-r-brand-surface-container flex flex-col gap-5 pl-3
-          fixed top-0 left-0 z-50 transition-transform duration-300
+          fixed top-0 bottom-0 left-0 z-50 transition-transform duration-300
           ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}
-          lg:translate-x-0 lg:relative lg:z-50
+          lg:translate-x-0  lg:z-50
         `}
       >
         <button

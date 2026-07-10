@@ -30,7 +30,6 @@ const ViewOrders = () => {
       />
     );
   }
-  console.log(orders);
 
   return (
     <div className="grid grid-col-1 gap-4">

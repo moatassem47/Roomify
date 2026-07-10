@@ -33,7 +33,6 @@ const OrderDetails = () => {
       there's no data to show
     </div>;
   }
-  console.log(order);
 
   const formattedDate = new Date(order.createdAt).toLocaleDateString("en-US", {
     year: "numeric",

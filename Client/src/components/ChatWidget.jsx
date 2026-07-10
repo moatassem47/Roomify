@@ -80,7 +80,6 @@ const ChatWidget = () => {
       }
     } catch (error) {
       console.error("Chat error:", error);
-
       setMessages((prev) => [
         ...prev,
         {

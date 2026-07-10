@@ -18,7 +18,6 @@ const Dashboard = () => {
   }
   const Charts=data.Charts
   const KPIS = data.KPIS;
-  console.log(Charts);
   
   return (
     <div className="py-2 px-3 flex flex-col gap-8">

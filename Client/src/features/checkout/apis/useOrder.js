@@ -12,7 +12,6 @@ export const useCreateCashOrder = () => {
       navigate(`/checkout/success?orderId=${orderId}`);
     },
     onError: (error) => {
-        console.log(error)
       navigate("/checkout/cancel", {
         state: {
           error: error.message || "Something went wrong.",

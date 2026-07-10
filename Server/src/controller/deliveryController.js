@@ -98,6 +98,7 @@ const orderDelivered = async (req, res) => {
     }
  
     order.status = "Delivered";
+    order.paymentStatus="Completed"
     order.deliveredAt = Date.now(); 
     order.statusHistory.push({
       status: "Delivered",

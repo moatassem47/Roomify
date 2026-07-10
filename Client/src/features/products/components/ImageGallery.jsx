@@ -11,7 +11,7 @@ const ImageGallery = ({images,model}) => {
 
   return (
     <div className="flex flex-col gap-4">
-        <div className="w-full h-100 overflow-hidden rounded-2xl bg-brand-surface-container/30 relative flex items-center justify-center">
+        <div className="w-full h-100 overflow-hidden rounded-2xl  relative flex items-center justify-center">
             {show3D && model ? (
                 <Viewin3D model={model} />
             ) : (
