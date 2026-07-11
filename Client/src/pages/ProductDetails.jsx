@@ -3,7 +3,6 @@ import { useGetSindgleProduct } from '../features/products/apis/useProducts';
 import Breadcrumbs from '../components/BreadCrumbs';
 import ImageGallery from '../features/products/components/ImageGallery';
 import ProductHeader from '../features/products/components/ProductHeader';
-import ProductColors from '../features/products/components/ProductColors';
 import ProductQuickInfo from '../features/products/components/ProductQuickInfo';
 import ProductActions from '../features/products/components/ProductActions';
 import ProductTrustBadges from '../features/products/components/ProductTrustBadges';
@@ -28,8 +27,8 @@ const ProductDetails = () => {
     );
 
   const specs = product?.specs || {};
-  const colors = specs.color || [];
   const materials = specs.material || [];
+  
 
   return (
     <>
@@ -61,11 +60,10 @@ const ProductDetails = () => {
               description={product.description}
             />
             
-            <ProductColors colors={colors} />
             
             <ProductQuickInfo specs={specs} materials={materials} />
             
-            <ProductActions stock={product.stockQuantity}/>
+            <ProductActions stock={product.stockQuantity} product={product}/>
             
             <ProductTrustBadges />
 

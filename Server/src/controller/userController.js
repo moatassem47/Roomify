@@ -2,7 +2,6 @@ const User = require("../model/userSchema");
 const bcrypt = require("bcrypt");
 const Product = require("../model/productSchema");
 const Order = require("../model/orderSchema");
-const Cart = require("../model/cartSchema");
 const mongoose = require("mongoose");
 
 const cookieOptions = {
@@ -99,51 +98,6 @@ const changeUserData = async (req, res) => {
   }
 };
 
-const toggleWishlist = async (req, res) => {
-  try {
-    const { id } = req.user;
-    const { ProductID } = req.params;
-
-    const user = await User.findOne({ _id: id, isDeleted: { $ne: true } });
-    const productExists = await Product.exists({ _id: ProductID });
-    if (!user) {
-      return res.status(404).json({
-        message: "User not found.",
-      });
-    }
-
-    if (!productExists) {
-      return res.status(404).json({
-        message: "product not found.",
-      });
-    }
-
-    const exists = user.wishlist.some((id) => id.toString() === ProductID);
-
-    if (exists) {
-      user.wishlist = user.wishlist.filter((id) => id.toString() !== ProductID);
-
-      await user.save();
-
-      return res.status(200).json({
-        message: "Product removed from wishlist.",
-      });
-    }
-
-    user.wishlist.push(ProductID);
-
-    await user.save();
-
-    return res.status(200).json({
-      message: "Product added to wishlist.",
-    });
-  } catch (e) {
-    return res.status(500).json({
-      name: e.name,
-      message: e.message,
-    });
-  }
-};
 
 const deleteAccount = async (req, res) => {
 
@@ -198,17 +152,13 @@ const deleteAccount = async (req, res) => {
 
     user.isDeleted = true;
     user.email = `deleted_${user._id}@deleted.local`;
-    user.refreshToken = null;
     user.tokenVersion += 1;
     user.googleId = null;
     user.providers = [];
     user.avatar = "";
     user.address = {};
-    user.wishlist = [];
 
     await user.save({session});
-
-   await Cart.deleteOne({ userId: id }).session(session)
 
     await session.commitTransaction()
 
@@ -230,34 +180,8 @@ const deleteAccount = async (req, res) => {
   }
 };
 
-const getWishlist = async (req, res) => {
-  try {
-    const { id } = req.user;
-
-    const user = await User.findOne({ _id: id, isDeleted: { $ne: true } }).populate(
-      "wishlist",
-      "name price imageUrls",
-    );
-
-    if (!user) {
-      return res.status(404).json({
-        message: "User not found.",
-      });
-    }
-
-    return res.status(200).json(user.wishlist);
-  } catch (e) {
-    return res.status(500).json({
-      name: e.name,
-      message: e.message,
-    });
-  }
-};
-
 module.exports = {
   getUserData,
   changeUserData,
   deleteAccount,
-  toggleWishlist,
-  getWishlist,
 };

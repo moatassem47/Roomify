@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
-import useFetchQuery from "../hooks/useFetchQuery";
 import Loading from "../components/Loading";
 import { Heart, RotateCcw } from "lucide-react";
 import EmptyState from "../components/EmptyState";
 import ProductCard from "../features/products/components/ProductCard";
+import { useGetWishlist } from "../features/wishlist/useWishlist";
 
 const Wishlist = () => {
   const {
     data: wishlist,
-    isloading,
+    isLoading,
     error,
-  } = useFetchQuery("/user/wishlist", ["wishlist"]);
-  if (isloading) return <Loading />;
+  } = useGetWishlist();
+  if (isLoading) return <Loading />;
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 rounded-[20px] bg-white px-6 py-20 text-center shadow-ambient">

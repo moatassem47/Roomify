@@ -1,4 +1,3 @@
-const Cart = require("../model/cartSchema");
 const Order = require("../model/orderSchema");
 const Product = require("../model/productSchema");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
@@ -10,48 +9,59 @@ const createPaymentSession = async (req, res) => {
 
   try {
     const userId = req.user.id;
-    const { shippingAddress, paymentMethod } = req.body;
+    const { shippingAddress, paymentMethod, items } = req.body;
 
-    const cart = await Cart.findOne({ userId }).session(session).populate(
-      "items.productId",
-      "name price",
-    );
-
-    if (!cart || cart.items.length === 0) {
+    if (!items || items.length === 0) {
       await session.abortTransaction();
       return res.status(404).json({ message: "There's no items in your cart" });
     }
 
-    const totalAmount = cart.items.reduce((total, item) => {
-      const itemPrice = item.quantity * item.productId.price;
+    const productIds = items.map(item => item.productId);
+    const products = await Product.find({ _id: { $in: productIds } }).session(session);
+
+    const cartItems = [];
+    for (const item of items) {
+      const product = products.find(p => p._id.toString() === item.productId.toString());
+      if (!product) {
+        await session.abortTransaction();
+        return res.status(404).json({ message: "Product not found" });
+      }
+      cartItems.push({
+        product,
+        quantity: Number(item.quantity)
+      });
+    }
+
+    const totalAmount = cartItems.reduce((total, item) => {
+      const itemPrice = item.quantity * item.product.price;
       return (total += itemPrice);
     }, 0);
 
-    const orderItems = cart.items.map((item) => ({
-      productId: item.productId._id,
+    const orderItems = cartItems.map((item) => ({
+      productId: item.product._id,
       quantity: item.quantity,
-      unitPrice: item.productId.price,
+      unitPrice: item.product.price,
     }));
 
-    const line_items = cart.items.map((item) => ({
+    const line_items = cartItems.map((item) => ({
       price_data: {
         currency: "egp",
-        product_data: { name: item.productId.name },
-        unit_amount: Math.round(item.productId.price * 100),
+        product_data: { name: item.product.name },
+        unit_amount: Math.round(item.product.price * 100),
       },
       quantity: item.quantity,
     }));
 
-    for (const item of cart.items) {
+    for (const item of cartItems) {
       const updateProduct = await Product.updateOne(
-        { _id: item.productId._id, stockQuantity: { $gte: item.quantity } },
+        { _id: item.product._id, stockQuantity: { $gte: item.quantity } },
         { $inc: { stockQuantity: -item.quantity } },
         { session }
       );
 
       if (updateProduct.modifiedCount === 0) {
         await session.abortTransaction();
-        return res.status(400).json({ message: `Sorry, there's not enough of ${item.productId.name} in our storage` });
+        return res.status(400).json({ message: `Sorry, there's not enough of ${item.product.name} in our storage` });
       }
     }
 
@@ -138,16 +148,7 @@ const stripeWebhook = async (req, res) => {
             }
 
             if (userId) {
-                const updatedCart = await Cart.findOneAndUpdate(
-                    { userId },
-                    { $set: { items: [] } },
-                    { new: true }
-                );
-                if (updatedCart) {
-                    console.log(`✅ Successfully cleared Cart for User ${userId}`);
-                } else {
-                    console.warn(`⚠️ Cart for User ${userId} not found`);
-                }
+                console.log(`ℹ️ Stripe checkout completed successfully. Client will clear cart local storage for User ${userId}`);
             } else {
                 console.warn(`⚠️ No userId found in Stripe session metadata`);
             }

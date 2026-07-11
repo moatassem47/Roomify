@@ -3,6 +3,7 @@ import { useCreateCardOrder, useCreateCashOrder } from "../apis/useOrder"
 import { FormProvider, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import orderSchema from "../schema/orderSchema"
+import { useGetCart } from "../../cart/apis/useCart"
 
 import BreadCrump from "./BreadCrump"
 import Step1Checkout from "./Step1Checkout"
@@ -13,6 +14,7 @@ const CheckoutForm = () => {
     const [step,setStep]=useState(1)
     const {mutate:Card}=useCreateCardOrder()
     const {mutate:Cash}=useCreateCashOrder()
+    const { data: cartData } = useGetCart()
     const methods=useForm({
         resolver:zodResolver(orderSchema),
         mode:"onTouched"
@@ -34,8 +36,16 @@ const CheckoutForm = () => {
    }
 
    const onSubmit=(orderData)=>{
+    // Build items array from local cart for the backend
+    const items = (cartData?.cart?.items || []).map(item => ({
+      productId: item.productId._id,
+      quantity: item.quantity,
+    }))
+
+    const payload = { ...orderData, items }
+
     if(orderData.paymentMethod==="Cash"){
-        Cash(orderData, {
+        Cash(payload, {
       onError: (error) => {
           console.error(error);
           setError("root", {
@@ -45,7 +55,7 @@ const CheckoutForm = () => {
       },
     })
     }else{
-        Card(orderData, {
+        Card(payload, {
       onError: (error) => {
           console.error(error);
           setError("root", {

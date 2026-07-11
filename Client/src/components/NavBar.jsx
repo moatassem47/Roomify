@@ -19,27 +19,30 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   const handleCartClick = () => {
-  if (!isVerified()) return;
-  navigate("/cart");
-};
+    if (!isVerified()) return;
+    navigate("/cart");
+  };
+
   return (
     <>
       <nav className="bg-white fixed right-0 left-0 top-0 z-50 flex items-center justify-between shadow-ambient h-20">
-        <figure className="lg:w-80 w-44">
+        <figure className="lg:w-80 w-44 cursor-pointer" onClick={() => navigate("/")}>
           <img src={myIcon} alt="logo" />
         </figure>
-        <ul className="md:flex gap-5 text-outline flex-2 justify-center [&>li:hover]:text-brand-cedar [&>li:hover]:cursor-pointer [&>li:active]:opacity-80 font-semibold hidden  ">
+        
+        <ul className="lg:flex gap-6 text-outline font-semibold hidden items-center">
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/" className="hover:text-brand-cedar transition-colors">Home</NavLink>
           </li>
           <li>
-            <NavLink to="/shop">Shop All</NavLink>
+            <NavLink to="/shop" className="hover:text-brand-cedar transition-colors">Shop All</NavLink>
           </li>
           <li>
-            <NavLink to="/story">Our Story</NavLink>
+            <NavLink to="/story" className="hover:text-brand-cedar transition-colors">Our Story</NavLink>
           </li>
         </ul>
 
+       
         <div className="flex max-w-70 flex-2 justify-center md:gap-8 gap-3 items-center">
           {isAuthenticated ? (
             <>
@@ -47,7 +50,7 @@ const NavBar = () => {
                 className="relative inline-block cursor-pointer hover:-translate-y-1  transition-all duration-300 active:opacity-80"
                 onClick={() =>handleCartClick()}
               >
-                <ShoppingBag color="#825031" />
+                <ShoppingBag className="text-brand-cedar" />
                 <span
                   className={`absolute w-5 h-5 flex justify-center items-center bg-brand-cedar text-white rounded-full -top-2 -right-3 text-xs
               ${totalQuantity === 0 && `hidden`}`}
@@ -66,8 +69,7 @@ const NavBar = () => {
                     className="flex items-center gap-2 focus:outline-none"
                   >
                     <User
-                      color="#825032"
-                      className="cursor-pointer hover:-translate-y-1  transition-all duration-300 active:opacity-80"
+                      className="text-brand-cedar cursor-pointer hover:-translate-y-1 transition-all duration-300 active:opacity-80"
                     />
                   </button>
                 }

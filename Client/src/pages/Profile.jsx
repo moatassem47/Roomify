@@ -82,7 +82,7 @@ const Profile = () => {
             <h2 className="font-headline-sm text-headline-sm text-on-surface mb-6">
               Account Information
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="p-4 bg-white rounded-xl custom-shadow">
                 <p className="text-xs font-semibold text-outline uppercase tracking-widest mb-1">
                   Email Address

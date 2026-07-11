@@ -1,19 +1,19 @@
 import { useEffect } from "react";
-import { useQueryClient } from "@tanstack/react-query";
 import { Link, useSearchParams } from "react-router-dom";
 import { useGetOrderById } from "../features/checkout/apis/useOrder";
 import { BadgeCheck, ArrowRight, Loader2, Check } from "lucide-react";
+import { useClearCart } from "../features/cart/apis/useCart";
 
 const CheckoutSuccess = () => {
-  const queryClient = useQueryClient();
+  const clearCart = useClearCart();
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get("orderId");
 
   const { data: order, isLoading, error } = useGetOrderById(orderId);
 
   useEffect(() => {
-    queryClient.invalidateQueries({ queryKey: ["cart"] });
-  }, [queryClient]);
+    clearCart();
+  }, []);
 
   
   const displayOrderId = orderId ? `#RF-${orderId.slice(-6).toUpperCase()}` : "N/A";

@@ -1,5 +1,4 @@
 const Order = require("../model/orderSchema");
-const Cart = require("../model/cartSchema");
 const Product = require("../model/productSchema");
 const mongoose = require("mongoose");
 
@@ -9,31 +8,43 @@ const createOrder = async (req, res) => {
 
   try {
     const userId = req.user.id;
-    const { shippingAddress, paymentMethod } = req.body;
+    const { shippingAddress, paymentMethod, items } = req.body;
 
-    const cart = await Cart.findOne({ userId })
-      .session(session)
-      .populate("items.productId", "price name");
-
-    if (!cart || cart.items.length === 0) {
+    if (!items || items.length === 0) {
       await session.abortTransaction();
       return res.status(404).json({ message: "there's no items in your cart" });
     }
 
-    const totalAmount = cart.items.reduce((total, item) => {
-      const itemPrice = item.quantity * item.productId.price;
+    const productIds = items.map(item => item.productId);
+    const products = await Product.find({ _id: { $in: productIds } }).session(session);
+
+    const cartItems = [];
+    for (const item of items) {
+      const product = products.find(p => p._id.toString() === item.productId.toString());
+      if (!product) {
+        await session.abortTransaction();
+        return res.status(404).json({ message: "Product not found" });
+      }
+      cartItems.push({
+        product,
+        quantity: Number(item.quantity)
+      });
+    }
+
+    const totalAmount = cartItems.reduce((total, item) => {
+      const itemPrice = item.quantity * item.product.price;
       return (total += itemPrice);
     }, 0);
 
-    const orderItems = cart.items.map((item) => ({
-      productId: item.productId._id,
+    const orderItems = cartItems.map((item) => ({
+      productId: item.product._id,
       quantity: item.quantity,
-      unitPrice: item.productId.price,
+      unitPrice: item.product.price,
     }));
 
-    for (const item of cart.items) {
+    for (const item of cartItems) {
       const updateProduct = await Product.updateOne(
-        { _id: item.productId._id, stockQuantity: { $gte: item.quantity } },
+        { _id: item.product._id, stockQuantity: { $gte: item.quantity } },
         { $inc: { stockQuantity: -item.quantity } },
         { session },
       );
@@ -43,7 +54,7 @@ const createOrder = async (req, res) => {
         return res
           .status(400)
           .json({
-            message: `Sorry, there's not enough of ${item.productId.name} in our storage`,
+            message: `Sorry, there's not enough of ${item.product.name} in our storage`,
           });
       }
     }
@@ -68,8 +79,6 @@ const createOrder = async (req, res) => {
     );
 
      
-    cart.items = [];
-    await cart.save({ session });
     await session.commitTransaction();
     res.status(201).json({ message: "order created", order: order });
   } catch (e) {

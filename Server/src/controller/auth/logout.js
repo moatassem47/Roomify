@@ -1,4 +1,5 @@
 const User=require("../../model/userSchema")
+const jwt = require("jsonwebtoken");
 
 
 const logout = async (req, res) => {
@@ -7,10 +8,15 @@ const logout = async (req, res) => {
 
    
     if (refreshToken) {
-      const user = await User.findOne({ refreshToken: refreshToken });
-      if (user) {
-        user.refreshToken = ""; // أو undefined
-        await user.save({ validateBeforeSave: false });
+      try {
+        const decode = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+        const user = await User.findById(decode.id);
+        if (user) {
+          user.tokenVersion += 1;
+          await user.save({ validateBeforeSave: false });
+        }
+      } catch (e) {
+        // Ignore token validation error on logout
       }
     }
 

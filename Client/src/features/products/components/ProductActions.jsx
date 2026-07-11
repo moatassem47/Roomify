@@ -3,12 +3,11 @@ import Button from '../../../components/Button';
 import QuantityButton from '../../../components/QuantityButton';
 import { ShoppingCart } from 'lucide-react';
 import useAuth from "../../../store/authStore"
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAddToCart } from '../../cart/apis/useCart';
 import useRequireVerified from '../../../hooks/useRequireVerified';
 
-const ProductActions = ({stock}) => {
-  const { id } = useParams();
+const ProductActions = ({stock, product}) => {
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
 
@@ -32,7 +31,7 @@ const ProductActions = ({stock}) => {
 
     if (isVerified()) {
     
-      mutate({ productId: id, quantity });
+      mutate({ product, quantity });
     }
   };
 

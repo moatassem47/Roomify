@@ -92,19 +92,10 @@ const userSchema = new mongoose.Schema(
       default: true,
     },
     deletedAt: Date,
-    refreshToken: {
-      type: String
-    },
     tokenVersion: {
       type: Number,
       default: 0
     },
-    wishlist: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-      },
-    ],
     providers: {
       type: [String],
     },

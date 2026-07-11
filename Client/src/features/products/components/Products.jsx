@@ -7,6 +7,7 @@ import noProducts from "../../../assets/images/emptyCart.svg";
 import ProductCard from "./ProductCard";
 import useFetchQuery from "../../../hooks/useFetchQuery";
 import useFilters from "../../../hooks/useFilters";
+import { useGetWishlist } from "../../wishlist/useWishlist";
 
 const Products = () => {
   const { currentFilters, setFilters, clearFilters } = useFilters([
@@ -25,7 +26,7 @@ const Products = () => {
   );
   const params = new URLSearchParams(filters);
   const { data, isLoading, isFetching, error } = useFetchQuery(`/products?${params.toString()}`,["products",filters]);
-  const {data:wishlist}=useFetchQuery("/user/wishlist",["wishlist"])
+  const {data:wishlist}=useGetWishlist()
   if (isLoading) {
     return (
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
