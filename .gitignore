@@ -1,4 +1,5 @@
-*.json
+
 *.txt
 !package.json
 !package-lock.json
+!Server/vercel.json

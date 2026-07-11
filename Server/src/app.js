@@ -14,15 +14,25 @@ const cookiesParser=require("cookie-parser")
 const { stripeWebhook } = require("./controller/paymentController");
 const passport = require("passport");
 const chatAgentController=require("./controller/chatAgentController")
+const { getFrontendUrl } = require("./config/urls");
 require("./middleware/loginWithGoogle");
 
 const allowedOrigins = [
-    process.env.FrontEND_URL,
-    process.env.FRONTEND_URL,
-    "http://localhost:5173",
-    "http://localhost:5174",
+    getFrontendUrl(),
+    ...(process.env.NODE_ENV === "production" ? [] : [
+        "http://localhost:5173",
+        "http://localhost:5174",
+    ]),
 ].filter(Boolean)
 
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
 
 app.post('/order/webhook', express.raw({ type: 'application/json' }), stripeWebhook);
 
@@ -65,8 +75,15 @@ const PORT=process.env.PORT || 4000
 const startServer=async()=>{
     await connectDB()
     app.listen(PORT,()=>{
-        console.log(`Server is open on http://localhost:${PORT}`);
+        console.log(`Server is listening on port ${PORT}`);
     })
 }
 
-startServer()
+if (require.main === module) {
+    startServer().catch((error) => {
+        console.error(error);
+        process.exit(1);
+    })
+}
+
+module.exports = app

@@ -2,12 +2,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../../model/userSchema");
 const dotenv = require("dotenv").config();
 const {generateTokens} = require("../../utils/generateTokens");
-
-const cookieOptions = {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "strict",
-};
+const cookieOptions = require("../../utils/cookieOptions");
 
 const refreshToken = async (req, res) => {
   try {

@@ -3,11 +3,13 @@ const User = require("../../model/userSchema");
 const crypto = require("crypto");
 const { generateTokens } = require("../../utils/generateTokens");
 const sendEmail = require("../../utils/sendEmails");
+const cookieOptions = require("../../utils/cookieOptions");
+const { buildFrontendUrl } = require("../../config/urls");
 
 const hashToken = (token) => crypto.createHash("sha256").update(token).digest("hex");
 
 const sendVerificationEmail = async (user, token) => {
-  const verificationLink = `${process.env.FRONTEND_URL}/verify-email/${token}`;
+  const verificationLink = buildFrontendUrl(`/verify-email/${token}`);
 
   await sendEmail({
     to: user.email,
@@ -37,19 +39,13 @@ const sanitizeUser = (user) => {
 };
 
 const setAuthCookies = (res, accessToken, refreshToken) => {
-  const CookieOptions = {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
-  };
-
   res.cookie("accessToken", accessToken, {
-    ...CookieOptions,
+    ...cookieOptions,
     expires: new Date(Date.now() + 3 * 60 * 1000),
   });
 
   res.cookie("refreshToken", refreshToken, {
-    ...CookieOptions,
+    ...cookieOptions,
     expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
   });
 };

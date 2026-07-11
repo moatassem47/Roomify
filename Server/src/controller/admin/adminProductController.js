@@ -1,6 +1,6 @@
 const Product=require("../../model/productSchema")
 const mongoose=require("mongoose")
-const {uploudToCloudinary,DeleteProductFromCloudinary}=require("../../utils/cloudinaryHandler")
+const {uploadFileToCloudinary,DeleteProductFromCloudinary}=require("../../utils/cloudinaryHandler")
 const upload=require("../../middleware/uploadMiddleware")
 
 const hasValue=(value)=>value !== undefined && value !== null && value !== ""
@@ -58,7 +58,7 @@ exports.addProduct=async(req,res)=>{
 
         if(req.files && req.files.images){
             for(let image of req.files.images){
-                const url= await uploudToCloudinary(image.path,name,false)
+                const url= await uploadFileToCloudinary(image,name,false)
                 if(url){
                     imagesUrl.push(url)
                 }
@@ -69,7 +69,7 @@ exports.addProduct=async(req,res)=>{
         let modelurl=""
 
         if(req.files&&req.files.model){
-            const url = await uploudToCloudinary(req.files.model[0].path,name,true)
+            const url = await uploadFileToCloudinary(req.files.model[0],name,true)
             if(url){
                 modelurl=url
             }

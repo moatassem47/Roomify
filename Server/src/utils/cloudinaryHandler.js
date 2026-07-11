@@ -1,6 +1,26 @@
 const cloudinary=require("../config/cloudinary")
 const fs = require("fs").promises;
 
+const uploadBufferToCloudinary = (fileBuffer, productName, is3DModel = false) => {
+    return new Promise((resolve, reject) => {
+        const uploadStream = cloudinary.uploader.upload_stream(
+            {
+                folder: `roomify/Products/${productName}`,
+                resource_type: is3DModel ? "raw" : "image",
+            },
+            (error, result) => {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+
+                resolve(result.secure_url);
+            }
+        );
+
+        uploadStream.end(fileBuffer);
+    });
+};
 
 const uploudToCloudinary = async (localFilePath, productName, is3DModel = false) => {
     try {
@@ -29,6 +49,21 @@ const uploudToCloudinary = async (localFilePath, productName, is3DModel = false)
 
         }
         
+        return null;
+    }
+};
+
+const uploadFileToCloudinary = async (file, productName, is3DModel = false) => {
+    try {
+        if (!file) return null;
+
+        if (file.buffer) {
+            return await uploadBufferToCloudinary(file.buffer, productName, is3DModel);
+        }
+
+        return await uploudToCloudinary(file.path, productName, is3DModel);
+    } catch (e) {
+        console.error("Cloudinary Upload Error:", e);
         return null;
     }
 };
@@ -68,4 +103,4 @@ const DeleteProductFromCloudinary = async (productName) => {
 }
 
 
-module.exports={uploudToCloudinary,DeleteProductFromCloudinary}
+module.exports={uploudToCloudinary,uploadFileToCloudinary,DeleteProductFromCloudinary}

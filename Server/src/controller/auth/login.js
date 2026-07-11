@@ -3,6 +3,7 @@ const User = require("../../model/userSchema");
 const bcrypt=require("bcrypt")
 const dotenv=require("dotenv").config()
 const {generateTokens}=require("../../utils/generateTokens")
+const cookieOptions=require("../../utils/cookieOptions")
 
 const sanitizeUser = (user) => {
   const userResponse = user.toObject();
@@ -68,12 +69,12 @@ const login = async (req,res) => {
 
 
     res.cookie("accessToken",accessToken,{
-        ...CookieOptions,
+        ...cookieOptions,
         expires:new Date(Date.now() + 3 * 60 * 1000)
     })
 
      res.cookie("refreshToken",refreshToken,{
-        ...CookieOptions,
+        ...cookieOptions,
         expires:new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
     })
  

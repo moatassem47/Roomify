@@ -2,10 +2,11 @@ const mongoose = require("mongoose");
 const User = require("../../model/userSchema");
 const crypto = require("crypto");
 const sendEmail = require("../../utils/sendEmails");
+const { buildFrontendUrl } = require("../../config/urls");
 
 const hashToken = (token) => crypto.createHash("sha256").update(token).digest("hex");
 const sendVerificationEmail = async (user, token) => {
-  const verificationLink = `${process.env.FRONTEND_URL}/verify-email/${token}`;
+  const verificationLink = buildFrontendUrl(`/verify-email/${token}`);
 
   await sendEmail({
     to: user.email,

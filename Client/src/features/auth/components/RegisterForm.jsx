@@ -9,6 +9,7 @@ import RegisterStep3 from "./RegisterStep3";
 import { motion, AnimatePresence } from "framer-motion";
 import useAuth from "../../../store/authStore";
 import {useNavigate} from "react-router-dom"
+import { buildApiUrl } from "../../../utils/axios";
 
 const RegisterForm = () => {
   const [step, setStep] = useState(1);
@@ -64,7 +65,7 @@ const RegisterForm = () => {
   };
 
   const handleClick = () => {
-    window.location.href = "http://localhost:4000/auth/google";
+    window.location.href = buildApiUrl("/auth/google");
   };
 
   return (

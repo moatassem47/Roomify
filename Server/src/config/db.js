@@ -29,6 +29,10 @@ const getDatabaseName = (url) => {
 
 const connectDB = async () => {
   try {
+    if (mongoose.connection.readyState === 1) {
+      return mongoose.connection;
+    }
+
     const url = process.env.MONGO_URI;
     if (!url) {
       throw new Error("MONGO_URI is not set");
@@ -37,9 +41,10 @@ const connectDB = async () => {
     const dbName = getDatabaseName(url);
     await mongoose.connect(url, { dbName });
     console.log(`Database connected: ${mongoose.connection.db.databaseName}`);
+    return mongoose.connection;
   } catch (e) {
     console.error(`Database connection failed: ${e.message}`);
-    process.exit(1);
+    throw e;
   }
 };
 

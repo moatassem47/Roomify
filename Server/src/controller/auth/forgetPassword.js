@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const User = require("../../model/userSchema");
 const sendEmail = require("../../utils/sendEmails");
 const crypto = require("crypto");
+const { buildFrontendUrl } = require("../../config/urls");
 
 const hashToken = (token) => crypto.createHash("sha256").update(token).digest("hex");
 const resetResponse = {
@@ -17,7 +18,7 @@ const isStrongPassword = (password) =>
   /[^A-Za-z0-9]/.test(password);
 
 const sendResetEmail = async (user, token) => {
-  const resetLink = `${process.env.FRONTEND_URL}/changePassword/${token}`;
+  const resetLink = buildFrontendUrl(`/changePassword/${token}`);
 
   await sendEmail({
     to: user.email,
